@@ -1,20 +1,41 @@
 // НАМЕРЕНИЕ (ГОТОВНОСТЬ) СОВЕРШИТЬ СДЕЛКУ
 const order = {
   symbol: 'ХЛЕБ',
-  volume: 1,
-  price: 10,
+  traderId: 12345,
+  capacity: 3,
+  volume: 3,
+  price: 5,
   deal: 'buy',
   isFulfilled: false,
 }
 
-// ПРЕДЛАГАЕМАЯ ЦЕНА И ОБЪЁМ
-const bid = {
-  sell: [],
-  buy: [],
+const trader = {
+  id: 333,
+  balances: {
+    ХЛЕБ: 0,
+    USD: 111,
+  },
 }
 
-// СПИСОК НАМЕРЕНИЙ (ГОТОВНОСТЕЙ)
-const orderBook = [order]
+const traders = []
+
+// ПРЕДЛАГАЕМАЯ ЦЕНА И ОБЪЁМ (ставка)
+// ставки производная от orders. (визуальная информация)
+const bids = {
+  sell: [
+    [106, 6000],
+    [105, 5000],
+    [104, 4000],
+  ],
+  buy: [
+    [103, 3000],
+    [102, 2000],
+    [101, 1000],
+  ],
+}
+
+// СПИСОК НАМЕРЕНИЙ (ГОТОВНОСТЕЙ) [источник истины]
+const orders = [order]
 
 // ТЕКУЩИЙ ОБЪЕМ ОТКРЫТЫХ ОРДЕРОВ НА ПОКУПКУ
 const currentBuyVolume = 0

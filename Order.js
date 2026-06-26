@@ -1,53 +1,56 @@
 class Order {
-  constructor(volume, price, deal) {
+  constructor(deal, price, volume) {
     this.id = crypto.randomUUID().split('-')[0]
     this.symbol = 'ХЛЕБ'
-    this.capacity = 1
+    this.capacity = volume
     this.volume = volume
     this.price = price
     this.deal = deal
-    this.isFulfilled = false // потому что в будущем order может быть частично закрытым
+  }
+
+  // потому что в будущем order может быть частично закрытым
+  get isFulfilled() {
+    return this.capacity === 0
   }
 }
 
-class Bid {
-  constructor() {
-    this.ordersIds = []
-  }
-}
-
-const orders = []
-
-const bidPointers = {
+const orders = {
   sell: [],
   buy: [],
 }
 
-const bid = () => ({
-  sell: bidPointers.sell.map(bp => orders.find(o => o.id === bp)),
-  buy: bidPointers.buy.map(bp => orders.find(o => o.id === bp)).filter(),
-})
-
-function addOrder(order) {
-  orders.push(order)
-  bidPointers[order.deal].push(order.id)
-
-  // const foundOrder = bid[order.deal].find(ob => ob.price === order.price)
-  // if (foundOrder) foundOrder.volume += order.volume
-  // else bid[order.deal].push(order)
-  // bid['sell'].sort((newVal, oldVal) => oldVal.price - newVal.price)
-  // bid['buy'].sort((newVal, oldVal) => newVal.price - oldVal.price)
+function computeBids() {
+  const bids = { sell: [], buy: [] }
+  const deal = ['buy', 'sell']
+  deal.forEach(d => {
+    orders[d].forEach(ob => {
+      const bid = bids[d].find(bid => bid[0] === ob.price)
+      if (!bid) bids[d].push([ob.price, ob.volume])
+      else bid[1] += ob.volume
+    })
+  })
+  return bids
 }
 
-addOrder(new Order(1, 9, 'buy'))
-addOrder(new Order(1, 7, 'buy'))
-addOrder(new Order(1, 9, 'buy'))
-addOrder(new Order(1, 5, 'buy'))
-addOrder(new Order(1, 9, 'buy'))
-// addOrder(new Order(1, 99, 'sell'))
-// addOrder(new Order(1, 77, 'sell'))
-// addOrder(new Order(1, 99, 'sell'))
+function makeOrder(order) {
+  orders[order.deal].push(order)
+  orders['sell'].sort((newVal, oldVal) => oldVal.price - newVal.price)
+  orders['buy'].sort((newVal, oldVal) => newVal.price - oldVal.price)
+}
 
-console.log(orders)
-console.log(bidPointers)
-console.log(bid())
+function takeOrder(deal, volume, symbol) {
+  // body
+}
+
+makeOrder(new Order('buy', 9, 1))
+makeOrder(new Order('buy', 5, 1))
+makeOrder(new Order('buy', 9, 1))
+makeOrder(new Order('buy', 7, 5))
+makeOrder(new Order('buy', 9, 1))
+makeOrder(new Order('sell', 11, 1))
+makeOrder(new Order('sell', 13, 5))
+makeOrder(new Order('sell', 11, 1))
+
+console.log(computeBids())
+
+// console.log(orders)
