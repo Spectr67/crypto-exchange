@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crypto Palette Extended</title>
+    <style>
+      body {
+        background-color: #111217; /* Глубокий фон биржи */
+        color: #eaecef;
+        font-family: sans-serif;
+        padding: 30px;
+      }
+
+      .color-group {
+        margin-bottom: 25px;
+      }
+
+      .group-title {
+        font-size: 14px;
+        margin-bottom: 10px;
+        color: #848e9c;
+      }
+
+      div.box {
+        display: inline-block;
+        width: 90px;
+        height: 90px;
+        margin-right: 10px;
+        border-radius: 6px;
+        vertical-align: top;
+        position: relative;
+      }
+
+      /* Подписи прямо на блоках для удобства */
+      div.box::after {
+        content: attr(data-label);
+        position: absolute;
+        bottom: 5px;
+        left: 5px;
+        font-size: 10px;
+        color: rgba(255, 255, 255, 0.7);
+        background: rgba(0, 0, 0, 0.4);
+        padding: 2px 4px;
+        border-radius: 3px;
+      }
+
+      /* 1. Желтый (Primary) */
+      .p-base {
+        background-color: #f3ba2f;
+      }
+      .p-hover {
+        background-color: #d9a520;
+      } /* Темнее для наведения */
+      .p-subtle {
+        background-color: #2f291b;
+      } /* Фон для алертов / плашек */
+
+      /* 2. Зеленый (Success / Buy) */
+      .s-base {
+        background-color: #0ecb81;
+      }
+      .s-hover {
+        background-color: #0b9f65;
+      }
+      .s-bg {
+        background-color: #162a22;
+      } /* Заливка строки в зеленом стакане */
+
+      /* 3. Красный (Danger / Sell) */
+      .d-base {
+        background-color: #f6465d;
+      }
+      .d-hover {
+        background-color: #d4354b;
+      }
+      .d-bg {
+        background-color: #2b1a1e;
+      } /* Заливка строки в красном стакане */
+
+      /* 4. Темные фоны (Dark) */
+      .bg-deep {
+        background-color: #0b0e11;
+      } /* Самый глубокий задник */
+      .bg-panel {
+        background-color: #1e2329;
+      } /* Панели, карточки, меню */
+      .bg-row-hover {
+        background-color: #2b3139;
+      } /* Подсветка строки при наведении */
+
+      /* 5. Светлые тона (Light / Текст) */
+      .t-main {
+        background-color: #eaecef;
+      } /* Главные цифры и текст */
+      .t-muted {
+        background-color: #848e9c;
+      } /* Второстепенный текст, копейки */
+      .t-dark {
+        background-color: #474d57;
+      } /* Иконки, заблокированные элементы */
+    </style>
+  </head>
+  <body>
+    <h2>Интерфейсная палитра криптобиржи</h2>
+    <hr style="border-color: #2b3139; margin-bottom: 30px" />
+
+    <div class="color-group">
+      <div class="group-title">Primary (Акценты, кнопки)</div>
+      <div class="box p-base" data-label="Base"></div>
+      <div class="box p-hover" data-label="Hover"></div>
+      <div class="box p-subtle" data-label="Subtle Bg"></div>
+    </div>
+
+    <div class="color-group">
+      <div class="group-title">Success (Лонг / Покупка)</div>
+      <div class="box s-base" data-label="Base"></div>
+      <div class="box s-hover" data-label="Hover"></div>
+      <div class="box s-bg" data-label="Order Depth"></div>
+    </div>
+
+    <div class="color-group">
+      <div class="group-title">Danger (Шорт / Продажа)</div>
+      <div class="box d-base" data-label="Base"></div>
+      <div class="box d-hover" data-label="Hover"></div>
+      <div class="box d-bg" data-label="Order Depth"></div>
+    </div>
+
+    <div class="color-group">
+      <div class="group-title">Dark (Сетка интерфейса)</div>
+      <div class="box bg-deep" data-label="Deep Bg"></div>
+      <div class="box bg-panel" data-label="Card/Panel"></div>
+      <div class="box bg-row-hover" data-label="Row Hover"></div>
+    </div>
+
+    <div class="color-group">
+      <div class="group-title">Light (Шрифты и иконки)</div>
+      <div class="box t-main" data-label="Main Text"></div>
+      <div class="box t-muted" data-label="Muted Text"></div>
+      <div class="box t-dark" data-label="Disabled"></div>
+    </div>
+  </body>
+</html>
