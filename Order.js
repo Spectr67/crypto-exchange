@@ -1,11 +1,11 @@
 class Order {
-  constructor(traderId, deal, price, volume) {
+  constructor(traderId, side, price, volume) {
     this.id = crypto.randomUUID().split('-')[0]
     this.symbol = 'ХЛЕБ'
-    this.capacity = volume
+    this.capacity = volume // read only
     this.volume = volume
     this.price = price
-    this.deal = deal
+    this.side = side
     this.traderId = traderId
     this.takersIds = []
   }
@@ -26,51 +26,62 @@ const users = [
   { id: 'петр_3', name: 'Петр', balance: { usdt: 2000, ХЛЕБ: 0 } },
 ]
 
+function swap(fromTraderId, toTraderId, symbol, count) {
+  // body
+}
+
+function deal(takerTraderId, makerTraderId, symbol, volume, cost, side) {
+  if (order.side === 'sell') {
+    swap(takerTraderId, makerTraderId, symbol, cost)
+    swap(makerTraderId, takerTraderId, symbol, volume)
+  }
+  if (order.side === 'buy') {
+    swap(makerTraderId, takerTraderId, symbol, cost)
+    swap(takerTraderId, makerTraderId, symbol, volume)
+  }
+}
+
 function computeBids() {
   const bids = { sell: [], buy: [] }
-  const deal = ['buy', 'sell']
-  deal.forEach(d => {
-    orders[d].forEach(ob => {
-      const bid = bids[d].find(bid => bid[0] === ob.price)
-      if (!bid) bids[d].push([ob.price, ob.volume])
+  const side = ['buy', 'sell']
+  side.forEach(s => {
+    orders[s].forEach(ob => {
+      const bid = bids[s].find(bid => bid[0] === ob.price)
+      if (!bid) bids[s].push([ob.price, ob.volume])
       else bid[1] += ob.volume
     })
   })
   return bids
 }
 
-function makeOrder(order) {
-  orders[order.deal].push(order)
+function appendOrder(order) {
+  orders[order.side].push(order)
   orders['sell'].sort((newVal, oldVal) => oldVal.price - newVal.price)
   orders['buy'].sort((newVal, oldVal) => newVal.price - oldVal.price)
 }
 
-function takeOrder(takerId, deal, volume, symbol) {
-  const targetPool = deal === 'buy' ? 'sell' : 'buy'
+function takeOrder(takerId, side, volume, symbol) {
+  const targetPool = side === 'buy' ? 'sell' : 'buy'
   let remainingVolume = volume
-  const closedOrders = []
-
-  while (remainingVolume > 0 && orders[targetPool].length > 0) {
-    const bestOrder = orders[targetPool][orders[targetPool].length - 1]
-
-    if (!bestOrder.takersIds.includes(takerId)) {
-      bestOrder.takersIds.push(takerId)
-    }
-
-    if (bestOrder.volume <= remainingVolume) {
-      remainingVolume -= bestOrder.volume
-      bestOrder.volume = 0
-
-      orders[targetPool].pop()
-      closedOrders.push(bestOrder)
-    } else {
-      bestOrder.volume -= remainingVolume
-      bestOrder.capacity = remainingVolume
-      remainingVolume = 0
+  const ordersToClose = []
+  const bestOrder = orders[targetPool].at(-1)
+  if (bestOrder.volume >= volume) {
+    bestOrder.volume -= volume
+    ordersToClose.push(bestOrder)
+    if (bestOrder.volume === 0) ordersToClose.push(bestOrder)
+  } else {
+    while (remainingVolume > 0 && orders[targetPool].length > 0) {
+      const bestOrder = orders[targetPool].at(-1)
+      if (bestOrder.volume <= remainingVolume) {
+        remainingVolume -= bestOrder.volume
+        bestOrder.volume = 0
+        orders[targetPool].pop()
+        ordersToClose.push(bestOrder)
+      }
     }
   }
 
-  closedOrders.forEach(order => closeOrder(order))
+  ordersToClose.forEach(order => closeOrder(order))
   return remainingVolume
 }
 
@@ -85,7 +96,7 @@ function closeOrder(order) {
   const volumePerTaker = totalVolume / takers.length
   const pricePerTaker = totalPrice / takers.length
 
-  if (order.deal === 'sell') {
+  if (order.side === 'sell') {
     trader.balance.ХЛЕБ -= totalVolume
     trader.balance.usdt += totalPrice
 
@@ -106,7 +117,7 @@ function closeOrder(order) {
   console.log(`Maker: ${trader.name}`)
   console.log(`Takers: ${takers.map(t => t.name).join(', ')}`)
   console.log(
-    `deal ${order.deal === 'sell' ? 'SELL' : 'BUY'} PRICE ${order.price} VOLUME ${totalVolume}`,
+    `deal ${order.side === 'sell' ? 'SELL' : 'BUY'} PRICE ${order.price} VOLUME ${totalVolume}`,
   )
 
   console.log('new balanses:')
@@ -114,21 +125,39 @@ function closeOrder(order) {
   takers.forEach(t => console.log(`${t.name}:`, t.balance))
 }
 
-makeOrder(new Order('иван_1', 'buy', 9, 1))
-makeOrder(new Order('иван_1', 'buy', 5, 1))
-makeOrder(new Order('иван_1', 'buy', 9, 1))
-makeOrder(new Order('иван_1', 'buy', 7, 5))
-makeOrder(new Order('иван_1', 'buy', 9, 1))
+function make(traderId, side, price, volume) {
+  // TODO: проверить есть ли баланс
+  appendOrder(new Order(traderId, side, price, volume))
+}
 
-makeOrder(new Order('мария_2', 'sell', 11, 1))
-makeOrder(new Order('мария_2', 'sell', 13, 5))
-makeOrder(new Order('мария_2', 'sell', 15, 1))
-makeOrder(new Order('мария_2', 'sell', 9, 1))
-makeOrder(new Order('мария_2', 'sell', 100, 10))
+make('иван_1', 'buy', 9, 1)
+make('иван_1', 'buy', 9, 1)
+make('иван_1', 'buy', 5, 1)
+make('иван_1', 'buy', 9, 1)
+make('иван_1', 'buy', 7, 5)
+make('иван_1', 'buy', 9, 1)
 
+make('мария_2', 'sell', 11, 1)
+make('мария_2', 'sell', 13, 5)
+make('мария_2', 'sell', 15, 1)
+make('мария_2', 'sell', 9, 2)
+
+console.log(orders)
 console.log('before', computeBids())
 
-takeOrder('петр_3', 'buy', 2, 'ХЛЕБ')
+console.log(users[1].balance)
 console.log(users[2].balance)
 
-console.log('\nafter', computeBids())
+takeOrder('петр_3', 'buy', 1, 'ХЛЕБ')
+
+// console.log(users[1].balance)
+// console.log(users[2].balance)
+
+// takeOrder('петр_3', 'buy', 1, 'ХЛЕБ')
+
+console.log(users[1].balance)
+console.log(users[2].balance)
+
+console.log('after', computeBids())
+
+console.log(orders)
