@@ -20,24 +20,50 @@ const orders = {
   buy: [],
 }
 
-const users = [
-  { id: 'иван_1', name: 'Иван', balance: { usdt: 1000, ХЛЕБ: 10 } },
-  { id: 'мария_2', name: 'Мария', balance: { usdt: 500, ХЛЕБ: 5 } },
-  { id: 'петр_3', name: 'Петр', balance: { usdt: 2000, ХЛЕБ: 0 } },
+const traders = [
+  {
+    id: 'иван_1',
+    name: 'Иван',
+    frozen: { usdt: 0, ХЛЕБ: 0 },
+    balance: { usdt: 1000, ХЛЕБ: 10 },
+  },
+  {
+    id: 'мария_2',
+    name: 'Мария',
+    frozen: { usdt: 0, ХЛЕБ: 0 },
+    balance: { usdt: 500, ХЛЕБ: 5 },
+  },
+  {
+    id: 'петр_3',
+    name: 'Петр',
+    frozen: { usdt: 0, ХЛЕБ: 0 },
+    balance: { usdt: 2000, ХЛЕБ: 0 },
+  },
 ]
 
-function  (fromTraderId, toTraderId, symbol, count) {
+function take() {
+  const currentOrders = calculateOrdersToTake()
+  currentOrders.forEach(co => {
+    deal(takerTraderId, makerTraderId, volume, cost, side)
+  })
+}
+
+function calculateOrdersToTake() {
   // body
 }
 
-function deal(takerTraderId, makerTraderId, symbol, volume, cost, side) {
+function swap(fromTraderId, toTraderId, count) {
+  // body
+}
+
+function deal(takerTraderId, makerTraderId, volume, cost, side) {
   if (order.side === 'sell') {
-    swap(takerTraderId, makerTraderId, symbol, cost)
-    swap(makerTraderId, takerTraderId, symbol, volume)
+    swap(takerTraderId, makerTraderId, cost)
+    swap(makerTraderId, takerTraderId, volume)
   }
   if (order.side === 'buy') {
-    swap(makerTraderId, takerTraderId, symbol, cost)
-    swap(takerTraderId, makerTraderId, symbol, volume)
+    swap(makerTraderId, takerTraderId, cost)
+    swap(takerTraderId, makerTraderId, volume)
   }
 }
 
@@ -60,7 +86,7 @@ function appendOrder(order) {
   orders['buy'].sort((newVal, oldVal) => newVal.price - oldVal.price)
 }
 
-function  (takerId, side, volume, symbol) {
+function takeOrder(takerId, side, volume, symbol) {
   const targetPool = side === 'buy' ? 'sell' : 'buy'
   let remainingVolume = volume
   const ordersToClose = []
@@ -86,8 +112,8 @@ function  (takerId, side, volume, symbol) {
 }
 
 function closeOrder(order) {
-  const trader = users.find(u => u.id === order.traderId)
-  const takers = users.filter(u => order.takersIds.includes(u.id))
+  const trader = traders.find(u => u.id === order.traderId)
+  const takers = traders.filter(u => order.takersIds.includes(u.id))
   const totalVolume = order.capacity
   const totalPrice = totalVolume * order.price
 
@@ -126,58 +152,84 @@ function closeOrder(order) {
 }
 
 function make(traderId, side, price, volume) {
-const trader = users.find(u => u.id === traderId)
-  if (!trader) return console.log('no user')
-
-  const symbol = 'ХЛЕБ'
-  const cost = price * volume
-  if (side === 'sell') {
-    if (trader.balance[symbol] < volume) {
-      console.log(`DENIED : у ${trader.name} NOT ENOUGH ${symbol}`)
-      return
-    }
-    trader.balance[symbol] -= volume
-    trader.frozen[symbol] += volume
-  } else if (side === 'buy') {
-    if (trader.balance.usdt < cost) {
-      console.log(` DENIED: у ${trader.name} NOT ENOUGH USDT .`)
-      return
-    }
-    trader.balance.usdt -= cost
-    trader.frozen.usdt += cost
-  }
+  if (!checkPositive(price, volume)) return
+  if (!checkBalanceByTraderId(traderId, side, price, volume)) return
   const newOrder = new Order(traderId, side, price, volume)
   appendOrder(newOrder)
 }
 
-make('иван_1', 'buy', 9, 1)
-make('иван_1', 'buy', 9, 1)
-make('иван_1', 'buy', 5, 1)
-make('иван_1', 'buy', 9, 1)
-make('иван_1', 'buy', 7, 5)
-make('иван_1', 'buy', 9, 1)
+function checkBalanceByTraderId(traderId, side, price, volume) {
+  const trader = getTraderById(traderId)
+  if (!trader) return
+  const symbol = 'ХЛЕБ'
+  const cost = price * volume
+  if (side === 'sell') return compareBalance(trader, symbol, volume)
+  if (side === 'buy') return compareBalance(trader, 'usdt', cost)
+}
 
-make('мария_2', 'sell', 11, 1)
-make('мария_2', 'sell', 13, 5)
-make('мария_2', 'sell', 15, 1)
-make('мария_2', 'sell', 9, 2)
+function freezeTraderBalance(traderId, symbol, count) {
+  getTraderById(traderId).balance[symbol] -= count
+  getTraderById(traderId).frozen[symbol] += count
+}
+function unfreezeTraderBalance(traderId, symbol, count) {
+  getTraderById(traderId).frozen[symbol] -= count
+  getTraderById(traderId).balance[symbol] += count
+}
+function getTraderById(id) {
+  const trader = traders.find(u => u.id === id)
+  if (!trader) {
+    console.log('trader not exist')
+    return false
+  }
+  return trader
+}
+function checkPositive(...numbers) {
+  const result = numbers.every(n => typeof n === 'number' && n > 0)
+  if (!result) console.log('error: has negative number...')
+  return result
+}
+function compareBalance(trader, symbol, requireBalance) {
+  if (trader.balance[symbol] < requireBalance) {
+    console.log(`DENIED: ${trader.name} NOT ENOUGH ${symbol}`)
+    return false
+  }
+  freezeTraderBalance(trader.id, symbol, requireBalance)
+  console.log(`GRANTED: ${trader.name} FREEZED ${symbol} : ${requireBalance}`)
+  return true
+}
+
+// make('иван_1', 'buy', 9, 1)
+// make('иван_1', 'buy', 9, 1)
+// make('иван_1', 'buy', 5, 1)
+// make('иван_1', 'buy', 9, 1)
+// make('иван_1', 'buy', 7, 5)
+// make('иван_1', 'buy', 9, 1)
+
+// make('мария_2', 'sell', 11, 1)
+// make('мария_2', 'sell', 13, 5)
+// make('мария_2', 'sell', 15, 1)
+
+make('мария_2', 'sell', 9, 5)
 
 console.log(orders)
-console.log('before', computeBids())
+console.log('after', computeBids())
 
-console.log(users[1].balance)
-console.log(users[2].balance)
-
-takeOrder('петр_3', 'buy', 1, 'ХЛЕБ')
+// console.log(orders)
+// console.log('before', computeBids())
 
 // console.log(users[1].balance)
 // console.log(users[2].balance)
 
 // takeOrder('петр_3', 'buy', 1, 'ХЛЕБ')
 
-console.log(users[1].balance)
-console.log(users[2].balance)
+// console.log(users[1].balance)
+// console.log(users[2].balance)
 
-console.log('after', computeBids())
+// takeOrder('петр_3', 'buy', 1, 'ХЛЕБ')
 
-console.log(orders)
+// console.log(users[1].balance)
+// console.log(users[2].balance)
+
+// console.log('after', computeBids())
+
+// console.log(orders)
