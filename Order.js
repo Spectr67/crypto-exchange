@@ -26,7 +26,7 @@ const users = [
   { id: 'петр_3', name: 'Петр', balance: { usdt: 2000, ХЛЕБ: 0 } },
 ]
 
-function swap(fromTraderId, toTraderId, symbol, count) {
+function  (fromTraderId, toTraderId, symbol, count) {
   // body
 }
 
@@ -60,7 +60,7 @@ function appendOrder(order) {
   orders['buy'].sort((newVal, oldVal) => newVal.price - oldVal.price)
 }
 
-function takeOrder(takerId, side, volume, symbol) {
+function  (takerId, side, volume, symbol) {
   const targetPool = side === 'buy' ? 'sell' : 'buy'
   let remainingVolume = volume
   const ordersToClose = []
@@ -126,8 +126,28 @@ function closeOrder(order) {
 }
 
 function make(traderId, side, price, volume) {
-  // TODO: проверить есть ли баланс
-  appendOrder(new Order(traderId, side, price, volume))
+const trader = users.find(u => u.id === traderId)
+  if (!trader) return console.log('no user')
+
+  const symbol = 'ХЛЕБ'
+  const cost = price * volume
+  if (side === 'sell') {
+    if (trader.balance[symbol] < volume) {
+      console.log(`DENIED : у ${trader.name} NOT ENOUGH ${symbol}`)
+      return
+    }
+    trader.balance[symbol] -= volume
+    trader.frozen[symbol] += volume
+  } else if (side === 'buy') {
+    if (trader.balance.usdt < cost) {
+      console.log(` DENIED: у ${trader.name} NOT ENOUGH USDT .`)
+      return
+    }
+    trader.balance.usdt -= cost
+    trader.frozen.usdt += cost
+  }
+  const newOrder = new Order(traderId, side, price, volume)
+  appendOrder(newOrder)
 }
 
 make('иван_1', 'buy', 9, 1)
