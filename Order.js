@@ -41,29 +41,75 @@ const traders = [
   },
 ]
 
-function take() {
-  const currentOrders = calculateOrdersToTake()
+function take(takerTraderId, side, volume) {
+  if (!checkPositive(volume)) return
+
+  const targetPool = side === 'buy' ? 'sell' : 'buy'
+
+  const currentOrders = calculateOrdersToTake(takerTraderId, targetPool, volume)
+
+  if (currentOrders.length === 0) {
+    return
+  }
+
   currentOrders.forEach(co => {
-    deal(takerTraderId, makerTraderId, volume, cost, side)
+    co.order.takersIds.push(takerTraderId)
+
+    deal(takerTraderId, co.order.traderId, co.volume, co.cost, side)
+    if (co.order.isFulfilled) {
+      closeOrder(co.order)
+    }
   })
 }
 
-function calculateOrdersToTake() {
-  // body
-}
+function calculateOrdersToTake(takerId, targetPool, volume) {
+  let remainingVolume = volume
+  const ordersToTake = []
 
-function swap(fromTraderId, toTraderId, count) {
-  // body
+  while (remainingVolume > 0 && orders[targetPool].length > 0) {
+    const bestOrder = orders[targetPool].at(-1)
+    const volumeToTake = Math.min(remainingVolume, bestOrder.volume)
+
+    ordersToTake.push({
+      order: bestOrder,
+      volume: volumeToTake,
+      cost: volumeToTake * bestOrder.price,
+    })
+
+    remainingVolume -= volumeToTake
+    bestOrder.volume -= volumeToTake
+
+    if (bestOrder.volume === 0) {
+      orders[targetPool].pop()
+    }
+  }
+
+  return ordersToTake
+}
+function swap(fromTraderId, toTraderId, symbol, count) {
+  const fromTrader = getTraderById(fromTraderId)
+  const toTrader = getTraderById(toTraderId)
+
+  if (!fromTrader || !toTrader) return
+  if (fromTrader.frozen[symbol] >= count) {
+    fromTrader.frozen[symbol] -= count
+  } else {
+    fromTrader.balance[symbol] -= count
+  }
+
+  toTrader.balance[symbol] += count
 }
 
 function deal(takerTraderId, makerTraderId, volume, cost, side) {
-  if (order.side === 'sell') {
-    swap(takerTraderId, makerTraderId, cost)
-    swap(makerTraderId, takerTraderId, volume)
-  }
-  if (order.side === 'buy') {
-    swap(makerTraderId, takerTraderId, cost)
-    swap(takerTraderId, makerTraderId, volume)
+  const asset = 'ХЛЕБ'
+  const quote = 'usdt'
+
+  if (side === 'buy') {
+    swap(takerTraderId, makerTraderId, quote, cost)
+    swap(makerTraderId, takerTraderId, asset, volume)
+  } else if (side === 'sell') {
+    swap(takerTraderId, makerTraderId, asset, volume)
+    swap(makerTraderId, takerTraderId, quote, cost)
   }
 }
 
@@ -198,6 +244,23 @@ function compareBalance(trader, symbol, requireBalance) {
   return true
 }
 
+console.log('Иван', traders[0].balance)
+console.log('Мария ', traders[1].balance)
+
+make('иван_1', 'sell', 100, 5)
+
+make('мария_2', 'buy', 50, 2)
+
+console.log('Bids:', computeBids())
+
+console.log('Петр', traders[2].balance)
+
+take('петр_3', 'buy', 3)
+
+console.log(computeBids())
+traders.forEach(t => {
+  console.log(`${t.name} -> Balance:`, t.balance, '| Frozen:', t.frozen)
+})
 // make('иван_1', 'buy', 9, 1)
 // make('иван_1', 'buy', 9, 1)
 // make('иван_1', 'buy', 5, 1)
