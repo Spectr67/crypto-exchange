@@ -43,18 +43,14 @@ const traders = [
 
 function take(takerTraderId, side, volume) {
   if (!checkPositive(volume)) return
-
   const targetPool = side === 'buy' ? 'sell' : 'buy'
-
   const currentOrders = calculateOrdersToTake(takerTraderId, targetPool, volume)
-
   if (currentOrders.length === 0) {
     return
   }
 
   currentOrders.forEach(co => {
     co.order.takersIds.push(takerTraderId)
-
     deal(takerTraderId, co.order.traderId, co.volume, co.cost, side)
     if (co.order.isFulfilled) {
       closeOrder(co.order)
@@ -86,6 +82,7 @@ function calculateOrdersToTake(takerId, targetPool, volume) {
 
   return ordersToTake
 }
+
 function swap(fromTraderId, toTraderId, symbol, count) {
   const fromTrader = getTraderById(fromTraderId)
   const toTrader = getTraderById(toTraderId)
