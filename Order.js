@@ -241,23 +241,26 @@ function compareBalance(trader, symbol, requireBalance) {
   return true
 }
 
-console.log('Иван', traders[0].balance)
-console.log('Мария ', traders[1].balance)
-
-make('иван_1', 'sell', 100, 5)
-
-make('мария_2', 'buy', 50, 2)
-
-console.log('Bids:', computeBids())
-
-console.log('Петр', traders[2].balance)
-
-take('петр_3', 'buy', 3)
-
-console.log(computeBids())
 traders.forEach(t => {
   console.log(`${t.name} -> Balance:`, t.balance, '| Frozen:', t.frozen)
 })
+console.log('Bids:', computeBids())
+
+make('иван_1', 'sell', 100, 5)
+make('мария_2', 'buy', 50, 2)
+
+traders.forEach(t => {
+  console.log(`${t.name} -> Balance:`, t.balance, '| Frozen:', t.frozen)
+})
+console.log('Bids:', computeBids())
+
+take('петр_3', 'buy', 33)
+
+traders.forEach(t => {
+  console.log(`${t.name} -> Balance:`, t.balance, '| Frozen:', t.frozen)
+})
+console.log('Bids:', computeBids())
+
 // make('иван_1', 'buy', 9, 1)
 // make('иван_1', 'buy', 9, 1)
 // make('иван_1', 'buy', 5, 1)
@@ -269,10 +272,10 @@ traders.forEach(t => {
 // make('мария_2', 'sell', 13, 5)
 // make('мария_2', 'sell', 15, 1)
 
-make('мария_2', 'sell', 9, 5)
+// make('мария_2', 'sell', 9, 5)
 
-console.log(orders)
-console.log('after', computeBids())
+// console.log(orders)
+// console.log('after', computeBids())
 
 // console.log(orders)
 // console.log('before', computeBids())
@@ -293,3 +296,5 @@ console.log('after', computeBids())
 // console.log('after', computeBids())
 
 // console.log(orders)
+
+// swap(takerTraderId, makerTraderId, quote, cost)
