@@ -37,6 +37,7 @@ export function make(traderId, side, price, volume) {
   appendOrder(newOrder)
 }
 
+// плохое название. это не проверка. это что-то другое
 function checkBalanceByTraderId(traderId, side, price, volume) {
   const trader = getTraderById(traderId)
   if (!trader) return
@@ -56,11 +57,13 @@ function compareBalance(trader, symbol, requireBalance) {
   return true
 }
 
-function freezeTraderBalance(traderId, symbol, count) {
+export function freezeTraderBalance(traderId, symbol, count) {
+  // если заморозка не прошла корректно вернуть false, если корректно, то true
   getTraderById(traderId).balance[symbol] -= count
   getTraderById(traderId).frozen[symbol] += count
 }
-function unfreezeTraderBalance(traderId, symbol, count) {
+export function unfreezeTraderBalance(traderId, symbol, count) {
+  // если разморозка не прошла корректно вернуть false, если корректно, то true
   getTraderById(traderId).frozen[symbol] -= count
   getTraderById(traderId).balance[symbol] += count
 }

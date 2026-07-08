@@ -1,27 +1,21 @@
 import { computeBids } from './functions.js'
-import { getTraderById, traders } from './traders.js'
+import { getTraderById, logTraders, traders } from './traders.js'
 import { make, orders } from './orders-make.js'
 import { take } from './orders-take.js'
 
-traders.forEach(t => {
-  console.log(`${t.name} -> Balance:`, t.balance, '| Frozen:', t.frozen)
-})
-console.log('Bids:', computeBids())
+logTraders()
+console.log(computeBids(), '\n')
 
 make('иван_1', 'sell', 100, 5)
-make('мария_2', 'buy', 50, 2)
+// make('мария_2', 'buy', 50, 2)
 
-traders.forEach(t => {
-  console.log(`${t.name} -> Balance:`, t.balance, '| Frozen:', t.frozen)
-})
-console.log('Bids:', computeBids())
+logTraders()
+console.log(computeBids(), '\n')
 
 take('петр_3', 'buy', 5) // ??? ошибка
 
-traders.forEach(t => {
-  console.log(`${t.name} -> Balance:`, t.balance, '| Frozen:', t.frozen)
-})
-console.log('Bids:', computeBids())
+logTraders()
+console.log(computeBids(), '\n')
 
 // make('иван_1', 'buy', 9, 1)
 // make('иван_1', 'buy', 9, 1)

@@ -44,30 +44,35 @@ function calculateOrdersToTake(takerId, targetPool, volume) {
   return ordersToTake
 }
 
-function swap(fromTraderId, toTraderId, symbol, count) {
+export function swap(fromTraderId, toTraderId, symbol, count, payback = false) {
+  // при удачном свапе возвращаем true, при неудачном свапе - false
   const fromTrader = getTraderById(fromTraderId)
   const toTrader = getTraderById(toTraderId)
 
   if (!fromTrader || !toTrader) return
-  if (fromTrader.frozen[symbol] >= count) {
-    fromTrader.frozen[symbol] -= count
-  } else {
-    fromTrader.balance[symbol] -= count
-  }
 
-  toTrader.balance[symbol] += count
+  const source = payback ? 'balance' : 'frozen'
+
+  if (fromTrader[source][symbol] >= count) {
+    fromTrader[source][symbol] -= count
+    toTrader.balance[symbol] += count
+  } else {
+    console.log('не хватает замороженных средств')
+  }
 }
 
-function deal(takerTraderId, makerTraderId, volume, cost, side) {
+export function deal(takerTraderId, makerTraderId, volume, cost, side) {
+  // при удачной сделке возвращаем true, при неудачной - false
   const asset = 'ХЛЕБ'
   const quote = 'usdt'
 
   if (side === 'buy') {
-    swap(takerTraderId, makerTraderId, quote, cost)
     swap(makerTraderId, takerTraderId, asset, volume)
-  } else if (side === 'sell') {
-    swap(takerTraderId, makerTraderId, asset, volume)
+    swap(takerTraderId, makerTraderId, quote, cost, true)
+  }
+  if (side === 'sell') {
     swap(makerTraderId, takerTraderId, quote, cost)
+    swap(takerTraderId, makerTraderId, asset, volume, true)
   }
 }
 
@@ -107,7 +112,7 @@ function closeOrder(order) {
     `deal ${order.side === 'sell' ? 'SELL' : 'BUY'} PRICE ${order.price} VOLUME ${totalVolume}`,
   )
 
-  console.log('new balanses:')
-  console.log(`${trader.name}:`, trader.balance)
-  takers.forEach(t => console.log(`${t.name}:`, t.balance))
+  // console.log('new balanses:')
+  // console.log(`${trader.name}:`, trader.balance)
+  // takers.forEach(t => console.log(`${t.name}:`, t.balance))
 }
