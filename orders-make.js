@@ -38,6 +38,7 @@ export function make(traderId, side, price, volume) {
 }
 
 // плохое название. это не проверка. это что-то другое
+// ХЛЕБ и usdt зашиты в этой функции
 function checkBalanceByTraderId(traderId, side, price, volume) {
   const trader = getTraderById(traderId)
   if (!trader) return

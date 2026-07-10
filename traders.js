@@ -1,22 +1,34 @@
+import { orders } from './orders-make.js'
+
+const symbols = ['USDT', 'ХЛЕБ']
+const pairs = [`${symbols[0]}/${symbols[1]}`]
+
+// createTrader()
+
 export const traders = [
   {
     id: 'иван_1',
     name: 'Иван',
     frozen: { usdt: 0, ХЛЕБ: 0 },
+    getFrozen() {
+      return orders['sell']
+        .filter(o => o.traderId === 'иван_1')
+        .reduce((acc, item) => item.volume + acc, 0)
+    },
     balance: { usdt: 1000, ХЛЕБ: 10 },
   },
   // {
   //   id: 'мария_2',
   //   name: 'Мария',
   //   frozen: { usdt: 0, ХЛЕБ: 0 },
-  //   balance: { usdt: 500, ХЛЕБ: 5 },
+  //   balance: { usdt: 0, ХЛЕБ: 5 },
   // },
-  {
-    id: 'петр_3',
-    name: 'Петр',
-    frozen: { usdt: 0, ХЛЕБ: 0 },
-    balance: { usdt: 2000, ХЛЕБ: 5 },
-  },
+  // {
+  //   id: 'петр_3',
+  //   name: 'Петр',
+  //   frozen: { usdt: 0, ХЛЕБ: 0 },
+  //   balance: { usdt: 2000, ХЛЕБ: 5 },
+  // },
 ]
 
 export function getTraderById(id) {

@@ -5,7 +5,7 @@ import { getTraderById, traders } from './traders.js'
 export function take(takerTraderId, side, volume) {
   if (!checkPositive(volume)) return
   const targetPool = side === 'buy' ? 'sell' : 'buy'
-  const currentOrders = calculateOrdersToTake(takerTraderId, targetPool, volume)
+  const currentOrders = calculateOrdersToTake(targetPool, volume)
   if (currentOrders.length === 0) {
     return
   }
@@ -19,7 +19,8 @@ export function take(takerTraderId, side, volume) {
   })
 }
 
-function calculateOrdersToTake(takerId, targetPool, volume) {
+// тейкер гарантированно не выкупит больше ордеров чем вернёт эта функция
+export function calculateOrdersToTake(targetPool, volume) {
   let remainingVolume = volume
   const ordersToTake = []
 
@@ -35,6 +36,8 @@ function calculateOrdersToTake(takerId, targetPool, volume) {
 
     remainingVolume -= volumeToTake
     bestOrder.volume -= volumeToTake
+
+    // unfreezeVolume(traderId, orderId, volume)
 
     if (bestOrder.volume === 0) {
       orders[targetPool].pop()
@@ -116,7 +119,7 @@ function closeOrder(order) {
     `deal ${order.side === 'sell' ? 'SELL' : 'BUY'} PRICE ${order.price} VOLUME ${totalVolume}`,
   )
 
-  // console.log('new balanses:')
+  // console.log('new balances:')
   // console.log(`${trader.name}:`, trader.balance)
   // takers.forEach(t => console.log(`${t.name}:`, t.balance))
 }

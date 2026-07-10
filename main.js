@@ -3,6 +3,11 @@ import { getTraderById, logTraders, traders } from './traders.js'
 import { make, orders } from './orders-make.js'
 import { take } from './orders-take.js'
 
+// let currentPair
+// let currentSymbol
+// let currentMaker
+// let currentTaker
+
 logTraders()
 console.log(computeBids(), '\n')
 
