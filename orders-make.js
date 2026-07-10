@@ -58,12 +58,40 @@ function compareBalance(trader, symbol, requireBalance) {
 }
 
 export function freezeTraderBalance(traderId, symbol, count) {
-  // если заморозка не прошла корректно вернуть false, если корректно, то true
-  getTraderById(traderId).balance[symbol] -= count
-  getTraderById(traderId).frozen[symbol] += count
+  const trader = getTraderById(traderId)
+
+  if (!trader) {
+    return false
+  }
+
+  if (trader.balance[symbol] === undefined) trader.balance[symbol] = 0
+  if (trader.frozen[symbol] === undefined) trader.frozen[symbol] = 0
+
+  if (trader.balance[symbol] >= count) {
+    trader.balance[symbol] -= count
+    trader.frozen[symbol] += count
+    return true
+  } else {
+    console.log(`Недостаточно средств на балансе для заморозки ${symbol}`)
+    return false
+  }
 }
+
 export function unfreezeTraderBalance(traderId, symbol, count) {
-  // если разморозка не прошла корректно вернуть false, если корректно, то true
-  getTraderById(traderId).frozen[symbol] -= count
-  getTraderById(traderId).balance[symbol] += count
+  const trader = getTraderById(traderId)
+  if (!trader) {
+    return false
+  }
+
+  if (trader.balance[symbol] === undefined) trader.balance[symbol] = 0
+  if (trader.frozen[symbol] === undefined) trader.frozen[symbol] = 0
+
+  if (trader.frozen[symbol] >= count) {
+    trader.frozen[symbol] -= count
+    trader.balance[symbol] += count
+    return true
+  } else {
+    console.log(`Недостаточно средств в frozen для разморозки ${symbol}`)
+    return false
+  }
 }

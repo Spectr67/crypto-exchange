@@ -49,15 +49,19 @@ export function swap(fromTraderId, toTraderId, symbol, count, payback = false) {
   const fromTrader = getTraderById(fromTraderId)
   const toTrader = getTraderById(toTraderId)
 
-  if (!fromTrader || !toTrader) return
+  if (!fromTrader || !toTrader) {
+    return false
+  }
 
   const source = payback ? 'balance' : 'frozen'
 
   if (fromTrader[source][symbol] >= count) {
     fromTrader[source][symbol] -= count
     toTrader.balance[symbol] += count
+    return true
   } else {
     console.log('не хватает замороженных средств')
+    return false
   }
 }
 
