@@ -18,26 +18,33 @@ export function take(takerTraderId, side, volume) {
     }
   })
 }
-
-// тейкер гарантированно не выкупит больше ордеров чем вернёт эта функция
 export function calculateOrdersToTake(targetPool, volume) {
   let remainingVolume = volume
   const ordersToTake = []
 
   while (remainingVolume > 0 && orders[targetPool].length > 0) {
     const bestOrder = orders[targetPool].at(-1)
+
     const volumeToTake = Math.min(remainingVolume, bestOrder.volume)
+    const costToTake = volumeToTake * bestOrder.price
 
     ordersToTake.push({
       order: bestOrder,
       volume: volumeToTake,
-      cost: volumeToTake * bestOrder.price,
+      cost: costToTake,
     })
 
     remainingVolume -= volumeToTake
     bestOrder.volume -= volumeToTake
 
-    // unfreezeVolume(traderId, orderId, volume)
+    const maker = getTraderById(bestOrder.traderId)
+    if (maker) {
+      if (bestOrder.side === 'sell') {
+        maker.frozen['ХЛЕБ'] = Math.max(0, maker.frozen['ХЛЕБ'] - volumeToTake)
+      } else if (bestOrder.side === 'buy') {
+        maker.frozen['usdt'] = Math.max(0, maker.frozen['usdt'] - costToTake)
+      }
+    }
 
     if (bestOrder.volume === 0) {
       orders[targetPool].pop()
@@ -46,6 +53,33 @@ export function calculateOrdersToTake(targetPool, volume) {
 
   return ordersToTake
 }
+// тейкер гарантированно не выкупит больше ордеров чем вернёт эта функция
+// export function calculateOrdersToTake(targetPool, volume) {
+//   let remainingVolume = volume
+//   const ordersToTake = []
+
+//   while (remainingVolume > 0 && orders[targetPool].length > 0) {
+//     const bestOrder = orders[targetPool].at(-1)
+//     const volumeToTake = Math.min(remainingVolume, bestOrder.volume)
+
+//     ordersToTake.push({
+//       order: bestOrder,
+//       volume: volumeToTake,
+//       cost: volumeToTake * bestOrder.price,
+//     })
+
+//     remainingVolume -= volumeToTake
+//     bestOrder.volume -= volumeToTake
+
+//     // unfreezeVolume(traderId, orderId, volume)
+
+//     if (bestOrder.volume === 0) {
+//       orders[targetPool].pop()
+//     }
+//   }
+
+//   return ordersToTake
+// }
 
 export function swap(fromTraderId, toTraderId, symbol, count, payback = false) {
   // при удачном свапе возвращаем true, при неудачном свапе - false
