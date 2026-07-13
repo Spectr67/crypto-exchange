@@ -81,6 +81,7 @@ export function calculateOrdersToTake(targetPool, volume) {
 //   return ordersToTake
 // }
 
+// deprecated
 export function swap(fromTraderId, toTraderId, symbol, count, payback = false) {
   // при удачном свапе возвращаем true, при неудачном свапе - false
   const fromTrader = getTraderById(fromTraderId)

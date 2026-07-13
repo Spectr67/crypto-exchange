@@ -5,9 +5,10 @@ import { logTraders, getTraderById } from '../traders.js'
 import { calculateOrdersToTake } from '../orders-take.js'
 
 make('иван_1', 'sell', 300, 1)
-console.log(computeBids())
-console.log(orders)
-let o = calculateOrdersToTake('sell', 1) // подсчитать стоимость
+make('иван_1', 'sell', 400, 2)
+// console.log(computeBids())
+// console.log(orders)
+let o = calculateOrdersToTake('sell', 2) // подсчитать стоимость
 console.log(o)
 // logTraders()
 // make('петр_3', 'sell', 300, 2)
@@ -16,31 +17,31 @@ console.log(o)
 
 // после сделки на конкретный ордер нужно проверять баланс тейкера
 
-make('иван_1', 'sell', 100, 2)
-make('иван_1', 'sell', 110, 2)
-console.log(orders.sell)
-console.log(getTraderById('иван_1').frozen)
+// make('иван_1', 'sell', 100, 2)
+// make('иван_1', 'sell', 110, 2)
+// console.log(orders.sell)
+// console.log(getTraderById('иван_1').frozen)
 
-const volumeToBuy = 3
-console.log()
+// const volumeToBuy = 3
+// console.log()
 
-const resultOfTake = calculateOrdersToTake('sell', volumeToBuy)
+// const resultOfTake = calculateOrdersToTake('sell', volumeToBuy)
 
-console.log(resultOfTake, null, 2)
+// console.log(resultOfTake, null, 2)
 
-console.log(orders.sell)
+// console.log(orders.sell)
 
-if (orders.sell.length === 1 && orders.sell[0].volume === 1) {
-  console.log(true)
-} else {
-  console.log(false)
-}
+// if (orders.sell.length === 1 && orders.sell[0].volume === 1) {
+//   console.log(true)
+// } else {
+//   console.log(false)
+// }
 
-const ivanFrozenBread = getTraderById('иван_1').frozen['ХЛЕБ']
-console.log(ivanFrozenBread)
+// const ivanFrozenBread = getTraderById('иван_1').frozen['ХЛЕБ']
+// console.log(ivanFrozenBread)
 
-if (ivanFrozenBread === 1) {
-  console.log(true)
-} else {
-  console.log(false)
-}
+// if (ivanFrozenBread === 1) {
+//   console.log(true)
+// } else {
+//   console.log(false)
+// }

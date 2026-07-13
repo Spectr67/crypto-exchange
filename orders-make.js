@@ -1,10 +1,11 @@
 import { checkPositive } from './functions.js'
 import { getTraderById } from './traders.js'
 
-class Order {
-  constructor(traderId, side, price, volume) {
+// а какая торговая пара ?
+export class Order {
+  constructor(traderId, side, price, volume, symbol = 'ХЛЕБ') {
     this.id = crypto.randomUUID().split('-')[0]
-    this.symbol = 'ХЛЕБ'
+    this.symbol = symbol
     this.capacity = volume // read only
     this.volume = volume
     this.price = price

@@ -15,6 +15,6 @@ export function computeBids() {
 
 export function checkPositive(...numbers) {
   const result = numbers.every(n => typeof n === 'number' && n > 0)
-  if (!result) console.log('error: has negative number...')
+  if (!result) console.log('error: invalid number...')
   return result
 }
