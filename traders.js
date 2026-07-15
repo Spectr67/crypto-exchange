@@ -60,6 +60,7 @@ export function transferBalancePay(taker, order, volume) {
   if (order.volume < volume) return false
   order.volume -= volume
   taker.balance[order.symbol] += volume
+  return true
 }
 
 export function transferBalancePayback(taker, maker, symbol, volume) {
@@ -67,6 +68,7 @@ export function transferBalancePayback(taker, maker, symbol, volume) {
   if (taker.balance[symbol] < volume) return false
   taker.balance[symbol] -= volume
   maker.balance[symbol] += volume
+  return true
 }
 
 // ?pair?
