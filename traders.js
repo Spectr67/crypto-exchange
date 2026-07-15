@@ -1,13 +1,13 @@
 import { checkPositive } from './functions.js'
 import { orders } from './orders-make.js'
 
-const symbols = ['USDT', 'ХЛЕБ']
-const pairs = [`${symbols[0]}/${symbols[1]}`]
-const pair = {
-  BTC: 'USTD', // BTC / USDT |
-  // sell: продаём бтц за доллар
-  // buy: покупаем бтц за доллар
-}
+// const symbols = ['USDT', 'ХЛЕБ']
+// const pairs = [`${symbols[0]}/${symbols[1]}`]
+// const pair = {
+//   BTC: 'USTD', // BTC / USDT |
+//   // sell: продаём бтц за доллар
+//   // buy: покупаем бтц за доллар
+// }
 
 // createTrader()
 
@@ -75,5 +75,15 @@ export function transferBalancePayback(taker, maker, symbol, volume) {
 // вызывается для выполнения каждого ордера, который пришел
 // из функции calculateOrdersToTake
 export function transferDeal(taker, order) {
-  //
+  const asset = 'ХЛЕБ'
+  const quote = 'usdt'
+
+  if (side === 'buy') {
+    swap(makerTraderId, takerTraderId, asset, volume)
+    swap(takerTraderId, makerTraderId, quote, cost, true)
+  }
+  if (side === 'sell') {
+    swap(makerTraderId, takerTraderId, quote, cost)
+    swap(takerTraderId, makerTraderId, asset, volume, true)
+  }
 }

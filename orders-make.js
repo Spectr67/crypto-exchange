@@ -54,46 +54,6 @@ function compareBalance(trader, symbol, requireBalance) {
     console.log(`DENIED: ${trader.name} NOT ENOUGH ${symbol}`)
     return false
   }
-  freezeTraderBalance(trader.id, symbol, requireBalance)
   console.log(`GRANTED: ${trader.name} FREEZED ${symbol} : ${requireBalance}`)
   return true
-}
-
-export function freezeTraderBalance(traderId, symbol, count) {
-  const trader = getTraderById(traderId)
-
-  if (!trader) {
-    return false
-  }
-
-  if (trader.balance[symbol] === undefined) trader.balance[symbol] = 0
-  if (trader.frozen[symbol] === undefined) trader.frozen[symbol] = 0
-
-  if (trader.balance[symbol] >= count) {
-    trader.balance[symbol] -= count
-    trader.frozen[symbol] += count
-    return true
-  } else {
-    console.log(`Недостаточно средств на балансе для заморозки ${symbol}`)
-    return false
-  }
-}
-
-export function unfreezeTraderBalance(traderId, symbol, count) {
-  const trader = getTraderById(traderId)
-  if (!trader) {
-    return false
-  }
-
-  if (trader.balance[symbol] === undefined) trader.balance[symbol] = 0
-  if (trader.frozen[symbol] === undefined) trader.frozen[symbol] = 0
-
-  if (trader.frozen[symbol] >= count) {
-    trader.frozen[symbol] -= count
-    trader.balance[symbol] += count
-    return true
-  } else {
-    console.log(`Недостаточно средств в frozen для разморозки ${symbol}`)
-    return false
-  }
 }
