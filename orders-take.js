@@ -4,6 +4,9 @@ import { getTraderById, traders } from './traders.js'
 
 export function take(takerTraderId, side, volume) {
   if (!checkPositive(volume)) return
+  const taker = getTraderById(takerTraderId)
+  if (!taker) return
+
   const targetPool = side === 'buy' ? 'sell' : 'buy'
   const currentOrders = calculateOrdersToTake(targetPool, volume)
   if (currentOrders.length === 0) {
@@ -11,8 +14,23 @@ export function take(takerTraderId, side, volume) {
   }
 
   currentOrders.forEach(co => {
+    const maker = getTraderById(co.order.traderId)
+    if (!maker) return
+
     co.order.takersIds.push(takerTraderId)
-    deal(takerTraderId, co.order.traderId, co.volume, co.cost, side)
+
+    const asset = 'ХЛЕБ'
+    const quote = 'usdt'
+
+    if (side === 'buy') {
+      transferBalancePayback(taker, maker, quote, co.cost)
+
+      transferBalancePay(taker, co.order, co.volume)
+    } else if (side === 'sell') {
+      transferBalancePayback(taker, maker, asset, co.volume)
+      transferBalancePay(taker, co.order, co.cost)
+    }
+
     if (co.order.isFulfilled) {
       closeOrder(co.order)
     }
@@ -36,15 +54,6 @@ export function calculateOrdersToTake(targetPool, volume) {
 
     remainingVolume -= volumeToTake
     bestOrder.volume -= volumeToTake
-
-    const maker = getTraderById(bestOrder.traderId)
-    if (maker) {
-      if (bestOrder.side === 'sell') {
-        maker.frozen['ХЛЕБ'] = Math.max(0, maker.frozen['ХЛЕБ'] - volumeToTake)
-      } else if (bestOrder.side === 'buy') {
-        maker.frozen['usdt'] = Math.max(0, maker.frozen['usdt'] - costToTake)
-      }
-    }
 
     if (bestOrder.volume === 0) {
       orders[targetPool].pop()
@@ -81,7 +90,6 @@ export function calculateOrdersToTake(targetPool, volume) {
 //   return ordersToTake
 // }
 
-// deprecated
 export function swap(fromTraderId, toTraderId, symbol, count, payback = false) {
   // при удачном свапе возвращаем true, при неудачном свапе - false
   const fromTrader = getTraderById(fromTraderId)
