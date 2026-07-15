@@ -11,7 +11,21 @@ export class Order {
     this.price = price
     this.side = side
     this.traderId = traderId
-    this.takersIds = []
+    this.#freezeBalance()
+  }
+
+  #freezeBalance() {
+    const trader = getTraderById(this.traderId)
+    trader.balance[this.symbol] -= this.volume
+  }
+
+  #unfreezeBalance() {
+    const trader = getTraderById(this.traderId)
+    trader.balance[this.symbol] += this.volume
+  }
+
+  cancel() {
+    this.#unfreezeBalance()
   }
 
   get isFulfilled() {

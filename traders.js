@@ -55,11 +55,11 @@ export function logTraders() {
   console.log('')
 }
 
-export function transferBalancePay(taker, order, volume) {
-  if (!checkPositive(volume)) return false
-  if (order.volume < volume) return false
-  order.volume -= volume
-  taker.balance[order.symbol] += volume
+export function transferBalancePay(taker, order, limitVolume) {
+  if (order.volume > limitVolume) return false // переделать
+  // все равно выкупаем сколько хватит
+  order.volume = 0
+  taker.balance[order.symbol] += order.volume
   return true
 }
 
@@ -74,16 +74,22 @@ export function transferBalancePayback(taker, maker, symbol, volume) {
 // ?pair?
 // вызывается для выполнения каждого ордера, который пришел
 // из функции calculateOrdersToTake
-export function transferDeal(taker, order) {
+// для payback всегда считаем cost
+// ВНЕЗАПНО 2 варианта ТЕЙКА!!
+// ограничение либо по объёму закупки либо по сумме закупки
+export function transferDeal(taker, order, limitVolume, limitCost) {
   const asset = 'ХЛЕБ'
   const quote = 'usdt'
+  const maker = getTraderById(order.traderId)
+  const cost = order.volume * order.price
+  const side = 'buy'
 
   if (side === 'buy') {
-    swap(makerTraderId, takerTraderId, asset, volume)
-    swap(takerTraderId, makerTraderId, quote, cost, true)
+    transferBalancePayback(taker, maker, quote, cost)
+    transferBalancePay(taker, order, limitVolume)
   }
-  if (side === 'sell') {
-    swap(makerTraderId, takerTraderId, quote, cost)
-    swap(takerTraderId, makerTraderId, asset, volume, true)
-  }
+  // if (side === 'sell') {
+  //   swap(makerTraderId, takerTraderId, quote, cost)
+  //   swap(takerTraderId, makerTraderId, asset, volume, true)
+  // }
 }
