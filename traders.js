@@ -1,40 +1,24 @@
 import { checkPositive } from './functions.js'
 import { orders } from './orders-make.js'
 
-// const symbols = ['USDT', 'ХЛЕБ']
-// const pairs = [`${symbols[0]}/${symbols[1]}`]
-// const pair = {
-//   BTC: 'USTD', // BTC / USDT |
-//   // sell: продаём бтц за доллар
-//   // buy: покупаем бтц за доллар
-// }
-
 // createTrader()
 
 export const traders = [
   {
     id: 'иван_1',
     // name: 'Иван',
-    // frozen: { usdt: 0, ХЛЕБ: 0 },
-    // getFrozen() {
-    //   return orders['sell']
-    //     .filter(o => o.traderId === 'иван_1')
-    //     .reduce((acc, item) => item.volume + acc, 0)
-    // },
-    balance: { usdt: 1000, ХЛЕБ: 10 },
+    balance: { USDT: 10000, BTC: 1 },
   },
   {
     id: 'мария_2',
     // name: 'Мария',
-    // frozen: { usdt: 0, ХЛЕБ: 0 },
-    balance: { usdt: 500, ХЛЕБ: 5 },
+    balance: { USDT: 10000, BTC: 1 },
   },
-  // {
-  //   id: 'петр_3',
-  //   name: 'Петр',
-  //   frozen: { usdt: 0, ХЛЕБ: 0 },
-  //   balance: { usdt: 2000, ХЛЕБ: 5 },
-  // },
+  {
+    id: 'петр_3',
+    // name: 'Петр',
+    balance: { USDT: 10000, BTC: 1 },
+  },
 ]
 
 export function getTraderById(id) {
@@ -55,19 +39,19 @@ export function logTraders() {
   console.log('')
 }
 
-export function transferBalancePay(taker, order, limitVolume) {
-  if (order.volume > limitVolume) return false // переделать
-  // все равно выкупаем сколько хватит
+// к моменту вызова этой функции ордер уже оплачен из баланса тейкера
+export function transferBalancePay(taker, order) {
   order.volume = 0
   taker.balance[order.symbol] += order.volume
   return true
 }
 
-export function transferBalancePayback(taker, maker, symbol, volume) {
-  if (!checkPositive(volume)) return false
-  if (taker.balance[symbol] < volume) return false
-  taker.balance[symbol] -= volume
-  maker.balance[symbol] += volume
+export function transferBalancePayback(taker, maker, symbol, sum) {
+  if (!checkPositive(sum)) return false
+  // у тейкера не хватает денег для полного выкупа ордера
+  if (taker.balance[symbol] < sum) return false
+  taker.balance[symbol] -= sum
+  maker.balance[symbol] += sum
   return true
 }
 
@@ -81,12 +65,12 @@ export function transferDeal(taker, order, limitVolume, limitCost) {
   const asset = 'ХЛЕБ'
   const quote = 'usdt'
   const maker = getTraderById(order.traderId)
-  const cost = order.volume * order.price
+  // const cost = order.volume * order.price // сколько оплаты снимет с тейкера
   const side = 'buy'
 
   if (side === 'buy') {
-    transferBalancePayback(taker, maker, quote, cost)
-    transferBalancePay(taker, order, limitVolume)
+    transferBalancePayback(taker, maker, quote, order.cost)
+    transferBalancePay(taker, order)
   }
   // if (side === 'sell') {
   //   swap(makerTraderId, takerTraderId, quote, cost)

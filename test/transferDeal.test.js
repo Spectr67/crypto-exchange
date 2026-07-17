@@ -1,5 +1,5 @@
-import { Order } from './orders-make.js'
-import { traders, transferDeal } from './traders.js'
+import { Order } from '../orders-make.js'
+import { traders, transferDeal } from '../traders.js'
 
 const maker = traders[0]
 const taker = traders[1]

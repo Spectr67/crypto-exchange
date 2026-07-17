@@ -1,46 +1,24 @@
-console.log(crypto.randomUUID())
+function superBig(bigA, bigB) {
+  while (littleFunction2(arguments)) {
+    bigB(bigA)
+  }
+}
 
-const d = [
-  {
-    id: 'a1dba49b',
-    symbol: 'ХЛЕБ',
-    volume: 1,
-    price: 9,
-    deal: 'buy',
-    isFulfilled: false,
-  },
-  {
-    id: '898f3fa9',
-    symbol: 'ХЛЕБ',
-    volume: 1,
-    price: 7,
-    deal: 'buy',
-    isFulfilled: false,
-  },
-  {
-    id: '48613026',
-    symbol: 'ХЛЕБ',
-    volume: 1,
-    price: 9,
-    deal: 'buy',
-    isFulfilled: false,
-  },
-  {
-    id: '8c167012',
-    symbol: 'ХЛЕБ',
-    volume: 1,
-    price: 5,
-    deal: 'buy',
-    isFulfilled: false,
-  },
-  {
-    id: '197bdb4c',
-    symbol: 'ХЛЕБ',
-    volume: 1,
-    price: 9,
-    deal: 'buy',
-    isFulfilled: false,
-  },
-]
+function bigFunction(arguments) {
+  if (littleFunction1(arguments)) {
+    littleFunction2(arguments)
+    for (sfs of littleFunction2(arguments)) {
+      littleFunction3(arguments)
+    }
+  }
+}
 
-console.log(Object.groupBy(d, o => o.price))
+function littleFunction1(arguments) {
+  // body
+}
+function littleFunction2(arguments) {
+  // body
+}
+function littleFunction3(arguments) {
+  // body
+}
