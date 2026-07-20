@@ -1,12 +1,21 @@
-import { Order } from '../orders-make.js'
-import { traders } from '../traders.js'
+import { make, orders } from '../orders-make.js'
+import { take } from '../orders-take.js'
+import { traders, logTraders } from '../traders.js'
+logTraders()
 
-const maker = traders[0]
+make('иван_1', 'sell', 0.5, 40000)
 
-console.log(maker)
+make('мария_2', 'sell', 0.5, 50000)
+console.log(orders.sell)
+logTraders()
 
-const order = new Order(maker.id, 'buy', 1, 10001)
+take('петр_3', 'buy', 0.3, null)
 
-console.log(order)
+console.log(orders.sell[0]?.volume)
+logTraders()
 
-console.log(maker)
+take('петр_3', 'buy', null, 20000)
+
+console.log(orders.sell)
+
+logTraders()

@@ -68,7 +68,7 @@ function appendOrder(order) {
 export function make(traderId, side, volume, price, pair) {
   // if (!checkPositive(price, volume)) return
   // if (!checkBalanceByTraderId(traderId, side, price, volume)) return
-  const newOrder = new Order(traderId, side, volume, price)
+  const newOrder = new Order(traderId, side, volume, price, pair)
   appendOrder(newOrder)
 }
 

@@ -61,9 +61,8 @@ export function transferBalancePayback(taker, maker, symbol, sum) {
 // для payback всегда считаем cost
 // ВНЕЗАПНО 2 варианта ТЕЙКА!!
 // ограничение либо по объёму закупки либо по сумме закупки
-export function transferDeal(taker, order, limitVolume, limitCost) {
-  const asset = 'ХЛЕБ'
-  const quote = 'usdt'
+export function transferDeal(taker, order, limitVolume, limitCost, pair) {
+  const [asset, quote] = pair
   const maker = getTraderById(order.traderId)
   // const cost = order.volume * order.price // сколько оплаты снимет с тейкера
   const side = 'buy'
