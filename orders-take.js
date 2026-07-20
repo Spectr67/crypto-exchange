@@ -29,7 +29,7 @@ function takeByVolume(taker, side, limitVolume, pair) {
       const dealVolume = Math.min(order.volume, remainVolume)
       const dealCost = dealVolume * order.price
 
-      const success = transferDeal(taker, order, dealVolume, dealCost, pair)
+      const success = transferDeal(taker, order, pair, dealVolume, dealCost)
 
       if (success) {
         remainVolume -= dealVolume
@@ -52,8 +52,8 @@ function takeByCost(taker, side, limitCost, pair) {
       const orderCost = order.volume * order.price
       const dealCost = Math.min(orderCost, remainCost)
       const dealVolume = dealCost / order.price
-
-      const success = transferDeal(taker, order, dealVolume, dealCost, pair)
+      //                                               карго культ
+      const success = transferDeal(taker, order, pair, dealVolume, dealCost)
 
       if (success) {
         remainCost -= dealCost

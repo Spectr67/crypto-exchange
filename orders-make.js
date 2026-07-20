@@ -15,13 +15,19 @@ export class Order {
     this.price = price
     this.cost = this.price * this.volume
     this.traderId = traderId
-    this.#freezeBalance()
+    if (this.checkTraderBalance()) {
+      this.#freezeBalance()
+    } else {
+      console.log('ERRNOBALANCE')
+      this.capacity = 0
+      this.volume = 0
+    }
   }
 
   // TODO:
   checkTraderBalance() {
     const trader = getTraderById(this.traderId)
-    if (trader.balance[symbol] < requireBalance) {
+    if (trader.balance[this.pair[1]] < this.cost) {
       return false
     }
     return true

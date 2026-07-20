@@ -7,17 +7,17 @@ export const traders = [
   {
     id: 'иван_1',
     // name: 'Иван',
-    balance: { USDT: 10000, BTC: 1 },
+    balance: { USDT: 10000, BTC: 3 },
   },
   {
     id: 'мария_2',
     // name: 'Мария',
-    balance: { USDT: 10000, BTC: 1 },
+    balance: { USDT: 10000, BTC: 3 },
   },
   {
     id: 'петр_3',
     // name: 'Петр',
-    balance: { USDT: 10000, BTC: 1 },
+    balance: { USDT: 10000, BTC: 3 },
   },
 ]
 
@@ -40,9 +40,9 @@ export function logTraders() {
 }
 
 // к моменту вызова этой функции ордер уже оплачен из баланса тейкера
-export function transferBalancePay(taker, order) {
+export function transferBalancePay(taker, order, symbol) {
+  taker.balance[symbol] += order.volume
   order.volume = 0
-  taker.balance[order.symbol] += order.volume
   return true
 }
 
@@ -61,15 +61,12 @@ export function transferBalancePayback(taker, maker, symbol, sum) {
 // для payback всегда считаем cost
 // ВНЕЗАПНО 2 варианта ТЕЙКА!!
 // ограничение либо по объёму закупки либо по сумме закупки
-export function transferDeal(taker, order, limitVolume, limitCost, pair) {
-  const [asset, quote] = pair
+export function transferDeal(taker, order, limitVolume, limitCost) {
   const maker = getTraderById(order.traderId)
-  // const cost = order.volume * order.price // сколько оплаты снимет с тейкера
-  const side = 'buy'
 
-  if (side === 'buy') {
-    transferBalancePayback(taker, maker, quote, order.cost)
-    transferBalancePay(taker, order)
+  if (order.side === 'sell') {
+    transferBalancePayback(taker, maker, order.pair[1], order.cost)
+    transferBalancePay(taker, order, order.pair[0])
   }
   // if (side === 'sell') {
   //   swap(makerTraderId, takerTraderId, quote, cost)
