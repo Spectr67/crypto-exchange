@@ -1,4 +1,4 @@
-import { checkPositive } from './functions.js'
+import { checkPositive, checkTraderBalance } from './functions.js'
 import { getTraderById } from './traders.js'
 
 export class Order {
@@ -27,12 +27,18 @@ export class Order {
   // TODO:
   checkTraderBalance() {
     const trader = getTraderById(this.traderId)
-    if (trader.balance[this.pair[1]] < this.cost) {
-      return false
-    }
-    return true
-  }
+    if (!trader) return false
+    const [asset, quote] = this.pair
 
+    if (this.side === 'sell') {
+      return trader.balance[asset] >= this.volume
+    }
+    if (this.side === 'buy') {
+      return trader.balance[quote] >= this.cost
+    }
+
+    return false
+  }
   #freezeBalance() {
     const trader = getTraderById(this.traderId)
     if (this.side === 'sell') {
@@ -71,9 +77,11 @@ function appendOrder(order) {
 }
 
 // бизнес логика открытия ордера
-export function make(traderId, side, volume, price, pair) {
-  // if (!checkPositive(price, volume)) return
-  // if (!checkBalanceByTraderId(traderId, side, price, volume)) return
+export function make(traderId, side, volume, price, pair = ['BTC', 'USDT']) {
+  if (!checkPositive(price, volume)) return
+  if (!checkTraderBalance(traderId, side, price, volume, pair)) {
+    return false
+  }
   const newOrder = new Order(traderId, side, volume, price, pair)
   appendOrder(newOrder)
 }

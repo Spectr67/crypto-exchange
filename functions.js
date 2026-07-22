@@ -1,4 +1,5 @@
 import { orders } from './orders-make.js'
+import { getTraderById } from './traders.js'
 
 export function computeBids() {
   const bids = { sell: [], buy: [] }
@@ -17,4 +18,27 @@ export function checkPositive(...numbers) {
   const result = numbers.every(n => typeof n === 'number' && n > 0)
   if (!result) console.log('error: invalid number...')
   return result
+}
+
+export function checkTraderBalance(
+  traderId,
+  side,
+  price,
+  volume,
+  pair = ['BTC', 'USDT'],
+) {
+  const trader = getTraderById(traderId)
+  if (!trader) return false
+
+  const [asset, quote] = pair
+
+  if (side === 'sell') {
+    return (trader.balance[asset] || 0) >= volume
+  }
+  if (side === 'buy') {
+    const cost = price * volume
+    return (trader.balance[quote] || 0) >= cost
+  }
+
+  return false
 }
