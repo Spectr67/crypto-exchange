@@ -62,9 +62,14 @@ export function transferBalancePayback(taker, maker, symbol, sum) {
 // ВНЕЗАПНО 2 варианта ТЕЙКА!!
 // ограничение либо по объёму закупки либо по сумме закупки
 export function transferDeal(taker, order, limitVolume, limitCost) {
+  if (order.isInvalid) {
+    console.log('ERRINVALIDORDER')
+    return
+  }
   const maker = getTraderById(order.traderId)
 
   if (order.side === 'sell') {
+    console.log('!!!!!')
     transferBalancePayback(taker, maker, order.pair[1], order.cost)
     transferBalancePay(taker, order, order.pair[0])
   }

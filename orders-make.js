@@ -5,8 +5,6 @@ export class Order {
   // ['BTC', 'USDT'] BTC/USDT
   // pair состоит из двух symbol
   constructor(traderId, side, volume, price, pair = ['BTC', 'USDT']) {
-    if (!checkPositive(price)) return null
-    if (!checkPositive(volume)) return null
     this.id = crypto.randomUUID().split('-')[0]
     this.pair = pair
     this.side = side
@@ -15,29 +13,24 @@ export class Order {
     this.price = price
     this.cost = this.price * this.volume
     this.traderId = traderId
-    if (this.checkTraderBalance()) {
+    this.isInvalid = false
+    const isCorrectNumbers = checkPositive(price) && checkPositive(volume)
+    if (isCorrectNumbers && this.checkTraderBalance()) {
       this.#freezeBalance()
     } else {
-      console.log('ERRNOBALANCE')
+      console.log('ERRORDERCREATE')
+      this.isInvalid = true
       this.capacity = 0
       this.volume = 0
+      this.price = 0
+      this.cost = 0
     }
   }
 
   // TODO:
   checkTraderBalance() {
-    const trader = getTraderById(this.traderId)
-    if (!trader) return false
-    const [asset, quote] = this.pair
-
-    if (this.side === 'sell') {
-      return trader.balance[asset] >= this.volume
-    }
-    if (this.side === 'buy') {
-      return trader.balance[quote] >= this.cost
-    }
-
-    return false
+    const { traderId, side, volume, price, pair } = this
+    return checkTraderBalance(traderId, side, volume, price, pair)
   }
   #freezeBalance() {
     const trader = getTraderById(this.traderId)
@@ -79,29 +72,7 @@ function appendOrder(order) {
 // бизнес логика открытия ордера
 export function make(traderId, side, volume, price, pair = ['BTC', 'USDT']) {
   if (!checkPositive(price, volume)) return
-  if (!checkTraderBalance(traderId, side, price, volume, pair)) {
-    return false
-  }
   const newOrder = new Order(traderId, side, volume, price, pair)
+  if (newOrder.isInvalid) return false
   appendOrder(newOrder)
 }
-
-// плохое название. это не проверка. это что-то другое
-// ХЛЕБ и usdt зашиты в этой функции
-// function checkBalanceByTraderId(traderId, side, price, volume) {
-//   const trader = getTraderById(traderId)
-//   if (!trader) return
-//   const symbol = 'ХЛЕБ'
-//   const cost = price * volume
-//   if (side === 'sell') return compareBalance(trader, symbol, volume)
-//   if (side === 'buy') return compareBalance(trader, 'usdt', cost)
-// }
-
-// function compareBalance(trader, symbol, requireBalance) {
-//   if (trader.balance[symbol] < requireBalance) {
-//     console.log(`DENIED: ${trader.name} NOT ENOUGH ${symbol}`)
-//     return false
-//   }
-//   console.log(`GRANTED: ${trader.name} FREEZED ${symbol} : ${requireBalance}`)
-//   return true
-// }
