@@ -7,7 +7,7 @@ export function computeBids() {
   side.forEach(s => {
     orders[s].forEach(ob => {
       const bid = bids[s].find(bid => bid[0] === ob.price)
-      if (!bid) bids[s].push([ob.price, ob.volume])
+      if (!bid) bids[s].push([ob.volume, ob.price])
       else bid[1] += ob.volume
     })
   })

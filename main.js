@@ -3,55 +3,23 @@ import { getTraderById, logTraders, traders } from './traders.js'
 import { make, orders } from './orders-make.js'
 import { take } from './orders-take.js'
 
-// let currentPair
-// let currentSymbol
-// let currentMaker
-// let currentTaker
-
-logTraders()
-console.log(computeBids(), '\n')
-
-make('иван_1', 'sell', 100, 5)
 // make('мария_2', 'buy', 50, 2)
 
-logTraders()
 console.log(computeBids(), '\n')
 
-take('петр_3', 'buy', 5) // ??? ошибка
-
-logTraders()
+console.log(traders[0])
+console.log(traders[1])
 console.log(computeBids(), '\n')
-
-// make('иван_1', 'buy', 9, 1)
-// make('иван_1', 'buy', 9, 1)
-// make('иван_1', 'buy', 5, 1)
-// make('иван_1', 'buy', 9, 1)
-// make('иван_1', 'buy', 7, 5)
-// make('иван_1', 'buy', 9, 1)
-
-// make('мария_2', 'sell', 11, 1)
-// make('мария_2', 'sell', 13, 5)
-// make('мария_2', 'sell', 15, 1)
-
-// make('мария_2', 'sell', 9, 5)
-
-// console.log(orders)
-// console.log('after', computeBids())
-
-// console.log(orders)
-// console.log('before', computeBids())
-
-// console.log(users[1].balance)
-// console.log(users[2].balance)
-
-// console.log(users[1].balance)
-// console.log(users[2].balance)
-
-// console.log(users[1].balance)
-// console.log(users[2].balance)
-
-// console.log('after', computeBids())
-
-// console.log(orders)
-
-// swap(takerTraderId, makerTraderId, quote, cost)
+make('иван_1', 'sell', 1, 300)
+make('иван_1', 'sell', 1, 400)
+make('иван_1', 'sell', 1, 200)
+make('иван_1', 'sell', 1, 500)
+make('иван_1', 'sell', 1, 100)
+console.log(traders[0])
+console.log(traders[1])
+console.log(computeBids(), '\n')
+take('мария_2', 'sell')
+console.log('===')
+console.log(traders[0])
+console.log(traders[1])
+console.log(computeBids(), '\n')

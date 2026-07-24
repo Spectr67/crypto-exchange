@@ -7,18 +7,18 @@ export const traders = [
   {
     id: 'иван_1',
     // name: 'Иван',
-    balance: { USDT: 10000, BTC: 3 },
+    balance: { USDT: 0, BTC: 5 },
   },
   {
     id: 'мария_2',
     // name: 'Мария',
-    balance: { USDT: 10000, BTC: 3 },
+    balance: { USDT: 1000, BTC: 0 },
   },
-  {
-    id: 'петр_3',
-    // name: 'Петр',
-    balance: { USDT: 10000, BTC: 3 },
-  },
+  // {
+  //   id: 'петр_3',
+  //   // name: 'Петр',
+  //   balance: { USDT: 10000, BTC: 3 },
+  // },
 ]
 
 export function getTraderById(id) {
@@ -40,9 +40,9 @@ export function logTraders() {
 }
 
 // к моменту вызова этой функции ордер уже оплачен из баланса тейкера
-export function transferBalancePay(taker, order, symbol) {
-  taker.balance[symbol] += order.volume
-  order.volume = 0
+export function transferBalancePay(taker, order, symbol, sum) {
+  taker.balance[symbol] += sum
+  order.volume -= sum
   return true
 }
 
@@ -69,12 +69,17 @@ export function transferDeal(taker, order, limitVolume, limitCost) {
   const maker = getTraderById(order.traderId)
 
   if (order.side === 'sell') {
-    console.log('!!!!!')
-    transferBalancePayback(taker, maker, order.pair[1], order.cost)
-    transferBalancePay(taker, order, order.pair[0])
+    if (transferBalancePayback(taker, maker, order.pair[1], order.cost)) {
+      transferBalancePay(taker, order, order.pair[0], order.volume)
+    } else {
+      console.log('OMG!!')
+    }
   }
   if (order.side === 'buy') {
-    transferBalancePay(taker, order, order.pair[1])
-    transferBalancePayback(taker, maker, order.pair[0], order.volume)
+    if (transferBalancePayback(taker, maker, order.pair[0], order.volume)) {
+      transferBalancePay(taker, order, order.pair[1], order.cost)
+    } else {
+      console.log('OMG!!')
+    }
   }
 }

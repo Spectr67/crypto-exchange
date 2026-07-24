@@ -1,3 +1,8 @@
+// let currentPair
+// let currentSymbol
+// let currentMaker
+// let currentTaker
+
 текущая цена
 
 объем за сутки
@@ -29,3 +34,7 @@
 🍔 проверить transferBalancePay.test.js
 
 ✅ проверить transferDeal-order-buy.test.js (+дописать сам код)
+
+🔄 при тейке тупо выкупакем все открытые ордера на весь баланс тейкера
+
+🔄 в main.js ордера выкупаются не самые выгодные

@@ -46,6 +46,7 @@ export class Order {
 
   #unfreezeBalance() {
     const trader = getTraderById(this.traderId)
+    // FIXME: this.pair вместо this.symbol
     trader.balance[this.symbol] += this.volume
   }
 
