@@ -6,7 +6,7 @@ const taker = traders[1]
 
 console.log(maker)
 console.log(taker)
-const order = new Order(maker.id, 'buy', 3, 50, ['BTC', 'USDT'])
+const order = new Order(maker.id, 'buy', 3, 500000, ['BTC', 'USDT'])
 // то что отнялось 150 это норма, потому что это обычная заморозка
 console.log(maker)
 console.log(taker)

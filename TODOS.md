@@ -14,7 +14,7 @@
 
 🔄 сделать чтоб невозможно было создать ордер, который оставляет мейкера в минусе
 
-🍔 протестировать функцию transferDeal для ордера, открытого на покупку
+✅ протестировать функцию transferDeal для ордера, открытого на покупку
 
 ✅ проверить баланс мейкера ПЕРЕД созданием ордера
 
@@ -24,8 +24,8 @@
 
 ✅ make function check balance
 
-🍔 проверить checkTraderBalance.test.js
+✅ проверить checkTraderBalance.test.js
 
 🍔 проверить transferBalancePay.test.js
 
-🍔 проверить transferDeal-order-buy.test.js (+дописать сам код)
+✅ проверить transferDeal-order-buy.test.js (+дописать сам код)

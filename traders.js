@@ -73,8 +73,8 @@ export function transferDeal(taker, order, limitVolume, limitCost) {
     transferBalancePayback(taker, maker, order.pair[1], order.cost)
     transferBalancePay(taker, order, order.pair[0])
   }
-  // if (side === 'sell') {
-  //   swap(makerTraderId, takerTraderId, quote, cost)
-  //   swap(takerTraderId, makerTraderId, asset, volume, true)
-  // }
+  if (order.side === 'buy') {
+    transferBalancePay(taker, order, order.pair[1])
+    transferBalancePayback(taker, maker, order.pair[0], order.volume)
+  }
 }

@@ -6,7 +6,7 @@ const taker = traders[1]
 
 console.log(maker)
 console.log(taker)
-const order = new Order(maker.id, 'sell', 4, 50, ['BTC', 'USDT'])
+const order = new Order(maker.id, 'sell', 3, 1500, ['BTC', 'USDT'])
 
 console.log(maker)
 console.log(taker)
@@ -15,3 +15,4 @@ transferDeal(taker, order, ['BTC', 'USDT'])
 console.log(maker)
 console.log(taker)
 console.log(order)
+//  работает
