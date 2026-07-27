@@ -2,8 +2,6 @@ import { checkPositive, checkTraderBalance } from './functions.js'
 import { getTraderById } from './traders.js'
 
 export class Order {
-  // ['BTC', 'USDT'] BTC/USDT
-  // pair состоит из двух symbol
   constructor(traderId, side, volume, price, pair = ['BTC', 'USDT']) {
     this.id = crypto.randomUUID().split('-')[0]
     this.pair = pair
@@ -27,7 +25,6 @@ export class Order {
     }
   }
 
-  // TODO:
   checkTraderBalance() {
     const { traderId, side, volume, price, pair } = this
     return checkTraderBalance(traderId, side, volume, price, pair)
@@ -76,7 +73,6 @@ function appendOrder(order) {
   orders['buy'].sort((newVal, oldVal) => newVal.price - oldVal.price)
 }
 
-// бизнес логика открытия ордера
 export function make(traderId, side, volume, price, pair = ['BTC', 'USDT']) {
   if (!checkPositive(price, volume)) return
   const newOrder = new Order(traderId, side, volume, price, pair)

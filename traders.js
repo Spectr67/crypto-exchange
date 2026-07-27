@@ -48,14 +48,12 @@ export function transferBalancePay(taker, order, symbol, sum) {
 
 export function transferBalancePayback(taker, maker, symbol, sum) {
   if (!checkPositive(sum)) return false
-  // у тейкера не хватает денег для полного выкупа ордера
   if (taker.balance[symbol] < sum) return false
   taker.balance[symbol] -= sum
   maker.balance[symbol] += sum
   return true
 }
 
-// ?pair?
 // вызывается для выполнения каждого ордера, который пришел
 // из функции calculateOrdersToTake
 // для payback всегда считаем cost
