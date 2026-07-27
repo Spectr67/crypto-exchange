@@ -69,7 +69,7 @@ export const orders = {
 
 function appendOrder(order) {
   orders[order.side].push(order)
-  orders['sell'].sort((newVal, oldVal) => oldVal.price - newVal.price)
+  orders['sell'].sort((newVal, oldVal) => newVal.price - oldVal.price)
   orders['buy'].sort((newVal, oldVal) => newVal.price - oldVal.price)
 }
 

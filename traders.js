@@ -6,20 +6,23 @@ import { orders } from './orders-make.js'
 export const traders = [
   {
     id: 'иван_1',
-    // name: 'Иван',
-    balance: { USDT: 0, BTC: 5 },
+    balance: { USDT: 0, BTC: 15 },
   },
   {
     id: 'мария_2',
-    // name: 'Мария',
     balance: { USDT: 1000, BTC: 0 },
   },
-  // {
-  //   id: 'петр_3',
-  //   // name: 'Петр',
-  //   balance: { USDT: 10000, BTC: 3 },
-  // },
 ]
+// export const traders = [
+//   {
+//     id: 'иван_1',
+//     balance: { USDT: 1500, BTC: 0 },
+//   },
+//   {
+//     id: 'мария_2',
+//     balance: { USDT: 1000, BTC: 5 },
+//   },
+// ]
 
 export function getTraderById(id) {
   const trader = traders.find(u => u.id === id)
@@ -68,16 +71,18 @@ export function transferDeal(taker, order, limitVolume, limitCost) {
 
   if (order.side === 'sell') {
     if (transferBalancePayback(taker, maker, order.pair[1], order.cost)) {
-      transferBalancePay(taker, order, order.pair[0], order.volume)
+      return transferBalancePay(taker, order, order.pair[0], order.volume)
     } else {
-      console.log('OMG!!')
+      console.log('order do not transfer "sell"')
+      return false
     }
   }
   if (order.side === 'buy') {
     if (transferBalancePayback(taker, maker, order.pair[0], order.volume)) {
-      transferBalancePay(taker, order, order.pair[1], order.cost)
+      return transferBalancePay(taker, order, order.pair[1], order.cost)
     } else {
-      console.log('OMG!!')
+      console.log('order do not transfer "buy"')
+      return false
     }
   }
 }

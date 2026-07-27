@@ -43,3 +43,7 @@
 ✅ unfreeze balance
 
 balance.limit? место full balance and full volume
+
+не добавляешь СВОИ проверки.
+
+вызываешь функции вслепую.
