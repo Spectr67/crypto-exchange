@@ -2,10 +2,21 @@ import { checkPositive } from './functions.js'
 import { orders } from './orders-make.js'
 import { getTraderById, traders, transferDeal } from './traders.js'
 
+function calculateBestOrder(ordersPool, side) {
+  const targetSide = side === 'buy' ? 'sell' : 'buy'
+  const pool = ordersPool[targetSide]
+
+  return [...pool].sort((a, b) => a.price - b.price)
+}
+
 export function take(traderId, side, pair) {
   const taker = getTraderById(traderId)
-  orders[side].forEach(order => {
-    transferDeal(taker, order)
+  if (!taker) return
+
+  const sortedOrders = calculateBestOrder(orders, side)
+
+  sortedOrders.forEach(order => {
+    transferDeal(taker, order, pair)
   })
 }
 

@@ -16,7 +16,7 @@ export class Order {
     this.isInvalid = false
     const isCorrectNumbers = checkPositive(price) && checkPositive(volume)
     if (isCorrectNumbers && this.checkTraderBalance()) {
-      this.#freezeBalance()
+      this.#freezeBalance(pair)
     } else {
       console.log('ERRORDERCREATE')
       this.isInvalid = true
@@ -46,8 +46,14 @@ export class Order {
 
   #unfreezeBalance() {
     const trader = getTraderById(this.traderId)
-    // FIXME: this.pair вместо this.symbol
-    trader.balance[this.symbol] += this.volume
+    if (this.side === 'sell') {
+      const symbol = this.pair[0]
+      trader.balance[symbol] += this.volume
+    }
+    if (this.side === 'buy') {
+      const symbol = this.pair[1]
+      trader.balance[symbol] += this.volume
+    }
   }
 
   cancel() {
