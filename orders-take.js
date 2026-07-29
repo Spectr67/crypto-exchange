@@ -1,6 +1,7 @@
 import { checkPositive } from './functions.js'
 import { orders } from './orders-make.js'
-import { getTraderById, traders, transferDeal } from './traders.js'
+import { getTraderById, traders } from './traders.js'
+import { transferDeal } from './transfer.js'
 
 export function take(traderId, side, pair) {
   const taker = getTraderById(traderId)
@@ -8,9 +9,21 @@ export function take(traderId, side, pair) {
   // if limitByCost
   // if limitByVolume
 
-  orders[side].forEach(order => {
-    if (!transferDeal(taker, order, pair)) return
-  })
+  for (const order of orders[side]) {
+    if (!transferDeal(taker, order)) return
+  }
+}
+
+function takeByVolume() {
+  // делаем что-то
+  take(traderId, side, pair, limitVolume, limitCost)
+  // делаем что-то
+}
+
+function takeByCost() {
+  // делаем что-то
+  take(traderId, side, pair, limitVolume, limitCost)
+  // делаем что-то
 }
 
 // ВНЕЗАПНО 2 варианта ТЕЙКА!!

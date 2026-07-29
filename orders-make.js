@@ -1,9 +1,9 @@
-import { checkPositive, checkTraderBalance } from './functions.js'
+import { checkPositive, checkTraderBalance, randId } from './functions.js'
 import { getTraderById } from './traders.js'
 
 export class Order {
   constructor(traderId, side, volume, price, pair = ['BTC', 'USDT']) {
-    this.id = crypto.randomUUID().split('-')[0]
+    this.id = randId()
     this.pair = pair
     this.side = side
     this.capacity = volume // read only

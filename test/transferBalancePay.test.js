@@ -1,5 +1,6 @@
 import { Order } from '../orders-make.js'
-import { traders, transferBalancePay } from '../traders.js'
+import { traders } from '../traders.js'
+import { transferBalancePay } from '../transfer.js'
 
 const maker = traders[0]
 const taker = traders[1]
@@ -8,9 +9,9 @@ console.log(maker)
 const pair = ['BTC', 'USDT']
 const order = new Order('иван_1', 'sell', 3, 100, pair)
 console.log(maker)
-console.log(order)
 console.log(taker)
-transferBalancePay(taker, order, 'BTC', 4)
+console.log(order)
+transferBalancePay(taker, order, 'BTC', 3)
 console.log('===')
 console.log(maker)
 console.log(taker)

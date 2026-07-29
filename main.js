@@ -1,5 +1,5 @@
 import { computeBids } from './functions.js'
-import { getTraderById, logTraders, traders } from './traders.js'
+import { getTraderById, traders } from './traders.js'
 import { make, orders } from './orders-make.js'
 import { take } from './orders-take.js'
 

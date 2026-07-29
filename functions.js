@@ -1,6 +1,8 @@
 import { orders } from './orders-make.js'
 import { getTraderById } from './traders.js'
 
+export const randId = () => crypto.randomUUID().split('-')[0]
+
 export function computeBids() {
   const bids = { sell: [], buy: [] }
   const side = ['buy', 'sell']
