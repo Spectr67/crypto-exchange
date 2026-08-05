@@ -1,0 +1,22 @@
+:root {
+  --p-base: #f3ba2f;
+  --p-hover: #d9a520;
+  --bg-deep: #0b0e11;
+  --bg-card: #181a20;
+  --text-main: #eaecef;
+}
+
+body {
+  background-color: var(--bg-deep);
+  color: var(--text-main);
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+}
+
+.crypto-card {
+  background-color: var(--bg-card);
+  border: 1px solid #2b313a;
+  border-radius: 8px;
+}

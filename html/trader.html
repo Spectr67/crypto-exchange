@@ -1,9 +1,10 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -11,35 +12,138 @@
       crossorigin="anonymous"
     />
     <style>
-      * {
-        /* border: 1px solid #def; */
+      .crypto-card:hover {
+        border-color: var(--p-base);
       }
-      .h {
-        min-height: 100px;
-        background: #1e90ff40;
-        color: #def;
+
+      .text-primary-accent {
+        color: var(--p-base);
+      }
+
+      .text-custom-muted {
+        color: var(--text-muted);
+      }
+
+      .crypto-link {
+        color: var(--text-muted);
+        text-decoration: none;
+        transition: color 0.2s ease;
+      }
+
+      .crypto-link:hover {
+        color: var(--p-base);
+      }
+
+      .footer-divider {
+        border-top: 1px solid #2b313a;
       }
     </style>
   </head>
 
-  <body data-bs-theme="dark">
-    <div class="wrapper">
-      <header>
-        <div class="h"></div>
+  <body class="d-flex flex-column min-vh-100">
+    <div class="container py-4">
+      <div class="mb-3 text-custom-muted fw-semibold">Трейдер</div>
+
+      <header class="crypto-card p-3 mb-4">
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="d-flex align-items-center gap-3">
+            <button
+              class="btn p-0 border-0 fs-5 text-custom-muted"
+              type="button"
+            >
+              &#9776;
+            </button>
+            <span class="fs-4 fw-bold text-primary-accent">CryptoBit</span>
+          </div>
+          <div class="d-flex align-items-center gap-3">
+            <a href="http://127.0.0.1:3000/html/wallet.html" class="crypto-link"
+              >Кошелек</a
+            >
+            <a href="#" class="crypto-link fw-semibold">logout</a>
+          </div>
+        </div>
       </header>
-      <nav>
-        <div class="h"></div>
-      </nav>
-      <main>
-        <div class="h container">
-          <div class="row justify-content-evenly">
-            <div class="h col-12 col-sm-6 col-md-4 col-lg-5">Профайл</div>
-            <div class="h col-12 col-sm-6 col-md-4 col-lg-5">Торговля</div>
+
+      <main class="mb-5">
+        <div class="row g-4">
+          <div class="col-12 col-md-6">
+            <h2 class="h5 mb-3 fw-bold">Профайл:</h2>
+            <div class="crypto-card p-4">
+              <div class="mb-2">
+                <span class="text-custom-muted">Имя:</span>
+                <span class="fw-semibold ms-2">Петя</span>
+              </div>
+              <div class="mb-2">
+                <span class="text-custom-muted">Фамилия:</span>
+                <span class="fw-semibold ms-2">Петров</span>
+              </div>
+              <div class="mb-2">
+                <span class="text-custom-muted">Никнейм:</span>
+                <span class="fw-semibold ms-2 text-primary-accent"
+                  >p_petya</span
+                >
+              </div>
+              <div class="mb-0">
+                <span class="text-custom-muted">Email:</span>
+                <span class="fw-semibold ms-2">p.petya@email.com</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <h2 class="h5 mb-3 fw-bold">Торговля:</h2>
+            <div class="crypto-card p-4">
+              <div class="mb-3">
+                <div class="text-custom-muted small">
+                  Эквивалент баланса в USDT:
+                </div>
+                <div class="fs-5 fw-bold text-primary-accent">3000 USDT</div>
+              </div>
+
+              <div class="mb-3">
+                <div class="text-custom-muted small">
+                  Открыто ордеров на сумму:
+                </div>
+                <div class="fs-5 fw-bold">3000 USDT</div>
+              </div>
+
+              <div class="mb-3">
+                <div class="text-custom-muted small">
+                  Объём торгов за сутки:
+                </div>
+                <div class="fs-5 fw-bold" style="color: var(--s-base)">
+                  1000 USDT
+                </div>
+              </div>
+
+              <div class="mb-0">
+                <div class="text-custom-muted small">
+                  Объём торгов за неделю:
+                </div>
+                <div class="fs-5 fw-bold">7000 USDT</div>
+              </div>
+            </div>
           </div>
         </div>
       </main>
-      <footer>
-        <div class="h"></div>
+
+      <footer class="footer-divider pt-4 mt-auto">
+        <div class="row g-3">
+          <div class="col-12 col-md-6">
+            <ul class="list-unstyled mb-0 d-flex flex-column gap-2">
+              <li><a href="#" class="crypto-link">Новости</a></li>
+              <li><a href="#" class="crypto-link">Обратная связь</a></li>
+              <li><a href="#" class="crypto-link">Сотрудничество</a></li>
+            </ul>
+          </div>
+          <div class="col-12 col-md-6">
+            <ul class="list-unstyled mb-0 d-flex flex-column gap-2">
+              <li><a href="#" class="crypto-link">Токены</a></li>
+              <li><a href="#" class="crypto-link">Уведомление о рисках</a></li>
+              <li><a href="#" class="crypto-link">Для разработчиков</a></li>
+            </ul>
+          </div>
+        </div>
       </footer>
     </div>
     <script

@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="ru" data-bs-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .text-primary-accent {
+        color: var(--p-base);
+      }
+
+      .text-custom-muted {
+        color: var(--text-muted);
+      }
+
+      .crypto-link {
+        color: var(--text-muted);
+        text-decoration: none;
+        transition: color 0.2s ease;
+      }
+
+      .crypto-link:hover {
+        color: var(--p-base);
+      }
+
+      .footer-divider {
+        border-top: 1px solid #2b313a;
+      }
+
+      .btn-crypto-primary {
+        background-color: var(--p-base);
+        color: #000;
+        font-weight: 600;
+        border: none;
+      }
+      .btn-crypto-primary:hover {
+        background-color: var(--p-hover);
+        color: #000;
+      }
+
+      .btn-crypto-secondary {
+        background-color: var(--bg-hover);
+        color: var(--text-main);
+        border: 1px solid #474d57;
+      }
+      .btn-crypto-secondary:hover {
+        background-color: #363c4e;
+        color: #fff;
+      }
+
+      .table-crypto {
+        color: var(--text-main);
+        vertical-align: middle;
+      }
+      .table-crypto th {
+        color: var(--text-muted);
+        border-bottom: 1px solid #2b313a;
+        font-weight: 500;
+      }
+      .table-crypto td {
+        border-bottom: 1px solid #2b313a;
+        background-color: transparent;
+      }
+      .table-crypto tbody tr:hover {
+        background-color: var(--bg-hover);
+      }
+    </style>
+  </head>
+
+  <body class="d-flex flex-column min-vh-100">
+    <div class="container py-4">
+      <div class="mb-3 text-custom-muted fw-semibold">Трейдер / Кошелек</div>
+      <header class="crypto-card p-3 mb-4">
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="d-flex align-items-center gap-3">
+            <button
+              class="btn p-0 border-0 fs-5 text-custom-muted"
+              type="button"
+            >
+              &#9776;
+            </button>
+            <span class="fs-4 fw-bold text-primary-accent">CryptoBit</span>
+          </div>
+          <div class="d-flex align-items-center gap-3">
+            <a href="http://127.0.0.1:3000/html/trader.html" class="crypto-link"
+              >Профиль</a
+            >
+            <a href="#" class="crypto-link fw-semibold">logout</a>
+          </div>
+        </div>
+      </header>
+      <main class="mb-5">
+        <div class="crypto-card p-4 mb-4">
+          <div class="row align-items-center g-3">
+            <div class="col-12 col-md-6">
+              <div class="text-custom-muted small mb-1">
+                Приблизительный баланс:
+              </div>
+              <div class="fs-3 fw-bold text-primary-accent">
+                3,000.00 <span class="fs-5">USDT</span>
+              </div>
+              <div class="text-custom-muted small">≈ $3,000.00 USD</div>
+            </div>
+
+            <div
+              class="col-12 col-md-6 d-flex gap-2 justify-content-md-end flex-wrap"
+            >
+              <button class="btn btn-crypto-primary px-3 py-2">
+                &#8609; Депозит
+              </button>
+              <button class="btn btn-crypto-secondary px-3 py-2">
+                &#8607; Вывод
+              </button>
+              <button class="btn btn-crypto-secondary px-3 py-2">
+                &#8646; Конвертация
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <h2 class="h5 mb-3 fw-bold">Активы в кошельке:</h2>
+
+        <div class="crypto-card p-3">
+          <div class="table-responsive">
+            <table class="table table-crypto mb-0">
+              <thead>
+                <tr>
+                  <th scope="col">Токен</th>
+                  <th scope="col">Всего</th>
+                  <th scope="col">Доступно</th>
+                  <th scope="col">В ордерах</th>
+                  <th scope="col" class="text-end">Действия</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="d-flex align-items-center gap-2">
+                      <span class="fw-bold">USDT</span>
+                      <span class="text-custom-muted small">Tether</span>
+                    </div>
+                  </td>
+                  <td class="fw-semibold">1,500.00</td>
+                  <td class="text-success" style="color: var(--s-base)">
+                    1,000.00
+                  </td>
+                  <td class="text-custom-muted">500.00</td>
+                  <td class="text-end">
+                    <div class="btn-group btn-group-sm" role="group">
+                      <button class="btn btn-crypto-primary">Депозит</button>
+                      <button class="btn btn-crypto-secondary">Вывод</button>
+                      <button class="btn btn-crypto-secondary">
+                        Конвертация
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <div class="d-flex align-items-center gap-2">
+                      <span class="fw-bold">BTC</span>
+                      <span class="text-custom-muted small">Bitcoin</span>
+                    </div>
+                  </td>
+                  <td class="fw-semibold">0.015</td>
+                  <td class="text-success" style="color: var(--s-base)">
+                    0.010
+                  </td>
+                  <td class="text-custom-muted">0.005</td>
+                  <td class="text-end">
+                    <div class="btn-group btn-group-sm" role="group">
+                      <button class="btn btn-crypto-primary">Депозит</button>
+                      <button class="btn btn-crypto-secondary">Вывод</button>
+                      <button class="btn btn-crypto-secondary">
+                        Конвертация
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <div class="d-flex align-items-center gap-2">
+                      <span class="fw-bold">ETH</span>
+                      <span class="text-custom-muted small">Ethereum</span>
+                    </div>
+                  </td>
+                  <td class="fw-semibold">0.25</td>
+                  <td class="text-success" style="color: var(--s-base)">
+                    0.25
+                  </td>
+                  <td class="text-custom-muted">0.00</td>
+                  <td class="text-end">
+                    <div class="btn-group btn-group-sm" role="group">
+                      <button class="btn btn-crypto-primary">Депозит</button>
+                      <button class="btn btn-crypto-secondary">Вывод</button>
+                      <button class="btn btn-crypto-secondary">
+                        Конвертация
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <div class="d-flex align-items-center gap-2">
+                      <span class="fw-bold">SOL</span>
+                      <span class="text-custom-muted small">Solana</span>
+                    </div>
+                  </td>
+                  <td class="fw-semibold">3.50</td>
+                  <td class="text-success" style="color: var(--s-base)">
+                    2.00
+                  </td>
+                  <td class="text-custom-muted">1.50</td>
+                  <td class="text-end">
+                    <div class="btn-group btn-group-sm" role="group">
+                      <button class="btn btn-crypto-primary">Депозит</button>
+                      <button class="btn btn-crypto-secondary">Вывод</button>
+                      <button class="btn btn-crypto-secondary">
+                        Конвертация
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+
+      <footer class="footer-divider pt-4 mt-auto">
+        <div class="row g-3">
+          <div class="col-12 col-md-6">
+            <ul class="list-unstyled mb-0 d-flex flex-column gap-2">
+              <li><a href="#" class="crypto-link">Новости</a></li>
+              <li><a href="#" class="crypto-link">Обратная связь</a></li>
+              <li><a href="#" class="crypto-link">Сотрудничество</a></li>
+            </ul>
+          </div>
+          <div class="col-12 col-md-6">
+            <ul class="list-unstyled mb-0 d-flex flex-column gap-2">
+              <li><a href="#" class="crypto-link">Токены</a></li>
+              <li><a href="#" class="crypto-link">Уведомление о рисках</a></li>
+              <li><a href="#" class="crypto-link">Для разработчиков</a></li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
