@@ -107,6 +107,7 @@
           <div class="row">
             <div class="col">
               <h3>Открыть ордер</h3>
+
               <ul class="nav nav-tabs" id="elOrderSideTabNav" role="tablist">
                 <li class="nav-item flex-grow-1" role="presentation">
                   <button
@@ -131,14 +132,130 @@
                   </button>
                 </li>
               </ul>
-              <div class="tab-content">
+              <div class="tab-content pt-3">
                 <div
                   class="tab-pane fade show active"
                   id="elOrderBuyBlock"
                   aria-labelledby="elOrderBuyTab"
                   tabindex="0"
                 >
-                  Блок на покупку
+                  <form class="mb-4">
+                    <div class="mb-3">
+                      <label class="form-label">Цена</label>
+                      <div class="input-group">
+                        <input
+                          type="number"
+                          class="form-control"
+                          placeholder="65000"
+                        />
+                        <span class="input-group-text">USDT</span>
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label">Количество</label>
+                      <div class="input-group">
+                        <input
+                          type="number"
+                          class="form-control"
+                          placeholder="0.01"
+                          step="0.001"
+                        />
+                        <span class="input-group-text">BTC</span>
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label">Всего</label>
+                      <div class="input-group">
+                        <input
+                          type="number"
+                          class="form-control"
+                          placeholder="650"
+                          disabled
+                        />
+                        <span class="input-group-text">USDT</span>
+                      </div>
+                    </div>
+                    <button type="button" class="btn btn-success w-100">
+                      Купить
+                    </button>
+                  </form>
+                  <div class="mb-4">
+                    <h5 class="h6 text-secondary">Ордера на рынке</h5>
+                    <div class="table-responsive">
+                      <table class="table table-dark table-hover table-sm">
+                        <thead>
+                          <tr class="text-secondary">
+                            <th>Цена (USDT)</th>
+                            <th>Количество (BTC)</th>
+                            <th>Всего (USDT)</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td class="text-success">65 000.00</td>
+                            <td>0.4500</td>
+                            <td>29 250.00</td>
+                          </tr>
+                          <tr>
+                            <td class="text-success">64 980.00</td>
+                            <td>1.2000</td>
+                            <td>77 976.00</td>
+                          </tr>
+                          <tr>
+                            <td class="text-success">64 950.50</td>
+                            <td>0.0850</td>
+                            <td>5 520.79</td>
+                          </tr>
+                          <tr>
+                            <td class="text-success">64 910.00</td>
+                            <td>2.1000</td>
+                            <td>136 311.00</td>
+                          </tr>
+                          <tr>
+                            <td class="text-success">64 880.00</td>
+                            <td>0.1500</td>
+                            <td>9 732.00</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                  <h5 class="h6">Мои активные ордера на покупку</h5>
+                  <div class="table-responsive">
+                    <table class="table table-dark table-striped table-sm">
+                      <thead>
+                        <tr>
+                          <th>Цена (USDT)</th>
+                          <th>Количество (BTC)</th>
+                          <th>Сумма (USDT)</th>
+                          <th class="text-end">Действие</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>64 850.00</td>
+                          <td>0.0120</td>
+                          <td>778.20</td>
+                          <td class="text-end">
+                            <button class="btn btn-outline-danger btn-sm py-0">
+                              Отмена
+                            </button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>64 500.00</td>
+                          <td>0.0050</td>
+                          <td>322.50</td>
+                          <td class="text-end">
+                            <button class="btn btn-outline-danger btn-sm py-0">
+                              Отмена
+                            </button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
                 <div
                   class="tab-pane fade"
@@ -146,7 +263,114 @@
                   aria-labelledby="elOrderSellTab"
                   tabindex="0"
                 >
-                  Блок на продажу
+                  <form class="mb-4">
+                    <div class="mb-3">
+                      <label class="form-label">Цена</label>
+                      <div class="input-group">
+                        <input
+                          type="number"
+                          class="form-control"
+                          placeholder="65500"
+                        />
+                        <span class="input-group-text">USDT</span>
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label">Количество</label>
+                      <div class="input-group">
+                        <input
+                          type="number"
+                          class="form-control"
+                          placeholder="0.01"
+                          step="0.001"
+                        />
+                        <span class="input-group-text">BTC</span>
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label">Всего</label>
+                      <div class="input-group">
+                        <input
+                          type="number"
+                          class="form-control"
+                          placeholder="655"
+                          disabled
+                        />
+                        <span class="input-group-text">USDT</span>
+                      </div>
+                    </div>
+                    <button type="button" class="btn btn-danger w-100">
+                      Продать
+                    </button>
+                  </form>
+
+                  <div class="mb-4">
+                    <h5 class="h6 text-secondary">Ордера на рынке</h5>
+                    <div class="table-responsive">
+                      <table class="table table-dark table-hover table-sm">
+                        <thead>
+                          <tr class="text-secondary">
+                            <th>Цена (USDT)</th>
+                            <th>Количество (BTC)</th>
+                            <th>Всего (USDT)</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td class="text-danger">65 050.00</td>
+                            <td>0.1200</td>
+                            <td>7 806.00</td>
+                          </tr>
+                          <tr>
+                            <td class="text-danger">65 100.00</td>
+                            <td>0.8500</td>
+                            <td>55 335.00</td>
+                          </tr>
+                          <tr>
+                            <td class="text-danger">65 150.25</td>
+                            <td>1.5000</td>
+                            <td>97 725.37</td>
+                          </tr>
+                          <tr>
+                            <td class="text-danger">65 200.00</td>
+                            <td>0.0400</td>
+                            <td>2 608.00</td>
+                          </tr>
+                          <tr>
+                            <td class="text-danger">65 250.00</td>
+                            <td>3.0000</td>
+                            <td>195 750.00</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                  <h5 class="h6">Мои активные ордера на продажу</h5>
+                  <div class="table-responsive">
+                    <table class="table table-dark table-striped table-sm">
+                      <thead>
+                        <tr>
+                          <th>Цена (USDT)</th>
+                          <th>Количество (BTC)</th>
+                          <th>Сумма (USDT)</th>
+                          <th class="text-end">Действие</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>65 900.00</td>
+                          <td>0.0150</td>
+                          <td>988.50</td>
+                          <td class="text-end">
+                            <button class="btn btn-outline-danger btn-sm py-0">
+                              Отмена
+                            </button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>
