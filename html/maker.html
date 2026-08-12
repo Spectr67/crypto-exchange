@@ -14,6 +14,67 @@
       * {
         /* border: 1px solid #234; */
       }
+      :root {
+        --p-base: #f3ba2f !important;
+        --s-base: #0ecb81 !important;
+        --d-base: #f6465d !important;
+        --bg-deep: #0b0e11;
+        --bg-card: #181a20;
+        --bg-hover: #2b313a;
+        --text-muted: #848e9c;
+      }
+
+      body {
+        background-color: var(--bg-deep) !important;
+        font-family: monospace;
+      }
+
+      .order-book-container {
+        max-height: 320px;
+        overflow-y: auto;
+        background-color: var(--bg-card);
+        border: 1px solid var(--bg-hover);
+        border-radius: 8px;
+      }
+
+      .order-book-container::-webkit-scrollbar {
+        width: 4px;
+      }
+      .order-book-container::-webkit-scrollbar-thumb {
+        background: var(--bg-hover);
+        border-radius: 2px;
+      }
+
+      .table-orderbook thead th {
+        position: sticky;
+        top: 0;
+        z-index: 2;
+        background-color: var(--bg-card) !important;
+        color: var(--text-muted);
+        font-size: 0.75rem;
+        border-bottom: 1px solid var(--bg-hover);
+      }
+
+      .table-orderbook td {
+        background: transparent !important;
+        font-size: 0.85rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+      }
+
+      .table-orderbook tbody tr:hover {
+        background: #add8e630 !important;
+        cursor: pointer;
+      }
+
+      .price-top {
+        color: var(--d-base) !important;
+      }
+      .price-bottom {
+        color: var(--s-base) !important;
+      }
+      .footer-divider {
+        border-top: 1px solid #2b313a;
+      }
     </style>
   </head>
 
@@ -180,44 +241,154 @@
                     </button>
                   </form>
                   <div class="mb-4">
-                    <h5 class="h6 text-secondary">Ордера на рынке</h5>
-                    <div class="table-responsive">
-                      <table class="table table-dark table-hover table-sm">
-                        <thead>
-                          <tr class="text-secondary">
-                            <th>Цена (USDT)</th>
-                            <th>Количество (BTC)</th>
-                            <th>Всего (USDT)</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td class="text-success">65 000.00</td>
-                            <td>0.4500</td>
-                            <td>29 250.00</td>
-                          </tr>
-                          <tr>
-                            <td class="text-success">64 980.00</td>
-                            <td>1.2000</td>
-                            <td>77 976.00</td>
-                          </tr>
-                          <tr>
-                            <td class="text-success">64 950.50</td>
-                            <td>0.0850</td>
-                            <td>5 520.79</td>
-                          </tr>
-                          <tr>
-                            <td class="text-success">64 910.00</td>
-                            <td>2.1000</td>
-                            <td>136 311.00</td>
-                          </tr>
-                          <tr>
-                            <td class="text-success">64 880.00</td>
-                            <td>0.1500</td>
-                            <td>9 732.00</td>
-                          </tr>
-                        </tbody>
-                      </table>
+                    <div class="container" style="max-width: 450px">
+                      <div class="order-book-container">
+                        <table
+                          class="table table-dark table-borderless table-sm mb-0 table-orderbook"
+                        >
+                          <thead>
+                            <tr>
+                              <th class="py-1">price</th>
+                              <th class="py-1 text-end">volume</th>
+                              <th class="py-1 text-end">cost</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td class="py-0 price-top">65 400.00</td>
+                              <td class="py-0 text-end">0.150</td>
+                              <td class="py-0 text-end">9 810</td>
+                            </tr>
+                            <tr>
+                              <td class="py-0 price-top">65 350.50</td>
+                              <td class="py-0 text-end">1.200</td>
+                              <td class="py-0 text-end">78 420</td>
+                            </tr>
+                            <tr>
+                              <td class="py-0 price-top">65 300.00</td>
+                              <td class="py-0 text-end">0.050</td>
+                              <td class="py-0 text-end">3 265</td>
+                            </tr>
+                            <tr>
+                              <td class="py-0 price-top">65 250.00</td>
+                              <td class="py-0 text-end">0.890</td>
+                              <td class="py-0 text-end">58 072</td>
+                            </tr>
+                            <tr>
+                              <td class="py-0 price-top">65 200.00</td>
+                              <td class="py-0 text-end">2.100</td>
+                              <td class="py-0 text-end">136 920</td>
+                            </tr>
+                            <tr>
+                              <td class="py-0 price-top">65 150.00</td>
+                              <td class="py-0 text-end">0.400</td>
+                              <td class="py-0 text-end">26 060</td>
+                            </tr>
+                            <tr>
+                              <td class="py-0 price-top">65 400.00</td>
+                              <td class="py-0 text-end">0.150</td>
+                              <td class="py-0 text-end">9 810</td>
+                            </tr>
+                            <tr>
+                              <td class="py-0 price-top">65 350.50</td>
+                              <td class="py-0 text-end">1.200</td>
+                              <td class="py-0 text-end">78 420</td>
+                            </tr>
+                            <tr>
+                              <td class="py-0 price-top">65 300.00</td>
+                              <td class="py-0 text-end">0.050</td>
+                              <td class="py-0 text-end">3 265</td>
+                            </tr>
+                            <tr>
+                              <td class="py-0 price-top">65 250.00</td>
+                              <td class="py-0 text-end">0.890</td>
+                              <td class="py-0 text-end">58 072</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="order-book-container">
+                        <table
+                          class="table table-dark table-borderless table-sm mb-0 table-orderbook"
+                        >
+                          <tbody>
+                            <tr
+                              style="
+                                border-top: 1px solid var(--bg-hover);
+                                border-bottom: 1px solid var(--bg-hover);
+                              "
+                            >
+                              <td
+                                colspan="3"
+                                class="py-1 fw-bold fs-6 text-warning"
+                              >
+                                65 100.00
+                                <span class="fs-7 text-white-50"
+                                  >↑ $65,100.00</span
+                                >
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="order-book-container">
+                        <table
+                          class="table table-dark table-borderless table-sm mb-0 table-orderbook"
+                        >
+                          <tbody>
+                            <tr>
+                              <td class="py-0 price-bottom">65 000.00</td>
+                              <td class="py-0 text-end">3.500</td>
+                              <td class="py-0 text-end">227 500</td>
+                            </tr>
+                            <tr>
+                              <td class="py-0 price-bottom">64 950.00</td>
+                              <td class="py-0 text-end">0.080</td>
+                              <td class="py-0 text-end">5 196</td>
+                            </tr>
+                            <tr>
+                              <td class="py-0 price-bottom">64 900.00</td>
+                              <td class="py-0 text-end">1.450</td>
+                              <td class="py-0 text-end">94 105</td>
+                            </tr>
+                            <tr>
+                              <td class="py-0 price-bottom">64 850.00</td>
+                              <td class="py-0 text-end">0.300</td>
+                              <td class="py-0 text-end">19 455</td>
+                            </tr>
+                            <tr>
+                              <td class="py-0 price-bottom">65 080.00</td>
+                              <td class="py-0 text-end">0.750</td>
+                              <td class="py-0 text-end">48 810</td>
+                            </tr>
+                            <tr>
+                              <td class="py-0 price-bottom">65 050.00</td>
+                              <td class="py-0 text-end">0.120</td>
+                              <td class="py-0 text-end">7 806</td>
+                            </tr>
+                            <tr>
+                              <td class="py-0 price-bottom">65 000.00</td>
+                              <td class="py-0 text-end">3.500</td>
+                              <td class="py-0 text-end">227 500</td>
+                            </tr>
+                            <tr>
+                              <td class="py-0 price-bottom">64 950.00</td>
+                              <td class="py-0 text-end">0.080</td>
+                              <td class="py-0 text-end">5 196</td>
+                            </tr>
+                            <tr>
+                              <td class="py-0 price-bottom">64 900.00</td>
+                              <td class="py-0 text-end">1.450</td>
+                              <td class="py-0 text-end">94 105</td>
+                            </tr>
+                            <tr>
+                              <td class="py-0 price-bottom">64 850.00</td>
+                              <td class="py-0 text-end">0.300</td>
+                              <td class="py-0 text-end">19 455</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
                   </div>
 
@@ -233,6 +404,236 @@
                         </tr>
                       </thead>
                       <tbody>
+                        <tr>
+                          <td>64 850.00</td>
+                          <td>0.0120</td>
+                          <td>778.20</td>
+                          <td class="text-end">
+                            <button class="btn btn-outline-danger btn-sm py-0">
+                              Отмена
+                            </button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>64 500.00</td>
+                          <td>0.0050</td>
+                          <td>322.50</td>
+                          <td class="text-end">
+                            <button class="btn btn-outline-danger btn-sm py-0">
+                              Отмена
+                            </button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>64 850.00</td>
+                          <td>0.0120</td>
+                          <td>778.20</td>
+                          <td class="text-end">
+                            <button class="btn btn-outline-danger btn-sm py-0">
+                              Отмена
+                            </button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>64 500.00</td>
+                          <td>0.0050</td>
+                          <td>322.50</td>
+                          <td class="text-end">
+                            <button class="btn btn-outline-danger btn-sm py-0">
+                              Отмена
+                            </button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>64 850.00</td>
+                          <td>0.0120</td>
+                          <td>778.20</td>
+                          <td class="text-end">
+                            <button class="btn btn-outline-danger btn-sm py-0">
+                              Отмена
+                            </button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>64 500.00</td>
+                          <td>0.0050</td>
+                          <td>322.50</td>
+                          <td class="text-end">
+                            <button class="btn btn-outline-danger btn-sm py-0">
+                              Отмена
+                            </button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>64 850.00</td>
+                          <td>0.0120</td>
+                          <td>778.20</td>
+                          <td class="text-end">
+                            <button class="btn btn-outline-danger btn-sm py-0">
+                              Отмена
+                            </button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>64 500.00</td>
+                          <td>0.0050</td>
+                          <td>322.50</td>
+                          <td class="text-end">
+                            <button class="btn btn-outline-danger btn-sm py-0">
+                              Отмена
+                            </button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>64 850.00</td>
+                          <td>0.0120</td>
+                          <td>778.20</td>
+                          <td class="text-end">
+                            <button class="btn btn-outline-danger btn-sm py-0">
+                              Отмена
+                            </button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>64 500.00</td>
+                          <td>0.0050</td>
+                          <td>322.50</td>
+                          <td class="text-end">
+                            <button class="btn btn-outline-danger btn-sm py-0">
+                              Отмена
+                            </button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>64 500.00</td>
+                          <td>0.0050</td>
+                          <td>322.50</td>
+                          <td class="text-end">
+                            <button class="btn btn-outline-danger btn-sm py-0">
+                              Отмена
+                            </button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>64 850.00</td>
+                          <td>0.0120</td>
+                          <td>778.20</td>
+                          <td class="text-end">
+                            <button class="btn btn-outline-danger btn-sm py-0">
+                              Отмена
+                            </button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>64 500.00</td>
+                          <td>0.0050</td>
+                          <td>322.50</td>
+                          <td class="text-end">
+                            <button class="btn btn-outline-danger btn-sm py-0">
+                              Отмена
+                            </button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>64 500.00</td>
+                          <td>0.0050</td>
+                          <td>322.50</td>
+                          <td class="text-end">
+                            <button class="btn btn-outline-danger btn-sm py-0">
+                              Отмена
+                            </button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>64 850.00</td>
+                          <td>0.0120</td>
+                          <td>778.20</td>
+                          <td class="text-end">
+                            <button class="btn btn-outline-danger btn-sm py-0">
+                              Отмена
+                            </button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>64 500.00</td>
+                          <td>0.0050</td>
+                          <td>322.50</td>
+                          <td class="text-end">
+                            <button class="btn btn-outline-danger btn-sm py-0">
+                              Отмена
+                            </button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>64 500.00</td>
+                          <td>0.0050</td>
+                          <td>322.50</td>
+                          <td class="text-end">
+                            <button class="btn btn-outline-danger btn-sm py-0">
+                              Отмена
+                            </button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>64 850.00</td>
+                          <td>0.0120</td>
+                          <td>778.20</td>
+                          <td class="text-end">
+                            <button class="btn btn-outline-danger btn-sm py-0">
+                              Отмена
+                            </button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>64 500.00</td>
+                          <td>0.0050</td>
+                          <td>322.50</td>
+                          <td class="text-end">
+                            <button class="btn btn-outline-danger btn-sm py-0">
+                              Отмена
+                            </button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>64 500.00</td>
+                          <td>0.0050</td>
+                          <td>322.50</td>
+                          <td class="text-end">
+                            <button class="btn btn-outline-danger btn-sm py-0">
+                              Отмена
+                            </button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>64 850.00</td>
+                          <td>0.0120</td>
+                          <td>778.20</td>
+                          <td class="text-end">
+                            <button class="btn btn-outline-danger btn-sm py-0">
+                              Отмена
+                            </button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>64 500.00</td>
+                          <td>0.0050</td>
+                          <td>322.50</td>
+                          <td class="text-end">
+                            <button class="btn btn-outline-danger btn-sm py-0">
+                              Отмена
+                            </button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>64 500.00</td>
+                          <td>0.0050</td>
+                          <td>322.50</td>
+                          <td class="text-end">
+                            <button class="btn btn-outline-danger btn-sm py-0">
+                              Отмена
+                            </button>
+                          </td>
+                        </tr>
                         <tr>
                           <td>64 850.00</td>
                           <td>0.0120</td>
@@ -378,7 +779,26 @@
         </div>
       </main>
       <footer>
-        <div></div>
+        <div>
+          <div class="row g-3">
+            <div class="col-12 col-md-6">
+              <ul class="list-unstyled mb-0 d-flex flex-column gap-2">
+                <li><a href="#" class="crypto-link">Новости</a></li>
+                <li><a href="#" class="crypto-link">Обратная связь</a></li>
+                <li><a href="#" class="crypto-link">Сотрудничество</a></li>
+              </ul>
+            </div>
+            <div class="col-12 col-md-6">
+              <ul class="list-unstyled mb-0 d-flex flex-column gap-2">
+                <li><a href="#" class="crypto-link">Токены</a></li>
+                <li>
+                  <a href="#" class="crypto-link">Уведомление о рисках</a>
+                </li>
+                <li><a href="#" class="crypto-link">Для разработчиков</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </footer>
     </div>
     <script
