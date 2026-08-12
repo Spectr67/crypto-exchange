@@ -12,9 +12,9 @@
     />
     <style>
       :root {
-        --p-base: #f3ba2f !important;
-        --s-base: #0ecb81 !important;
-        --d-base: #f6465d !important;
+        --p-base: #f3ba2f;
+        --s-base: #0ecb81;
+        --d-base: #f6465d;
         --bg-deep: #0b0e11;
         --bg-card: #181a20;
         --bg-hover: #2b313a;
@@ -26,39 +26,38 @@
         font-family: monospace;
       }
 
-      .order-book-container {
-        max-height: 320px;
-        overflow-y: auto;
+      tbody {
         background-color: var(--bg-card);
-        border: 1px solid var(--bg-hover);
         border-radius: 8px;
       }
 
-      .order-book-container::-webkit-scrollbar {
+      .table-top,
+      .table-bottom {
+        overflow-y: auto;
+        height: 320px;
+        /* max-height: 320px;  */
+      }
+
+      ::-webkit-scrollbar {
         width: 4px;
       }
-      .order-book-container::-webkit-scrollbar-thumb {
+      ::-webkit-scrollbar-thumb {
         background: var(--bg-hover);
         border-radius: 2px;
       }
 
-      .table-orderbook thead th {
-        position: sticky;
-        top: 0;
-        z-index: 2;
+      th {
         background-color: var(--bg-card) !important;
         color: var(--text-muted);
         font-size: 0.75rem;
-        border-bottom: 1px solid var(--bg-hover);
       }
 
-      .table-orderbook td {
+      td {
         background: transparent !important;
         font-size: 0.85rem;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.03);
       }
 
-      .table-orderbook tbody tr:hover {
+      tr:hover {
         background: #add8e630 !important;
         cursor: pointer;
       }
@@ -73,12 +72,9 @@
   </head>
 
   <body class="min-vh-100 p-3">
-    <div class="container" style="max-width: 450px">
-      <h6 class="text-secondary mb-2">Стакан ордеров</h6>
-      <div class="order-book-container">
-        <table
-          class="table table-dark table-borderless table-sm mb-0 table-orderbook"
-        >
+    <div class="container">
+      <div class="table-head">
+        <table class="table table-dark table-borderless table-sm mb-0">
           <thead>
             <tr>
               <th class="py-1">price</th>
@@ -86,6 +82,10 @@
               <th class="py-1 text-end">cost</th>
             </tr>
           </thead>
+        </table>
+      </div>
+      <div class="table-top">
+        <table class="table table-dark table-borderless table-sm mb-0">
           <tbody>
             <tr>
               <td class="py-0 price-top">65 400.00</td>
@@ -137,20 +137,38 @@
               <td class="py-0 text-end">0.890</td>
               <td class="py-0 text-end">58 072</td>
             </tr>
+            <tr>
+              <td class="py-0 price-top">65 150.00</td>
+              <td class="py-0 text-end">0.400</td>
+              <td class="py-0 text-end">26 060</td>
+            </tr>
+            <tr>
+              <td class="py-0 price-top">65 400.00</td>
+              <td class="py-0 text-end">0.150</td>
+              <td class="py-0 text-end">9 810</td>
+            </tr>
+            <tr>
+              <td class="py-0 price-top">65 350.50</td>
+              <td class="py-0 text-end">1.200</td>
+              <td class="py-0 text-end">78 420</td>
+            </tr>
+            <tr>
+              <td class="py-0 price-top">65 300.00</td>
+              <td class="py-0 text-end">0.050</td>
+              <td class="py-0 text-end">3 265</td>
+            </tr>
+            <tr>
+              <td class="py-0 price-top">65 250.00</td>
+              <td class="py-0 text-end">0.890</td>
+              <td class="py-0 text-end">58 072</td>
+            </tr>
           </tbody>
         </table>
       </div>
-      <div class="order-book-container">
-        <table
-          class="table table-dark table-borderless table-sm mb-0 table-orderbook"
-        >
+      <div class="table-middle">
+        <table class="table table-dark table-borderless table-sm mb-0">
           <tbody>
-            <tr
-              style="
-                border-top: 1px solid var(--bg-hover);
-                border-bottom: 1px solid var(--bg-hover);
-              "
-            >
+            <tr>
               <td colspan="3" class="py-1 fw-bold fs-6 text-warning">
                 65 100.00 <span class="fs-7 text-white-50">↑ $65,100.00</span>
               </td>
@@ -158,11 +176,34 @@
           </tbody>
         </table>
       </div>
-      <div class="order-book-container">
-        <table
-          class="table table-dark table-borderless table-sm mb-0 table-orderbook"
-        >
+      <div class="table-bottom">
+        <table class="table table-dark table-borderless table-sm mb-0">
           <tbody>
+            <tr>
+              <td class="py-0 price-bottom">65 000.00</td>
+              <td class="py-0 text-end">3.500</td>
+              <td class="py-0 text-end">227 500</td>
+            </tr>
+            <tr>
+              <td class="py-0 price-bottom">64 950.00</td>
+              <td class="py-0 text-end">0.080</td>
+              <td class="py-0 text-end">5 196</td>
+            </tr>
+            <tr>
+              <td class="py-0 price-bottom">64 900.00</td>
+              <td class="py-0 text-end">1.450</td>
+              <td class="py-0 text-end">94 105</td>
+            </tr>
+            <tr>
+              <td class="py-0 price-bottom">64 850.00</td>
+              <td class="py-0 text-end">0.300</td>
+              <td class="py-0 text-end">19 455</td>
+            </tr>
+            <tr>
+              <td class="py-0 price-bottom">65 080.00</td>
+              <td class="py-0 text-end">0.750</td>
+              <td class="py-0 text-end">48 810</td>
+            </tr>
             <tr>
               <td class="py-0 price-bottom">65 000.00</td>
               <td class="py-0 text-end">3.500</td>
