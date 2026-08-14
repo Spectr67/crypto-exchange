@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bids</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <style>
+      .table-top,
+      .table-bottom {
+        overflow-y: auto;
+        height: 64px;
+        /* max-height: 320px;  */
+      }
+      ::-webkit-scrollbar {
+        width: 4px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--bs-danger);
+        border-radius: 2px;
+      }
+    </style>
+  </head>
+
+  <body data-bs-theme="dark" class="min-vh-100" style="font-family: monospace">
+    <div class="wrapper">
+      <header>
+        <nav class="navbar bg-body-tertiary">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#"
+              ><button
+                class="navbar-toggler me-2"
+                type="button"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasNavbar"
+                aria-controls="offcanvasNavbar"
+                aria-label="Toggle navigation"
+              >
+                <span class="navbar-toggler-icon"></span></button
+              >Cryptorium</a
+            >
+            <span class="navbar-text"> Navbar text with </span>
+            <div
+              class="offcanvas offcanvas-start"
+              tabindex="-1"
+              id="offcanvasNavbar"
+              aria-labelledby="offcanvasNavbarLabel"
+            >
+              <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="offcanvas"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#"
+                      >Home</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a
+                      class="nav-link dropdown-toggle"
+                      href="#"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      Dropdown
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#">Action</a></li>
+                      <li>
+                        <a class="dropdown-item" href="#">Another action</a>
+                      </li>
+                      <li>
+                        <hr class="dropdown-divider" />
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="#"
+                          >Something else here</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+                <form class="d-flex mt-3" role="search">
+                  <input
+                    class="form-control me-2"
+                    type="search"
+                    placeholder="Search"
+                    aria-label="Search"
+                  />
+                  <button class="btn btn-outline-success" type="submit">
+                    Search
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </header>
+
+      <main>
+        <div class="container pt-3">
+          <div class="bg-warning">
+            <div class="table-head">
+              <table class="table table-borderless table-sm mb-0">
+                <thead>
+                  <tr>
+                    <th class="py-1 bg-transparent">price</th>
+                    <th class="py-1 bg-transparent text-end">volume</th>
+                    <th class="py-1 bg-transparent text-end">cost</th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+            <div class="table-top">
+              <table class="table table-borderless table-sm mb-0 table-hover">
+                <tbody>
+                  <tr>
+                    <td class="py-0 bg-transparent text-danger">
+                      <small>65 250.00</small>
+                    </td>
+                    <td class="py-0 text-end"><small>0.890</small></td>
+                    <td class="py-0 text-end"><small>58 072</small></td>
+                  </tr>
+                  <tr>
+                    <td class="py-0 text-danger"><small>65 250.00</small></td>
+                    <td class="py-0 text-end"><small>0.890</small></td>
+                    <td class="py-0 text-end"><small>58 072</small></td>
+                  </tr>
+                  <tr>
+                    <td class="py-0 text-danger"><small>65 250.00</small></td>
+                    <td class="py-0 text-end"><small>0.890</small></td>
+                    <td class="py-0 text-end"><small>58 072</small></td>
+                  </tr>
+                  <tr>
+                    <td class="py-0 text-danger"><small>65 250.00</small></td>
+                    <td class="py-0 text-end"><small>0.890</small></td>
+                    <td class="py-0 text-end"><small>58 072</small></td>
+                  </tr>
+                  <tr>
+                    <td class="py-0 text-danger"><small>65 250.00</small></td>
+                    <td class="py-0 text-end"><small>0.890</small></td>
+                    <td class="py-0 text-end"><small>58 072</small></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="table-middle">
+              <table class="table table-borderless table-sm mb-0">
+                <tbody>
+                  <tr>
+                    <td colspan="3" class="py-1 fw-bold fs-6 text-warning">
+                      65 100.00
+                      <span class="fs-7 text-white-50">↑ $65,100.00</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="table-bottom">
+              <table class="table table-borderless table-sm mb-0 table-hover">
+                <tbody>
+                  <tr>
+                    <td class="py-0 text-success"><small>65 000.00</small></td>
+                    <td class="py-0 text-end"><small>3.500</small></td>
+                    <td class="py-0 text-end"><small>227 500</small></td>
+                  </tr>
+                  <tr>
+                    <td class="py-0 text-success"><small>65 000.00</small></td>
+                    <td class="py-0 text-end"><small>3.500</small></td>
+                    <td class="py-0 text-end"><small>227 500</small></td>
+                  </tr>
+                  <tr>
+                    <td class="py-0 text-success"><small>65 000.00</small></td>
+                    <td class="py-0 text-end"><small>3.500</small></td>
+                    <td class="py-0 text-end"><small>227 500</small></td>
+                  </tr>
+                  <tr>
+                    <td class="py-0 text-success"><small>65 000.00</small></td>
+                    <td class="py-0 text-end"><small>3.500</small></td>
+                    <td class="py-0 text-end"><small>227 500</small></td>
+                  </tr>
+                  <tr>
+                    <td class="py-0 text-success"><small>65 000.00</small></td>
+                    <td class="py-0 text-end"><small>3.500</small></td>
+                    <td class="py-0 text-end"><small>227 500</small></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <hr class="container my-5" />
+
+      <footer class="container pt-3">
+        <div class="row g-3">
+          <div class="col-12 col-sm-6">
+            <ul class="list-unstyled mb-0 d-flex flex-column gap-2">
+              <li><a href="#" class="link-light">Новости</a></li>
+              <li><a href="#" class="link-light">Обратная связь</a></li>
+              <li><a href="#" class="link-light">Сотрудничество</a></li>
+            </ul>
+          </div>
+          <div class="col-12 col-sm-6">
+            <ul class="list-unstyled mb-0 d-flex flex-column gap-2">
+              <li><a href="#" class="link-light">Токены</a></li>
+              <li><a href="#" class="link-light">Уведомление о рисках</a></li>
+              <li><a href="#" class="link-light">Для разработчиков</a></li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
