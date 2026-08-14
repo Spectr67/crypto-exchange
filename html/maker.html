@@ -3,90 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Maker</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
       crossorigin="anonymous"
     />
-    <style>
-      * {
-        /* border: 1px solid #234; */
-      }
-      :root {
-        --p-base: #f3ba2f !important;
-        --s-base: #0ecb81 !important;
-        --d-base: #f6465d !important;
-        --bg-deep: #0b0e11;
-        --bg-card: #181a20;
-        --bg-hover: #2b313a;
-        --text-muted: #848e9c;
-      }
-
-      body {
-        background-color: var(--bg-deep) !important;
-        font-family: monospace;
-      }
-
-      .order-book-container {
-        max-height: 320px;
-        overflow-y: auto;
-        background-color: var(--bg-card);
-        border: 1px solid var(--bg-hover);
-        border-radius: 8px;
-      }
-
-      .order-book-container::-webkit-scrollbar {
-        width: 4px;
-      }
-      .order-book-container::-webkit-scrollbar-thumb {
-        background: var(--bg-hover);
-        border-radius: 2px;
-      }
-
-      .table-orderbook thead th {
-        position: sticky;
-        top: 0;
-        z-index: 2;
-        background-color: var(--bg-card) !important;
-        color: var(--text-muted);
-        font-size: 0.75rem;
-        border-bottom: 1px solid var(--bg-hover);
-      }
-
-      .table-orderbook td {
-        background: transparent !important;
-        font-size: 0.85rem;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-      }
-
-      .table-orderbook tbody tr:hover {
-        background: #add8e630 !important;
-        cursor: pointer;
-      }
-
-      .price-top {
-        color: var(--d-base) !important;
-      }
-      .price-bottom {
-        color: var(--s-base) !important;
-      }
-      .footer-divider {
-        border-top: 1px solid #2b313a;
-      }
-      .order-book-container {
-        max-height: 280px;
-        overflow-y: auto;
-        overflow-x: hidden;
-        background-color: var(--bg-card);
-        border: 1px solid var(--bg-hover);
-        border-radius: 8px;
-      }
-    </style>
+    <style></style>
   </head>
 
-  <body data-bs-theme="dark" class="min-vh-100">
+  <body data-bs-theme="dark" class="min-vh-100" style="font-family: monospace">
     <div class="wrapper">
       <header>
         <nav class="navbar bg-body-tertiary">
@@ -248,313 +175,8 @@
                       Купить
                     </button>
                   </form>
-                  <div class="mb-4">
-                    <div class="container" style="max-width: 450px">
-                      <div class="order-book-container">
-                        <table
-                          class="table table-dark table-borderless table-sm mb-0 table-orderbook"
-                        >
-                          <thead>
-                            <tr>
-                              <th class="py-1">price</th>
-                              <th class="py-1 text-end">volume</th>
-                              <th class="py-1 text-end">cost</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td class="py-0 price-top">65 400.00</td>
-                              <td class="py-0 text-end">0.150</td>
-                              <td class="py-0 text-end">9 810</td>
-                            </tr>
-                            <tr>
-                              <td class="py-0 price-top">65 350.50</td>
-                              <td class="py-0 text-end">1.200</td>
-                              <td class="py-0 text-end">78 420</td>
-                            </tr>
-                            <tr>
-                              <td class="py-0 price-top">65 300.00</td>
-                              <td class="py-0 text-end">0.050</td>
-                              <td class="py-0 text-end">3 265</td>
-                            </tr>
-                            <tr>
-                              <td class="py-0 price-top">65 250.00</td>
-                              <td class="py-0 text-end">0.890</td>
-                              <td class="py-0 text-end">58 072</td>
-                            </tr>
-                            <tr>
-                              <td class="py-0 price-top">65 200.00</td>
-                              <td class="py-0 text-end">2.100</td>
-                              <td class="py-0 text-end">136 920</td>
-                            </tr>
-                            <tr>
-                              <td class="py-0 price-top">65 150.00</td>
-                              <td class="py-0 text-end">0.400</td>
-                              <td class="py-0 text-end">26 060</td>
-                            </tr>
-                            <tr>
-                              <td class="py-0 price-top">65 400.00</td>
-                              <td class="py-0 text-end">0.150</td>
-                              <td class="py-0 text-end">9 810</td>
-                            </tr>
-                            <tr>
-                              <td class="py-0 price-top">65 350.50</td>
-                              <td class="py-0 text-end">1.200</td>
-                              <td class="py-0 text-end">78 420</td>
-                            </tr>
-                            <tr>
-                              <td class="py-0 price-top">65 300.00</td>
-                              <td class="py-0 text-end">0.050</td>
-                              <td class="py-0 text-end">3 265</td>
-                            </tr>
-                            <tr>
-                              <td class="py-0 price-top">65 250.00</td>
-                              <td class="py-0 text-end">0.890</td>
-                              <td class="py-0 text-end">58 072</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div class="order-book-container">
-                        <table
-                          class="table table-dark table-borderless table-sm mb-0 table-orderbook"
-                        >
-                          <tbody>
-                            <tr
-                              style="
-                                border-top: 1px solid var(--bg-hover);
-                                border-bottom: 1px solid var(--bg-hover);
-                              "
-                            >
-                              <td
-                                colspan="3"
-                                class="py-1 fw-bold fs-6 text-warning"
-                              >
-                                65 100.00
-                                <span class="fs-7 text-white-50"
-                                  >↑ $65,100.00</span
-                                >
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div class="order-book-container">
-                        <table
-                          class="table table-dark table-borderless table-sm mb-0 table-orderbook"
-                        >
-                          <tbody>
-                            <tr>
-                              <td class="py-0 price-bottom">65 000.00</td>
-                              <td class="py-0 text-end">3.500</td>
-                              <td class="py-0 text-end">227 500</td>
-                            </tr>
-                            <tr>
-                              <td class="py-0 price-bottom">64 950.00</td>
-                              <td class="py-0 text-end">0.080</td>
-                              <td class="py-0 text-end">5 196</td>
-                            </tr>
-                            <tr>
-                              <td class="py-0 price-bottom">64 900.00</td>
-                              <td class="py-0 text-end">1.450</td>
-                              <td class="py-0 text-end">94 105</td>
-                            </tr>
-                            <tr>
-                              <td class="py-0 price-bottom">64 850.00</td>
-                              <td class="py-0 text-end">0.300</td>
-                              <td class="py-0 text-end">19 455</td>
-                            </tr>
-                            <tr>
-                              <td class="py-0 price-bottom">65 080.00</td>
-                              <td class="py-0 text-end">0.750</td>
-                              <td class="py-0 text-end">48 810</td>
-                            </tr>
-                            <tr>
-                              <td class="py-0 price-bottom">65 050.00</td>
-                              <td class="py-0 text-end">0.120</td>
-                              <td class="py-0 text-end">7 806</td>
-                            </tr>
-                            <tr>
-                              <td class="py-0 price-bottom">65 000.00</td>
-                              <td class="py-0 text-end">3.500</td>
-                              <td class="py-0 text-end">227 500</td>
-                            </tr>
-                            <tr>
-                              <td class="py-0 price-bottom">64 950.00</td>
-                              <td class="py-0 text-end">0.080</td>
-                              <td class="py-0 text-end">5 196</td>
-                            </tr>
-                            <tr>
-                              <td class="py-0 price-bottom">64 900.00</td>
-                              <td class="py-0 text-end">1.450</td>
-                              <td class="py-0 text-end">94 105</td>
-                            </tr>
-                            <tr>
-                              <td class="py-0 price-bottom">64 850.00</td>
-                              <td class="py-0 text-end">0.300</td>
-                              <td class="py-0 text-end">19 455</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
                 </div>
-                <div class="p-3 text-light">
-                  <div class="container p-0" style="max-width: 650px">
-                    <div
-                      class="d-flex justify-content-between align-items-center mb-2"
-                    >
-                      <h5 class="h6 mb-0">Мои активные ордера</h5>
-                      <a
-                        href=""
-                        class="btn btn-outline-warning btn-sm py-0 fs-7"
-                      >
-                        История ордеров ↓
-                      </a>
-                    </div>
 
-                    <div class="order-book-container mb-4">
-                      <div class="table-responsive">
-                        <table
-                          class="table table-dark table-striped table-sm table-orderbook mb-0"
-                        >
-                          <thead>
-                            <tr>
-                              <th>Цена (USDT)</th>
-                              <th>Количество (BTC)</th>
-                              <th>Сумма (USDT)</th>
-                              <th class="text-end">Действие</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td class="price-bottom">64 850.00</td>
-                              <td>0.0120</td>
-                              <td>778.20</td>
-                              <td class="text-end">
-                                <button
-                                  class="btn btn-outline-danger btn-sm py-0 fs-7"
-                                >
-                                  Отмена
-                                </button>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td class="price-bottom">64 500.00</td>
-                              <td>0.0050</td>
-                              <td>322.50</td>
-                              <td class="text-end">
-                                <button
-                                  class="btn btn-outline-danger btn-sm py-0 fs-7"
-                                >
-                                  Отмена
-                                </button>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td class="price-top">65 100.00</td>
-                              <td>0.0150</td>
-                              <td>976.50</td>
-                              <td class="text-end">
-                                <button
-                                  class="btn btn-outline-danger btn-sm py-0 fs-7"
-                                >
-                                  Отмена
-                                </button>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td class="price-bottom">64 850.00</td>
-                              <td>0.0120</td>
-                              <td>778.20</td>
-                              <td class="text-end">
-                                <button
-                                  class="btn btn-outline-danger btn-sm py-0 fs-7"
-                                >
-                                  Отмена
-                                </button>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td class="price-bottom">64 500.00</td>
-                              <td>0.0050</td>
-                              <td>322.50</td>
-                              <td class="text-end">
-                                <button
-                                  class="btn btn-outline-danger btn-sm py-0 fs-7"
-                                >
-                                  Отмена
-                                </button>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-
-                    <div
-                      id="history-section"
-                      class="d-flex justify-content-between align-items-center mb-2 pt-2"
-                    >
-                      <h5 class="h6 mb-0 text-secondary">
-                        История ордеров (Завершённые)
-                      </h5>
-                      <span class="badge text-bg-secondary">Исполнено</span>
-                    </div>
-
-                    <div class="order-book-container">
-                      <div class="table-responsive">
-                        <table
-                          class="table table-dark table-striped table-sm table-orderbook mb-0"
-                        >
-                          <thead>
-                            <tr>
-                              <th>Цена (USDT)</th>
-                              <th>Количество (BTC)</th>
-                              <th>Сумма (USDT)</th>
-                              <th class="text-end">Статус</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td class="price-bottom">64 300.00</td>
-                              <td>0.0500</td>
-                              <td>3 215.00</td>
-                              <td class="text-end text-success fs-7">
-                                Исполнен
-                              </td>
-                            </tr>
-                            <tr>
-                              <td class="price-top">65 400.00</td>
-                              <td>0.0100</td>
-                              <td>654.00</td>
-                              <td class="text-end text-success fs-7">
-                                Исполнен
-                              </td>
-                            </tr>
-                            <tr>
-                              <td class="price-bottom">64 100.00</td>
-                              <td>0.0200</td>
-                              <td>1 282.00</td>
-                              <td class="text-end text-secondary fs-7">
-                                Отменён
-                              </td>
-                            </tr>
-                            <tr>
-                              <td class="price-top">65 250.00</td>
-                              <td>0.0080</td>
-                              <td>522.00</td>
-                              <td class="text-end text-success fs-7">
-                                Исполнен
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-                </div>
                 <div
                   class="tab-pane fade"
                   id="elOrderSellBlock"
@@ -601,99 +223,30 @@
                       Продать
                     </button>
                   </form>
-
-                  <div class="mb-4">
-                    <h5 class="h6 text-secondary">Ордера на рынке</h5>
-                    <div class="table-responsive">
-                      <table class="table table-dark table-hover table-sm">
-                        <thead>
-                          <tr class="text-secondary">
-                            <th>Цена (USDT)</th>
-                            <th>Количество (BTC)</th>
-                            <th>Всего (USDT)</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td class="text-danger">65 050.00</td>
-                            <td>0.1200</td>
-                            <td>7 806.00</td>
-                          </tr>
-                          <tr>
-                            <td class="text-danger">65 100.00</td>
-                            <td>0.8500</td>
-                            <td>55 335.00</td>
-                          </tr>
-                          <tr>
-                            <td class="text-danger">65 150.25</td>
-                            <td>1.5000</td>
-                            <td>97 725.37</td>
-                          </tr>
-                          <tr>
-                            <td class="text-danger">65 200.00</td>
-                            <td>0.0400</td>
-                            <td>2 608.00</td>
-                          </tr>
-                          <tr>
-                            <td class="text-danger">65 250.00</td>
-                            <td>3.0000</td>
-                            <td>195 750.00</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-
-                  <h5 class="h6">Мои активные ордера на продажу</h5>
-                  <div class="table-responsive">
-                    <table class="table table-dark table-striped table-sm">
-                      <thead>
-                        <tr>
-                          <th>Цена (USDT)</th>
-                          <th>Количество (BTC)</th>
-                          <th>Сумма (USDT)</th>
-                          <th class="text-end">Действие</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>65 900.00</td>
-                          <td>0.0150</td>
-                          <td>988.50</td>
-                          <td class="text-end">
-                            <button class="btn btn-outline-danger btn-sm py-0">
-                              Отмена
-                            </button>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </main>
-      <footer>
-        <div>
-          <div class="row g-3">
-            <div class="col-12 col-md-6">
-              <ul class="list-unstyled mb-0 d-flex flex-column gap-2">
-                <li><a href="#" class="crypto-link">Новости</a></li>
-                <li><a href="#" class="crypto-link">Обратная связь</a></li>
-                <li><a href="#" class="crypto-link">Сотрудничество</a></li>
-              </ul>
-            </div>
-            <div class="col-12 col-md-6">
-              <ul class="list-unstyled mb-0 d-flex flex-column gap-2">
-                <li><a href="#" class="crypto-link">Токены</a></li>
-                <li>
-                  <a href="#" class="crypto-link">Уведомление о рисках</a>
-                </li>
-                <li><a href="#" class="crypto-link">Для разработчиков</a></li>
-              </ul>
-            </div>
+
+      <hr class="container my-5" />
+
+      <footer class="container pt-3">
+        <div class="row g-3">
+          <div class="col-12 col-sm-6">
+            <ul class="list-unstyled mb-0 d-flex flex-column gap-2">
+              <li><a href="#" class="link-light">Новости</a></li>
+              <li><a href="#" class="link-light">Обратная связь</a></li>
+              <li><a href="#" class="link-light">Сотрудничество</a></li>
+            </ul>
+          </div>
+          <div class="col-12 col-sm-6">
+            <ul class="list-unstyled mb-0 d-flex flex-column gap-2">
+              <li><a href="#" class="link-light">Токены</a></li>
+              <li><a href="#" class="link-light">Уведомление о рисках</a></li>
+              <li><a href="#" class="link-light">Для разработчиков</a></li>
+            </ul>
           </div>
         </div>
       </footer>
