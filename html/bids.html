@@ -24,6 +24,14 @@
         background: var(--bs-danger);
         border-radius: 2px;
       }
+      td:first-child,
+      th:first-child {
+        width: 33%;
+      }
+      td:nth-child(2),
+      th:nth-child(2) {
+        width: 33%;
+      }
     </style>
   </head>
 
@@ -115,14 +123,15 @@
 
       <main>
         <div class="container pt-3">
-          <div class="bg-warning">
+          <!-- // bg-body-tertiary -->
+          <div class="bg-black p-2 rounded-3">
             <div class="table-head">
               <table class="table table-borderless table-sm mb-0">
                 <thead>
                   <tr>
-                    <th class="py-1 bg-transparent">price</th>
-                    <th class="py-1 bg-transparent text-end">volume</th>
-                    <th class="py-1 bg-transparent text-end">cost</th>
+                    <th class="pb-1 bg-transparent">price</th>
+                    <th class="pb-1 bg-transparent text-end">volume</th>
+                    <th class="pb-1 bg-transparent text-end">cost</th>
                   </tr>
                 </thead>
               </table>
@@ -134,28 +143,56 @@
                     <td class="py-0 bg-transparent text-danger">
                       <small>65 250.00</small>
                     </td>
-                    <td class="py-0 text-end"><small>0.890</small></td>
-                    <td class="py-0 text-end"><small>58 072</small></td>
+                    <td class="py-0 bg-transparent text-end">
+                      <small>0.890</small>
+                    </td>
+                    <td class="py-0 bg-transparent text-end">
+                      <small>58 072</small>
+                    </td>
                   </tr>
                   <tr>
-                    <td class="py-0 text-danger"><small>65 250.00</small></td>
-                    <td class="py-0 text-end"><small>0.890</small></td>
-                    <td class="py-0 text-end"><small>58 072</small></td>
+                    <td class="py-0 bg-transparent text-danger">
+                      <small>65 250.00</small>
+                    </td>
+                    <td class="py-0 bg-transparent text-end">
+                      <small>0.890</small>
+                    </td>
+                    <td class="py-0 bg-transparent text-end">
+                      <small>58 072</small>
+                    </td>
                   </tr>
                   <tr>
-                    <td class="py-0 text-danger"><small>65 250.00</small></td>
-                    <td class="py-0 text-end"><small>0.890</small></td>
-                    <td class="py-0 text-end"><small>58 072</small></td>
+                    <td class="py-0 bg-transparent text-danger">
+                      <small>65 250.00</small>
+                    </td>
+                    <td class="py-0 bg-transparent text-end">
+                      <small>0.890</small>
+                    </td>
+                    <td class="py-0 bg-transparent text-end">
+                      <small>58 072</small>
+                    </td>
                   </tr>
                   <tr>
-                    <td class="py-0 text-danger"><small>65 250.00</small></td>
-                    <td class="py-0 text-end"><small>0.890</small></td>
-                    <td class="py-0 text-end"><small>58 072</small></td>
+                    <td class="py-0 bg-transparent text-danger">
+                      <small>65 250.00</small>
+                    </td>
+                    <td class="py-0 bg-transparent text-end">
+                      <small>0.890</small>
+                    </td>
+                    <td class="py-0 bg-transparent text-end">
+                      <small>58 072</small>
+                    </td>
                   </tr>
                   <tr>
-                    <td class="py-0 text-danger"><small>65 250.00</small></td>
-                    <td class="py-0 text-end"><small>0.890</small></td>
-                    <td class="py-0 text-end"><small>58 072</small></td>
+                    <td class="py-0 bg-transparent text-danger">
+                      <small>65 250.00</small>
+                    </td>
+                    <td class="py-0 bg-transparent text-end">
+                      <small>0.890</small>
+                    </td>
+                    <td class="py-0 bg-transparent text-end">
+                      <small>58 072</small>
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -164,7 +201,10 @@
               <table class="table table-borderless table-sm mb-0">
                 <tbody>
                   <tr>
-                    <td colspan="3" class="py-1 fw-bold fs-6 text-warning">
+                    <td
+                      colspan="3"
+                      class="py-1 bg-transparent fw-bold fs-6 text-warning"
+                    >
                       65 100.00
                       <span class="fs-7 text-white-50">↑ $65,100.00</span>
                     </td>
@@ -176,29 +216,59 @@
               <table class="table table-borderless table-sm mb-0 table-hover">
                 <tbody>
                   <tr>
-                    <td class="py-0 text-success"><small>65 000.00</small></td>
-                    <td class="py-0 text-end"><small>3.500</small></td>
-                    <td class="py-0 text-end"><small>227 500</small></td>
+                    <td class="py-0 bg-transparent text-success">
+                      <small>65 000.00</small>
+                    </td>
+                    <td class="py-0 bg-transparent text-end">
+                      <small>3.500</small>
+                    </td>
+                    <td class="py-0 bg-transparent text-end">
+                      <small>227 500</small>
+                    </td>
                   </tr>
                   <tr>
-                    <td class="py-0 text-success"><small>65 000.00</small></td>
-                    <td class="py-0 text-end"><small>3.500</small></td>
-                    <td class="py-0 text-end"><small>227 500</small></td>
+                    <td class="py-0 bg-transparent text-success">
+                      <small>65 000.00</small>
+                    </td>
+                    <td class="py-0 bg-transparent text-end">
+                      <small>3.500</small>
+                    </td>
+                    <td class="py-0 bg-transparent text-end">
+                      <small>227 500</small>
+                    </td>
                   </tr>
                   <tr>
-                    <td class="py-0 text-success"><small>65 000.00</small></td>
-                    <td class="py-0 text-end"><small>3.500</small></td>
-                    <td class="py-0 text-end"><small>227 500</small></td>
+                    <td class="py-0 bg-transparent text-success">
+                      <small>65 000.00</small>
+                    </td>
+                    <td class="py-0 bg-transparent text-end">
+                      <small>3.500</small>
+                    </td>
+                    <td class="py-0 bg-transparent text-end">
+                      <small>227 500</small>
+                    </td>
                   </tr>
                   <tr>
-                    <td class="py-0 text-success"><small>65 000.00</small></td>
-                    <td class="py-0 text-end"><small>3.500</small></td>
-                    <td class="py-0 text-end"><small>227 500</small></td>
+                    <td class="py-0 bg-transparent text-success">
+                      <small>65 000.00</small>
+                    </td>
+                    <td class="py-0 bg-transparent text-end">
+                      <small>3.500</small>
+                    </td>
+                    <td class="py-0 bg-transparent text-end">
+                      <small>227 500</small>
+                    </td>
                   </tr>
                   <tr>
-                    <td class="py-0 text-success"><small>65 000.00</small></td>
-                    <td class="py-0 text-end"><small>3.500</small></td>
-                    <td class="py-0 text-end"><small>227 500</small></td>
+                    <td class="py-0 bg-transparent text-success">
+                      <small>65 000.00</small>
+                    </td>
+                    <td class="py-0 bg-transparent text-end">
+                      <small>3.500</small>
+                    </td>
+                    <td class="py-0 bg-transparent text-end">
+                      <small>227 500</small>
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -233,5 +303,10 @@
       integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
       crossorigin="anonymous"
     ></script>
+    <script>
+      document
+        .querySelector('.table-top')
+        .scrollBy({ behavior: 'instant', top: 1000 })
+    </script>
   </body>
 </html>
