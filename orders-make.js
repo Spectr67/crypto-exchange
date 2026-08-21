@@ -29,6 +29,7 @@ export class Order {
     const { traderId, side, volume, price, pair } = this
     return checkTraderBalance(traderId, side, volume, price, pair)
   }
+
   #freezeBalance() {
     const trader = getTraderById(this.traderId)
     if (this.side === 'sell') {

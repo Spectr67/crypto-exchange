@@ -11,6 +11,7 @@ export function take(traderId, side, pair) {
 
   for (const order of orders[side]) {
     if (!transferDeal(taker, order)) return
+    // добавляем transaction history
   }
 }
 
