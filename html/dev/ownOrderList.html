@@ -10,195 +10,271 @@
       integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
       crossorigin="anonymous"
     />
-    <style>
-      :root {
-        --p-base: #f3ba2f !important;
-        --s-base: #0ecb81 !important;
-        --d-base: #f6465d !important;
-        --bg-deep: #0b0e11;
-        --bg-card: #181a20;
-        --bg-hover: #2b313a;
-        --text-muted: #848e9c;
-      }
-
-      body {
-        background-color: var(--bg-deep) !important;
-      }
-
-      .order-book-container {
-        max-height: 280px;
-        overflow-y: auto;
-        background-color: var(--bg-card);
-        border: 1px solid var(--bg-hover);
-        border-radius: 8px;
-      }
-
-      .order-book-container::-webkit-scrollbar {
-        width: 4px;
-      }
-      .order-book-container::-webkit-scrollbar-thumb {
-        background: var(--bg-hover);
-        border-radius: 2px;
-      }
-
-      .table-orderbook thead th {
-        position: sticky;
-        top: 0;
-        z-index: 2;
-        background-color: var(--bg-card) !important;
-        color: var(--text-muted);
-        font-size: 0.75rem;
-        border-bottom: 1px solid var(--bg-hover);
-      }
-
-      .table-orderbook td {
-        background: transparent !important;
-        font-size: 0.85rem;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-      }
-
-      .table-orderbook tbody tr:hover {
-        background: #add8e630 !important;
-        cursor: pointer;
-      }
-
-      .price-top {
-        color: var(--d-base) !important;
-      }
-      .price-bottom {
-        color: var(--s-base) !important;
-      }
-    </style>
+    <style></style>
   </head>
+  <body data-bs-theme="dark" class="min-vh-100" style="font-family: monospace">
+    <div class="wrapper">
+      <header>
+        <nav class="navbar bg-body-tertiary">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#"
+              ><button
+                class="navbar-toggler me-2"
+                type="button"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasNavbar"
+                aria-controls="offcanvasNavbar"
+                aria-label="Toggle navigation"
+              >
+                <span class="navbar-toggler-icon"></span></button
+              ><span class="d-none d-sm-inline">Cryptorium</span></a
+            >
+            <select
+              class="form-select bg-dark text-light border-secondary font-monospace"
+              style="max-width: 150px"
+              id="coinSelect"
+            >
+              <option value="BTCUSDT" selected>BTC / USDT — $65,100.00</option>
+              <option value="ETHUSDT">ETH / USDT — $3,450.50</option>
+              <option value="SOLUSDT">SOL / USDT — $145.20</option>
+              <option value="BNBUSDT">BNB / USDT — $580.00</option>
+              <option value="XRPUSDT">XRP / USDT — $0.5820</option>
+              <option value="ADAUSDT">ADA / USDT — $0.3950</option>
+              <option value="DOGEUSDT">DOGE / USDT — $0.1240</option>
+              <option value="AVAXUSDT">AVAX / USDT — $26.80</option>
+              <option value="LINKUSDT">LINK / USDT — $14.10</option>
+              <option value="DOTUSDT">DOT / USDT — $6.75</option>
+            </select>
+            <div
+              class="offcanvas offcanvas-start"
+              tabindex="-1"
+              id="offcanvasNavbar"
+              aria-labelledby="offcanvasNavbarLabel"
+            >
+              <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="offcanvas"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#"
+                      >Home</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a
+                      class="nav-link dropdown-toggle"
+                      href="#"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      Dropdown
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#">Action</a></li>
+                      <li>
+                        <a class="dropdown-item" href="#">Another action</a>
+                      </li>
+                      <li>
+                        <hr class="dropdown-divider" />
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="#"
+                          >Something else here</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+                <form class="d-flex mt-3" role="search">
+                  <input
+                    class="form-control me-2"
+                    type="search"
+                    placeholder="Search"
+                    aria-label="Search"
+                  />
+                  <button class="btn btn-outline-success" type="submit">
+                    Search
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <main>
+        <div class="container p-0 col-12 col-md-8 col-lg-6">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h5 class="h6 mb-0 text-light">Мои активные ордера</h5>
+            <a
+              href="#history-section"
+              class="btn btn-outline-warning btn-sm py-0 fs-7"
+            >
+              История ордеров ↓
+            </a>
+          </div>
 
-  <body class="p-3 text-light">
-    <div class="container p-0" style="max-width: 650px">
-      <div class="d-flex justify-content-between align-items-center mb-2">
-        <h5 class="h6 mb-0">Мои активные ордера</h5>
-        <a href="" class="btn btn-outline-warning btn-sm py-0 fs-7">
-          История ордеров ↓
-        </a>
-      </div>
+          <div class="card bg-dark border-secondary overflow-hidden mb-4">
+            <div class="table-responsive" style="max-height: 300px">
+              <table
+                class="table table-dark table-striped table-hover table-sm align-middle mb-0 font-monospace"
+              >
+                <thead
+                  class="sticky-top table-dark border-bottom border-secondary"
+                >
+                  <tr>
+                    <th scope="col">Цена (USDT)</th>
+                    <th scope="col">Количество (BTC)</th>
+                    <th scope="col">Сумма (USDT)</th>
+                    <th scope="col" class="text-end">Действие</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="text-success fw-bold">64 850.00</td>
+                    <td>0.0120</td>
+                    <td>778.20</td>
+                    <td class="text-end">
+                      <button class="btn btn-outline-danger btn-sm py-0 fs-7">
+                        Отмена
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="text-success fw-bold">64 500.00</td>
+                    <td>0.0050</td>
+                    <td>322.50</td>
+                    <td class="text-end">
+                      <button class="btn btn-outline-danger btn-sm py-0 fs-7">
+                        Отмена
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="text-danger fw-bold">65 100.00</td>
+                    <td>0.0150</td>
+                    <td>976.50</td>
+                    <td class="text-end">
+                      <button class="btn btn-outline-danger btn-sm py-0 fs-7">
+                        Отмена
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="text-success fw-bold">64 850.00</td>
+                    <td>0.0120</td>
+                    <td>778.20</td>
+                    <td class="text-end">
+                      <button class="btn btn-outline-danger btn-sm py-0 fs-7">
+                        Отмена
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="text-success fw-bold">64 500.00</td>
+                    <td>0.0050</td>
+                    <td>322.50</td>
+                    <td class="text-end">
+                      <button class="btn btn-outline-danger btn-sm py-0 fs-7">
+                        Отмена
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
 
-      <div class="order-book-container mb-4">
-        <div class="table-responsive">
-          <table
-            class="table table-dark table-striped table-sm table-orderbook mb-0"
+          <div
+            id="history-section"
+            class="d-flex justify-content-between align-items-center mb-2 pt-2"
           >
-            <thead>
-              <tr>
-                <th>Цена (USDT)</th>
-                <th>Количество (BTC)</th>
-                <th>Сумма (USDT)</th>
-                <th class="text-end">Действие</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="price-bottom">64 850.00</td>
-                <td>0.0120</td>
-                <td>778.20</td>
-                <td class="text-end">
-                  <button class="btn btn-outline-danger btn-sm py-0 fs-7">
-                    Отмена
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td class="price-bottom">64 500.00</td>
-                <td>0.0050</td>
-                <td>322.50</td>
-                <td class="text-end">
-                  <button class="btn btn-outline-danger btn-sm py-0 fs-7">
-                    Отмена
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td class="price-top">65 100.00</td>
-                <td>0.0150</td>
-                <td>976.50</td>
-                <td class="text-end">
-                  <button class="btn btn-outline-danger btn-sm py-0 fs-7">
-                    Отмена
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td class="price-bottom">64 850.00</td>
-                <td>0.0120</td>
-                <td>778.20</td>
-                <td class="text-end">
-                  <button class="btn btn-outline-danger btn-sm py-0 fs-7">
-                    Отмена
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td class="price-bottom">64 500.00</td>
-                <td>0.0050</td>
-                <td>322.50</td>
-                <td class="text-end">
-                  <button class="btn btn-outline-danger btn-sm py-0 fs-7">
-                    Отмена
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+            <h5 class="h6 mb-0 text-secondary">
+              История ордеров (Завершённые)
+            </h5>
+            <span class="badge text-bg-secondary">Исполнено</span>
+          </div>
 
-      <div
-        id="history-section"
-        class="d-flex justify-content-between align-items-center mb-2 pt-2"
-      >
-        <h5 class="h6 mb-0 text-secondary">История ордеров (Завершённые)</h5>
-        <span class="badge text-bg-secondary">Исполнено</span>
-      </div>
-
-      <div class="order-book-container">
-        <div class="table-responsive">
-          <table
-            class="table table-dark table-striped table-sm table-orderbook mb-0"
-          >
-            <thead>
-              <tr>
-                <th>Цена (USDT)</th>
-                <th>Количество (BTC)</th>
-                <th>Сумма (USDT)</th>
-                <th class="text-end">Статус</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="price-bottom">64 300.00</td>
-                <td>0.0500</td>
-                <td>3 215.00</td>
-                <td class="text-end text-success fs-7">Исполнен</td>
-              </tr>
-              <tr>
-                <td class="price-top">65 400.00</td>
-                <td>0.0100</td>
-                <td>654.00</td>
-                <td class="text-end text-success fs-7">Исполнен</td>
-              </tr>
-              <tr>
-                <td class="price-bottom">64 100.00</td>
-                <td>0.0200</td>
-                <td>1 282.00</td>
-                <td class="text-end text-secondary fs-7">Отменён</td>
-              </tr>
-              <tr>
-                <td class="price-top">65 250.00</td>
-                <td>0.0080</td>
-                <td>522.00</td>
-                <td class="text-end text-success fs-7">Исполнен</td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="card bg-dark border-secondary overflow-hidden">
+            <div class="table-responsive" style="max-height: 300px">
+              <table
+                class="table table-dark table-striped table-hover table-sm align-middle mb-0 font-monospace"
+              >
+                <thead
+                  class="sticky-top table-dark border-bottom border-secondary"
+                >
+                  <tr>
+                    <th scope="col">Цена (USDT)</th>
+                    <th scope="col">Количество (BTC)</th>
+                    <th scope="col">Сумма (USDT)</th>
+                    <th scope="col" class="text-end">Статус</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="text-success fw-bold">64 300.00</td>
+                    <td>0.0500</td>
+                    <td>3 215.00</td>
+                    <td class="text-end text-success fs-7">Исполнен</td>
+                  </tr>
+                  <tr>
+                    <td class="text-danger fw-bold">65 400.00</td>
+                    <td>0.0100</td>
+                    <td>654.00</td>
+                    <td class="text-end text-success fs-7">Исполнен</td>
+                  </tr>
+                  <tr>
+                    <td class="text-success fw-bold">64 100.00</td>
+                    <td>0.0200</td>
+                    <td>1 282.00</td>
+                    <td class="text-end text-secondary fs-7">Отменён</td>
+                  </tr>
+                  <tr>
+                    <td class="text-danger fw-bold">65 250.00</td>
+                    <td>0.0080</td>
+                    <td>522.00</td>
+                    <td class="text-end text-success fs-7">Исполнен</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
-      </div>
+      </main>
+
+      <footer class="container pt-3">
+        <div class="row g-3">
+          <div class="col-12 col-sm-6">
+            <ul class="list-unstyled mb-0 d-flex flex-column gap-2">
+              <li><a href="#" class="link-light">Новости</a></li>
+              <li><a href="#" class="link-light">Обратная связь</a></li>
+              <li><a href="#" class="link-light">Сотрудничество</a></li>
+            </ul>
+          </div>
+          <div class="col-12 col-sm-6">
+            <ul class="list-unstyled mb-0 d-flex flex-column gap-2">
+              <li><a href="#" class="link-light">Токены</a></li>
+              <li><a href="#" class="link-light">Уведомление о рисках</a></li>
+              <li><a href="#" class="link-light">Для разработчиков</a></li>
+            </ul>
+          </div>
+        </div>
+      </footer>
     </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>

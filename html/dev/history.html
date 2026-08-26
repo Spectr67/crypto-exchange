@@ -11,416 +11,548 @@
       crossorigin="anonymous"
     />
   </head>
-  <body
-    data-bs-theme="dark"
-    class="min-vh-100"
-    style="font-family: monospace; min-width: 230px"
-  >
-    <div class="container my-4">
-      <h4 class="mb-3 text-light">История исполненных ордеров</h4>
-
-      <div class="accordion" id="ordersAccordion" data-bs-theme="dark">
-        <div
-          class="accordion-item mb-2 border border-secondary bg-dark text-light"
-        >
-          <h2 class="accordion-header" id="headingOne">
-            <button
-              class="accordion-button collapsed py-2 px-3 bg-dark text-light"
+  <body data-bs-theme="dark" class="min-vh-100" style="font-family: monospace">
+    <header>
+      <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#"
+            ><button
+              class="navbar-toggler me-2"
               type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseOne"
-              aria-expanded="false"
-              aria-controls="collapseOne"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvasNavbar"
+              aria-controls="offcanvasNavbar"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span></button
+            ><span class="d-none d-sm-inline">Cryptorium</span></a
+          >
+          <select
+            class="form-select bg-dark text-light border-secondary font-monospace"
+            style="max-width: 150px"
+            id="coinSelect"
+          >
+            <option value="BTCUSDT" selected>BTC / USDT — $65,100.00</option>
+            <option value="ETHUSDT">ETH / USDT — $3,450.50</option>
+            <option value="SOLUSDT">SOL / USDT — $145.20</option>
+            <option value="BNBUSDT">BNB / USDT — $580.00</option>
+            <option value="XRPUSDT">XRP / USDT — $0.5820</option>
+            <option value="ADAUSDT">ADA / USDT — $0.3950</option>
+            <option value="DOGEUSDT">DOGE / USDT — $0.1240</option>
+            <option value="AVAXUSDT">AVAX / USDT — $26.80</option>
+            <option value="LINKUSDT">LINK / USDT — $14.10</option>
+            <option value="DOTUSDT">DOT / USDT — $6.75</option>
+          </select>
+          <div
+            class="offcanvas offcanvas-start"
+            tabindex="-1"
+            id="offcanvasNavbar"
+            aria-labelledby="offcanvasNavbarLabel"
+          >
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="offcanvas"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="offcanvas-body">
+              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#"
+                    >Home</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a
+                    class="nav-link dropdown-toggle"
+                    href="#"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    Dropdown
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li>
+                      <a class="dropdown-item" href="#">Another action</a>
+                    </li>
+                    <li>
+                      <hr class="dropdown-divider" />
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">Something else here</a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+              <form class="d-flex mt-3" role="search">
+                <input
+                  class="form-control me-2"
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                />
+                <button class="btn btn-outline-success" type="submit">
+                  Search
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <div class="container my-4">
+        <h4 class="mb-3 text-light">История исполненных ордеров</h4>
+
+        <div class="accordion" id="ordersAccordion" data-bs-theme="dark">
+          <div
+            class="accordion-item mb-2 border border-secondary bg-dark text-light"
+          >
+            <h2 class="accordion-header" id="headingOne">
+              <button
+                class="accordion-button collapsed py-2 px-3 bg-dark text-light"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseOne"
+                aria-expanded="false"
+                aria-controls="collapseOne"
+              >
+                <div
+                  class="w-100 d-flex justify-content-between align-items-center me-3"
+                >
+                  <div style="flex-basis: 200px">
+                    <span
+                      class="badge bg-success text-center me-2"
+                      style="width: 75px"
+                      >BUY</span
+                    >
+                    <strong class="text-white">B/U</strong>
+                  </div>
+                  <div
+                    style="flex-basis: 200px"
+                    class="small d-none d-md-block"
+                  >
+                    Цена: <span class="text-info fw-semibold">$65,420.00</span>
+                  </div>
+                  <div>
+                    <span
+                      class="badge bg-success bg-opacity-25 text-success border border-success"
+                      >Filled</span
+                    >
+                  </div>
+                  <div class="text-muted small d-none d-lg-block">
+                    15.08.2026 18:30
+                  </div>
+                </div>
+              </button>
+            </h2>
+            <div
+              id="collapseOne"
+              class="accordion-collapse collapse"
+              aria-labelledby="headingOne"
+              data-bs-parent="#ordersAccordion"
             >
               <div
-                class="w-100 d-flex justify-content-between align-items-center me-3"
+                class="accordion-body bg-dark border-top border-secondary small text-light"
               >
-                <div style="flex-basis: 200px">
-                  <span
-                    class="badge bg-success text-center me-2"
-                    style="width: 75px"
-                    >BUY</span
+                <div class="row g-2">
+                  <div class="col-6 col-md-3">
+                    <span class="text-secondary d-block">Количество</span>
+                    <strong class="text-white">0.15000000 BTC</strong>
+                  </div>
+                  <div class="col-6 col-md-3">
+                    <span class="text-secondary d-block">Общая сумма</span>
+                    <strong class="text-white">$9,813.00 USDT</strong>
+                  </div>
+                  <div class="col-6 col-md-3">
+                    <span class="text-secondary d-block">Комиссия</span>
+                    <strong class="text-white">0.00015 BTC</strong>
+                  </div>
+                  <div class="col-6 col-md-3">
+                    <span class="text-secondary d-block">Тип ордера</span>
+                    <strong class="text-white">Limit</strong>
+                  </div>
+                  <div
+                    class="col-12 border-top border-secondary pt-2 mt-2 d-flex justify-content-between align-items-center text-secondary"
                   >
-                  <strong class="text-white">B/U</strong>
-                </div>
-                <div style="flex-basis: 200px" class="small d-none d-md-block">
-                  Цена: <span class="text-info fw-semibold">$65,420.00</span>
-                </div>
-                <div>
-                  <span
-                    class="badge bg-success bg-opacity-25 text-success border border-success"
-                    >Filled</span
-                  >
-                </div>
-                <div class="text-muted small d-none d-lg-block">
-                  15.08.2026 18:30
-                </div>
-              </div>
-            </button>
-          </h2>
-          <div
-            id="collapseOne"
-            class="accordion-collapse collapse"
-            aria-labelledby="headingOne"
-            data-bs-parent="#ordersAccordion"
-          >
-            <div
-              class="accordion-body bg-dark border-top border-secondary small text-light"
-            >
-              <div class="row g-2">
-                <div class="col-6 col-md-3">
-                  <span class="text-secondary d-block">Количество</span>
-                  <strong class="text-white">0.15000000 BTC</strong>
-                </div>
-                <div class="col-6 col-md-3">
-                  <span class="text-secondary d-block">Общая сумма</span>
-                  <strong class="text-white">$9,813.00 USDT</strong>
-                </div>
-                <div class="col-6 col-md-3">
-                  <span class="text-secondary d-block">Комиссия</span>
-                  <strong class="text-white">0.00015 BTC</strong>
-                </div>
-                <div class="col-6 col-md-3">
-                  <span class="text-secondary d-block">Тип ордера</span>
-                  <strong class="text-white">Limit</strong>
-                </div>
-                <div
-                  class="col-12 border-top border-secondary pt-2 mt-2 d-flex justify-content-between align-items-center text-secondary"
-                >
-                  <span
-                    >Order ID: <code class="text-light">#948201954</code></span
-                  >
-                  <span
-                    >Дата:
-                    <strong class="text-white">15.08.2026 18:30</strong></span
-                  >
+                    <span
+                      >Order ID:
+                      <code class="text-light">#948201954</code></span
+                    >
+                    <span
+                      >Дата:
+                      <strong class="text-white">15.08.2026 18:30</strong></span
+                    >
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div
-          class="accordion-item mb-2 border border-secondary bg-dark text-light"
-        >
-          <h2 class="accordion-header" id="headingTwo">
-            <button
-              class="accordion-button collapsed py-2 px-3 bg-dark text-light"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseTwo"
-              aria-expanded="false"
-              aria-controls="collapseTwo"
+          <div
+            class="accordion-item mb-2 border border-secondary bg-dark text-light"
+          >
+            <h2 class="accordion-header" id="headingTwo">
+              <button
+                class="accordion-button collapsed py-2 px-3 bg-dark text-light"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseTwo"
+                aria-expanded="false"
+                aria-controls="collapseTwo"
+              >
+                <div
+                  class="w-100 d-flex justify-content-between align-items-center me-3"
+                >
+                  <div style="flex-basis: 200px">
+                    <span
+                      class="badge bg-danger text-center me-2"
+                      style="width: 75px"
+                      >SELL</span
+                    >
+                    <strong class="text-white pe-1">ETH/USDT</strong>
+                  </div>
+                  <div
+                    style="flex-basis: 200px"
+                    class="small d-none d-md-block"
+                  >
+                    Цена: <span class="text-info fw-semibold">$3,450.50</span>
+                  </div>
+                  <div>
+                    <span
+                      class="badge bg-success bg-opacity-25 text-success border border-success"
+                      >Filled</span
+                    >
+                  </div>
+                  <div class="text-muted small d-none d-lg-block">
+                    15.08.2026 16:12
+                  </div>
+                </div>
+              </button>
+            </h2>
+            <div
+              id="collapseTwo"
+              class="accordion-collapse collapse"
+              aria-labelledby="headingTwo"
+              data-bs-parent="#ordersAccordion"
             >
               <div
-                class="w-100 d-flex justify-content-between align-items-center me-3"
+                class="accordion-body bg-dark border-top border-secondary small text-light"
               >
-                <div style="flex-basis: 200px">
-                  <span
-                    class="badge bg-danger text-center me-2"
-                    style="width: 75px"
-                    >SELL</span
+                <div class="row g-2">
+                  <div class="col-6 col-md-3">
+                    <span class="text-secondary d-block">Количество</span>
+                    <strong class="text-white">1.25000000 ETH</strong>
+                  </div>
+                  <div class="col-6 col-md-3">
+                    <span class="text-secondary d-block">Общая сумма</span>
+                    <strong class="text-white">$4,313.125 USDT</strong>
+                  </div>
+                  <div class="col-6 col-md-3">
+                    <span class="text-secondary d-block">Комиссия</span>
+                    <strong class="text-white">4.31 USDT</strong>
+                  </div>
+                  <div class="col-6 col-md-3">
+                    <span class="text-secondary d-block">Тип ордера</span>
+                    <strong class="text-white">Market</strong>
+                  </div>
+                  <div
+                    class="col-12 border-top border-secondary pt-2 mt-2 d-flex justify-content-between align-items-center text-secondary"
                   >
-                  <strong class="text-white pe-1">ETH/USDT</strong>
-                </div>
-                <div style="flex-basis: 200px" class="small d-none d-md-block">
-                  Цена: <span class="text-info fw-semibold">$3,450.50</span>
-                </div>
-                <div>
-                  <span
-                    class="badge bg-success bg-opacity-25 text-success border border-success"
-                    >Filled</span
-                  >
-                </div>
-                <div class="text-muted small d-none d-lg-block">
-                  15.08.2026 16:12
-                </div>
-              </div>
-            </button>
-          </h2>
-          <div
-            id="collapseTwo"
-            class="accordion-collapse collapse"
-            aria-labelledby="headingTwo"
-            data-bs-parent="#ordersAccordion"
-          >
-            <div
-              class="accordion-body bg-dark border-top border-secondary small text-light"
-            >
-              <div class="row g-2">
-                <div class="col-6 col-md-3">
-                  <span class="text-secondary d-block">Количество</span>
-                  <strong class="text-white">1.25000000 ETH</strong>
-                </div>
-                <div class="col-6 col-md-3">
-                  <span class="text-secondary d-block">Общая сумма</span>
-                  <strong class="text-white">$4,313.125 USDT</strong>
-                </div>
-                <div class="col-6 col-md-3">
-                  <span class="text-secondary d-block">Комиссия</span>
-                  <strong class="text-white">4.31 USDT</strong>
-                </div>
-                <div class="col-6 col-md-3">
-                  <span class="text-secondary d-block">Тип ордера</span>
-                  <strong class="text-white">Market</strong>
-                </div>
-                <div
-                  class="col-12 border-top border-secondary pt-2 mt-2 d-flex justify-content-between align-items-center text-secondary"
-                >
-                  <span
-                    >Order ID: <code class="text-light">#948195412</code></span
-                  >
-                  <span
-                    >Дата:
-                    <strong class="text-white">15.08.2026 16:12</strong></span
-                  >
+                    <span
+                      >Order ID:
+                      <code class="text-light">#948195412</code></span
+                    >
+                    <span
+                      >Дата:
+                      <strong class="text-white">15.08.2026 16:12</strong></span
+                    >
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div
-          class="accordion-item mb-2 border border-secondary bg-dark text-light"
-        >
-          <h2 class="accordion-header" id="headingThree">
-            <button
-              class="accordion-button collapsed py-2 px-3 bg-dark text-light"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseThree"
-              aria-expanded="false"
-              aria-controls="collapseThree"
+          <div
+            class="accordion-item mb-2 border border-secondary bg-dark text-light"
+          >
+            <h2 class="accordion-header" id="headingThree">
+              <button
+                class="accordion-button collapsed py-2 px-3 bg-dark text-light"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseThree"
+                aria-expanded="false"
+                aria-controls="collapseThree"
+              >
+                <div
+                  class="w-100 d-flex justify-content-between align-items-center me-3"
+                >
+                  <div style="flex-basis: 200px">
+                    <span
+                      class="badge bg-success text-center me-2"
+                      style="width: 75px"
+                      >BUY</span
+                    >
+                    <strong class="text-white">SOL/USDT</strong>
+                  </div>
+                  <div
+                    style="flex-basis: 200px"
+                    class="small d-none d-md-block"
+                  >
+                    Цена: <span class="text-info fw-semibold">$142.80</span>
+                  </div>
+                  <div>
+                    <span
+                      class="badge bg-success bg-opacity-25 text-success border border-success"
+                      >Filled</span
+                    >
+                  </div>
+                  <div class="text-muted small d-none d-lg-block">
+                    15.08.2026 14:05
+                  </div>
+                </div>
+              </button>
+            </h2>
+            <div
+              id="collapseThree"
+              class="accordion-collapse collapse"
+              aria-labelledby="headingThree"
+              data-bs-parent="#ordersAccordion"
             >
               <div
-                class="w-100 d-flex justify-content-between align-items-center me-3"
+                class="accordion-body bg-dark border-top border-secondary small text-light"
               >
-                <div style="flex-basis: 200px">
-                  <span
-                    class="badge bg-success text-center me-2"
-                    style="width: 75px"
-                    >BUY</span
+                <div class="row g-2">
+                  <div class="col-6 col-md-3">
+                    <span class="text-secondary d-block">Количество</span>
+                    <strong class="text-white">10.50000000 SOL</strong>
+                  </div>
+                  <div class="col-6 col-md-3">
+                    <span class="text-secondary d-block">Общая сумма</span>
+                    <strong class="text-white">$1,499.40 USDT</strong>
+                  </div>
+                  <div class="col-6 col-md-3">
+                    <span class="text-secondary d-block">Комиссия</span>
+                    <strong class="text-white">0.0105 SOL</strong>
+                  </div>
+                  <div class="col-6 col-md-3">
+                    <span class="text-secondary d-block">Тип ордера</span>
+                    <strong class="text-white">Limit</strong>
+                  </div>
+                  <div
+                    class="col-12 border-top border-secondary pt-2 mt-2 d-flex justify-content-between align-items-center text-secondary"
                   >
-                  <strong class="text-white">SOL/USDT</strong>
-                </div>
-                <div style="flex-basis: 200px" class="small d-none d-md-block">
-                  Цена: <span class="text-info fw-semibold">$142.80</span>
-                </div>
-                <div>
-                  <span
-                    class="badge bg-success bg-opacity-25 text-success border border-success"
-                    >Filled</span
-                  >
-                </div>
-                <div class="text-muted small d-none d-lg-block">
-                  15.08.2026 14:05
-                </div>
-              </div>
-            </button>
-          </h2>
-          <div
-            id="collapseThree"
-            class="accordion-collapse collapse"
-            aria-labelledby="headingThree"
-            data-bs-parent="#ordersAccordion"
-          >
-            <div
-              class="accordion-body bg-dark border-top border-secondary small text-light"
-            >
-              <div class="row g-2">
-                <div class="col-6 col-md-3">
-                  <span class="text-secondary d-block">Количество</span>
-                  <strong class="text-white">10.50000000 SOL</strong>
-                </div>
-                <div class="col-6 col-md-3">
-                  <span class="text-secondary d-block">Общая сумма</span>
-                  <strong class="text-white">$1,499.40 USDT</strong>
-                </div>
-                <div class="col-6 col-md-3">
-                  <span class="text-secondary d-block">Комиссия</span>
-                  <strong class="text-white">0.0105 SOL</strong>
-                </div>
-                <div class="col-6 col-md-3">
-                  <span class="text-secondary d-block">Тип ордера</span>
-                  <strong class="text-white">Limit</strong>
-                </div>
-                <div
-                  class="col-12 border-top border-secondary pt-2 mt-2 d-flex justify-content-between align-items-center text-secondary"
-                >
-                  <span
-                    >Order ID: <code class="text-light">#948154109</code></span
-                  >
-                  <span
-                    >Дата:
-                    <strong class="text-white">15.08.2026 14:05</strong></span
-                  >
+                    <span
+                      >Order ID:
+                      <code class="text-light">#948154109</code></span
+                    >
+                    <span
+                      >Дата:
+                      <strong class="text-white">15.08.2026 14:05</strong></span
+                    >
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div
-          class="accordion-item mb-2 border border-secondary bg-dark text-light"
-        >
-          <h2 class="accordion-header" id="headingFour">
-            <button
-              class="accordion-button collapsed py-2 px-3 bg-dark text-light"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseFour"
-              aria-expanded="false"
-              aria-controls="collapseFour"
+          <div
+            class="accordion-item mb-2 border border-secondary bg-dark text-light"
+          >
+            <h2 class="accordion-header" id="headingFour">
+              <button
+                class="accordion-button collapsed py-2 px-3 bg-dark text-light"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseFour"
+                aria-expanded="false"
+                aria-controls="collapseFour"
+              >
+                <div
+                  class="w-100 d-flex justify-content-between align-items-center me-3"
+                >
+                  <div style="flex-basis: 200px">
+                    <span
+                      class="badge bg-danger text-center me-2"
+                      style="width: 75px"
+                      >SELL</span
+                    >
+                    <strong class="text-white">XRP/USDT</strong>
+                  </div>
+                  <div
+                    style="flex-basis: 200px"
+                    class="small d-none d-md-block"
+                  >
+                    Цена: <span class="text-info fw-semibold">$0.5840</span>
+                  </div>
+                  <div>
+                    <span
+                      class="badge bg-success bg-opacity-25 text-success border border-success"
+                      >Filled</span
+                    >
+                  </div>
+                  <div class="text-muted small d-none d-lg-block">
+                    15.08.2026 11:20
+                  </div>
+                </div>
+              </button>
+            </h2>
+            <div
+              id="collapseFour"
+              class="accordion-collapse collapse"
+              aria-labelledby="headingFour"
+              data-bs-parent="#ordersAccordion"
             >
               <div
-                class="w-100 d-flex justify-content-between align-items-center me-3"
+                class="accordion-body bg-dark border-top border-secondary small text-light"
               >
-                <div style="flex-basis: 200px">
-                  <span
-                    class="badge bg-danger text-center me-2"
-                    style="width: 75px"
-                    >SELL</span
+                <div class="row g-2">
+                  <div class="col-6 col-md-3">
+                    <span class="text-secondary d-block">Количество</span>
+                    <strong class="text-white">2500.00000000 XRP</strong>
+                  </div>
+                  <div class="col-6 col-md-3">
+                    <span class="text-secondary d-block">Общая сумма</span>
+                    <strong class="text-white">$1,460.00 USDT</strong>
+                  </div>
+                  <div class="col-6 col-md-3">
+                    <span class="text-secondary d-block">Комиссия</span>
+                    <strong class="text-white">1.46 USDT</strong>
+                  </div>
+                  <div class="col-6 col-md-3">
+                    <span class="text-secondary d-block">Тип ордера</span>
+                    <strong class="text-white">Market</strong>
+                  </div>
+                  <div
+                    class="col-12 border-top border-secondary pt-2 mt-2 d-flex justify-content-between align-items-center text-secondary"
                   >
-                  <strong class="text-white">XRP/USDT</strong>
-                </div>
-                <div style="flex-basis: 200px" class="small d-none d-md-block">
-                  Цена: <span class="text-info fw-semibold">$0.5840</span>
-                </div>
-                <div>
-                  <span
-                    class="badge bg-success bg-opacity-25 text-success border border-success"
-                    >Filled</span
-                  >
-                </div>
-                <div class="text-muted small d-none d-lg-block">
-                  15.08.2026 11:20
-                </div>
-              </div>
-            </button>
-          </h2>
-          <div
-            id="collapseFour"
-            class="accordion-collapse collapse"
-            aria-labelledby="headingFour"
-            data-bs-parent="#ordersAccordion"
-          >
-            <div
-              class="accordion-body bg-dark border-top border-secondary small text-light"
-            >
-              <div class="row g-2">
-                <div class="col-6 col-md-3">
-                  <span class="text-secondary d-block">Количество</span>
-                  <strong class="text-white">2500.00000000 XRP</strong>
-                </div>
-                <div class="col-6 col-md-3">
-                  <span class="text-secondary d-block">Общая сумма</span>
-                  <strong class="text-white">$1,460.00 USDT</strong>
-                </div>
-                <div class="col-6 col-md-3">
-                  <span class="text-secondary d-block">Комиссия</span>
-                  <strong class="text-white">1.46 USDT</strong>
-                </div>
-                <div class="col-6 col-md-3">
-                  <span class="text-secondary d-block">Тип ордера</span>
-                  <strong class="text-white">Market</strong>
-                </div>
-                <div
-                  class="col-12 border-top border-secondary pt-2 mt-2 d-flex justify-content-between align-items-center text-secondary"
-                >
-                  <span
-                    >Order ID: <code class="text-light">#948102341</code></span
-                  >
-                  <span
-                    >Дата:
-                    <strong class="text-white">15.08.2026 11:20</strong></span
-                  >
+                    <span
+                      >Order ID:
+                      <code class="text-light">#948102341</code></span
+                    >
+                    <span
+                      >Дата:
+                      <strong class="text-white">15.08.2026 11:20</strong></span
+                    >
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div
-          class="accordion-item mb-2 border border-secondary bg-dark text-light"
-        >
-          <h2 class="accordion-header" id="headingFive">
-            <button
-              class="accordion-button collapsed py-2 px-3 bg-dark text-light"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseFive"
-              aria-expanded="false"
-              aria-controls="collapseFive"
+          <div
+            class="accordion-item mb-2 border border-secondary bg-dark text-light"
+          >
+            <h2 class="accordion-header" id="headingFive">
+              <button
+                class="accordion-button collapsed py-2 px-3 bg-dark text-light"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseFive"
+                aria-expanded="false"
+                aria-controls="collapseFive"
+              >
+                <div
+                  class="w-100 d-flex justify-content-between align-items-center me-3"
+                >
+                  <div style="flex-basis: 200px">
+                    <span
+                      class="badge bg-success text-center me-2"
+                      style="width: 75px"
+                      >BUY</span
+                    >
+                    <strong class="text-white">BNB/USDT</strong>
+                  </div>
+                  <div
+                    style="flex-basis: 200px"
+                    class="small d-none d-md-block"
+                  >
+                    Цена: <span class="text-info fw-semibold">$560.20</span>
+                  </div>
+                  <div>
+                    <span
+                      class="badge bg-success bg-opacity-25 text-success border border-success"
+                      >Filled</span
+                    >
+                  </div>
+                  <div class="text-muted small d-none d-lg-block">
+                    15.08.2026 09:15
+                  </div>
+                </div>
+              </button>
+            </h2>
+            <div
+              id="collapseFive"
+              class="accordion-collapse collapse"
+              aria-labelledby="headingFive"
+              data-bs-parent="#ordersAccordion"
             >
               <div
-                class="w-100 d-flex justify-content-between align-items-center me-3"
+                class="accordion-body bg-dark border-top border-secondary small text-light"
               >
-                <div style="flex-basis: 200px">
-                  <span
-                    class="badge bg-success text-center me-2"
-                    style="width: 75px"
-                    >BUY</span
+                <div class="row g-2">
+                  <div class="col-6 col-md-3">
+                    <span class="text-secondary d-block">Количество</span>
+                    <strong class="text-white">3.00000000 BNB</strong>
+                  </div>
+                  <div class="col-6 col-md-3">
+                    <span class="text-secondary d-block">Общая сумма</span>
+                    <strong class="text-white">$1,680.60 USDT</strong>
+                  </div>
+                  <div class="col-6 col-md-3">
+                    <span class="text-secondary d-block">Комиссия</span>
+                    <strong class="text-white">0.003 BNB</strong>
+                  </div>
+                  <div class="col-6 col-md-3">
+                    <span class="text-secondary d-block">Тип ордера</span>
+                    <strong class="text-white">Limit</strong>
+                  </div>
+                  <div
+                    class="col-12 border-top border-secondary pt-2 mt-2 d-flex justify-content-between align-items-center text-secondary"
                   >
-                  <strong class="text-white">BNB/USDT</strong>
-                </div>
-                <div style="flex-basis: 200px" class="small d-none d-md-block">
-                  Цена: <span class="text-info fw-semibold">$560.20</span>
-                </div>
-                <div>
-                  <span
-                    class="badge bg-success bg-opacity-25 text-success border border-success"
-                    >Filled</span
-                  >
-                </div>
-                <div class="text-muted small d-none d-lg-block">
-                  15.08.2026 09:15
-                </div>
-              </div>
-            </button>
-          </h2>
-          <div
-            id="collapseFive"
-            class="accordion-collapse collapse"
-            aria-labelledby="headingFive"
-            data-bs-parent="#ordersAccordion"
-          >
-            <div
-              class="accordion-body bg-dark border-top border-secondary small text-light"
-            >
-              <div class="row g-2">
-                <div class="col-6 col-md-3">
-                  <span class="text-secondary d-block">Количество</span>
-                  <strong class="text-white">3.00000000 BNB</strong>
-                </div>
-                <div class="col-6 col-md-3">
-                  <span class="text-secondary d-block">Общая сумма</span>
-                  <strong class="text-white">$1,680.60 USDT</strong>
-                </div>
-                <div class="col-6 col-md-3">
-                  <span class="text-secondary d-block">Комиссия</span>
-                  <strong class="text-white">0.003 BNB</strong>
-                </div>
-                <div class="col-6 col-md-3">
-                  <span class="text-secondary d-block">Тип ордера</span>
-                  <strong class="text-white">Limit</strong>
-                </div>
-                <div
-                  class="col-12 border-top border-secondary pt-2 mt-2 d-flex justify-content-between align-items-center text-secondary"
-                >
-                  <span
-                    >Order ID: <code class="text-light">#948056218</code></span
-                  >
-                  <span
-                    >Дата:
-                    <strong class="text-white">15.08.2026 09:15</strong></span
-                  >
+                    <span
+                      >Order ID:
+                      <code class="text-light">#948056218</code></span
+                    >
+                    <span
+                      >Дата:
+                      <strong class="text-white">15.08.2026 09:15</strong></span
+                    >
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </main>
+    <footer class="container pt-3">
+      <div class="row g-3">
+        <div class="col-12 col-sm-6">
+          <ul class="list-unstyled mb-0 d-flex flex-column gap-2">
+            <li><a href="#" class="link-light">Новости</a></li>
+            <li><a href="#" class="link-light">Обратная связь</a></li>
+            <li><a href="#" class="link-light">Сотрудничество</a></li>
+          </ul>
+        </div>
+        <div class="col-12 col-sm-6">
+          <ul class="list-unstyled mb-0 d-flex flex-column gap-2">
+            <li><a href="#" class="link-light">Токены</a></li>
+            <li><a href="#" class="link-light">Уведомление о рисках</a></li>
+            <li><a href="#" class="link-light">Для разработчиков</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"

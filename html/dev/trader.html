@@ -40,26 +40,107 @@
     </style>
   </head>
 
-  <body class="d-flex flex-column min-vh-100">
+  <body data-bs-theme="dark" class="min-vh-100" style="font-family: monospace">
     <div class="container py-4">
       <div class="mb-3 text-custom-muted fw-semibold">Трейдер</div>
 
-      <header class="crypto-card p-3 mb-4">
-        <div class="d-flex justify-content-between align-items-center">
-          <div class="d-flex align-items-center gap-3">
-            <button
-              class="btn p-0 border-0 fs-5 text-custom-muted"
-              type="button"
+      <header>
+        <nav class="navbar bg-body-tertiary">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#"
+              ><button
+                class="navbar-toggler me-2"
+                type="button"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasNavbar"
+                aria-controls="offcanvasNavbar"
+                aria-label="Toggle navigation"
+              >
+                <span class="navbar-toggler-icon"></span></button
+              ><span class="d-none d-sm-inline">Cryptorium</span></a
             >
-              &#9776;
-            </button>
-            <span class="fs-4 fw-bold text-primary-accent">CryptoBit</span>
+            <select
+              class="form-select bg-dark text-light border-secondary font-monospace"
+              style="max-width: 150px"
+              id="coinSelect"
+            >
+              <option value="BTCUSDT" selected>BTC / USDT — $65,100.00</option>
+              <option value="ETHUSDT">ETH / USDT — $3,450.50</option>
+              <option value="SOLUSDT">SOL / USDT — $145.20</option>
+              <option value="BNBUSDT">BNB / USDT — $580.00</option>
+              <option value="XRPUSDT">XRP / USDT — $0.5820</option>
+              <option value="ADAUSDT">ADA / USDT — $0.3950</option>
+              <option value="DOGEUSDT">DOGE / USDT — $0.1240</option>
+              <option value="AVAXUSDT">AVAX / USDT — $26.80</option>
+              <option value="LINKUSDT">LINK / USDT — $14.10</option>
+              <option value="DOTUSDT">DOT / USDT — $6.75</option>
+            </select>
+            <div
+              class="offcanvas offcanvas-start"
+              tabindex="-1"
+              id="offcanvasNavbar"
+              aria-labelledby="offcanvasNavbarLabel"
+            >
+              <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="offcanvas"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#"
+                      >Home</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a
+                      class="nav-link dropdown-toggle"
+                      href="#"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      Dropdown
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#">Action</a></li>
+                      <li>
+                        <a class="dropdown-item" href="#">Another action</a>
+                      </li>
+                      <li>
+                        <hr class="dropdown-divider" />
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="#"
+                          >Something else here</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+                <form class="d-flex mt-3" role="search">
+                  <input
+                    class="form-control me-2"
+                    type="search"
+                    placeholder="Search"
+                    aria-label="Search"
+                  />
+                  <button class="btn btn-outline-success" type="submit">
+                    Search
+                  </button>
+                </form>
+              </div>
+            </div>
           </div>
-          <div class="d-flex align-items-center gap-3">
-            <a href="/html/wallet.html" class="crypto-link">Кошелек</a>
-            <a href="#" class="crypto-link fw-semibold">logout</a>
-          </div>
-        </div>
+        </nav>
       </header>
 
       <main class="mb-5">
@@ -124,21 +205,20 @@
           </div>
         </div>
       </main>
-
-      <footer class="footer-divider pt-4 mt-auto">
+      <footer class="container pt-3">
         <div class="row g-3">
-          <div class="col-12 col-md-6">
+          <div class="col-12 col-sm-6">
             <ul class="list-unstyled mb-0 d-flex flex-column gap-2">
-              <li><a href="#" class="crypto-link">Новости</a></li>
-              <li><a href="#" class="crypto-link">Обратная связь</a></li>
-              <li><a href="#" class="crypto-link">Сотрудничество</a></li>
+              <li><a href="#" class="link-light">Новости</a></li>
+              <li><a href="#" class="link-light">Обратная связь</a></li>
+              <li><a href="#" class="link-light">Сотрудничество</a></li>
             </ul>
           </div>
-          <div class="col-12 col-md-6">
+          <div class="col-12 col-sm-6">
             <ul class="list-unstyled mb-0 d-flex flex-column gap-2">
-              <li><a href="#" class="crypto-link">Токены</a></li>
-              <li><a href="#" class="crypto-link">Уведомление о рисках</a></li>
-              <li><a href="#" class="crypto-link">Для разработчиков</a></li>
+              <li><a href="#" class="link-light">Токены</a></li>
+              <li><a href="#" class="link-light">Уведомление о рисках</a></li>
+              <li><a href="#" class="link-light">Для разработчиков</a></li>
             </ul>
           </div>
         </div>
