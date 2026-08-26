@@ -6,7 +6,7 @@ import { orders } from './orders-make.js'
 export const traders = [
   {
     id: 'иван_1',
-    balance: { USDT: 300, BTC: 15 },
+    balance: { USDT: 0, BTC: 15 },
   },
   {
     id: 'мария_2',

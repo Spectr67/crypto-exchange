@@ -3,14 +3,14 @@ import { orders } from './orders-make.js'
 import { getTraderById, traders } from './traders.js'
 import { transferDeal } from './transfer.js'
 
-export function take(traderId, side, pair) {
+export function take(traderId, side, pair, limitVolume) {
   const taker = getTraderById(traderId)
   if (!taker) return
   // if limitByCost
   // if limitByVolume
 
   for (const order of orders[side]) {
-    if (!transferDeal(taker, order)) return
+    if (!transferDeal(taker, order, limitVolume)) return
     // добавляем transaction history
   }
 }
