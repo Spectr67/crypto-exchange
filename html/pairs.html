@@ -3,371 +3,308 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bids</title>
+    <title>Document</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
       crossorigin="anonymous"
     />
-    <style>
-      .table-top,
-      .table-bottom {
-        overflow-y: auto;
-        /* height: 64px; */
-        max-height: 120px;
-      }
-      ::-webkit-scrollbar {
-        width: 4px;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: var(--bs-danger);
-        border-radius: 2px;
-      }
-      td:first-child,
-      th:first-child {
-        width: 33%;
-      }
-      td:nth-child(2),
-      th:nth-child(2) {
-        width: 33%;
-      }
-    </style>
   </head>
 
   <body data-bs-theme="dark" class="min-vh-100" style="font-family: monospace">
-    <div class="wrapper">
-      <header>
-        <nav class="navbar bg-body-tertiary">
-          <div class="container-fluid">
-            <a class="navbar-brand" href="#"
-              ><button
-                class="navbar-toggler me-2"
+    <header>
+      <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#"
+            ><button
+              class="navbar-toggler me-2"
+              type="button"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvasNavbar"
+              aria-controls="offcanvasNavbar"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span></button
+            ><span class="d-none d-sm-inline">Cryptorium</span></a
+          >
+          <select
+            class="form-select bg-dark text-light border-secondary font-monospace"
+            style="max-width: 150px"
+            id="coinSelect"
+          >
+            <option value="BTCUSDT" selected>BTC / USDT — $65,100.00</option>
+            <option value="ETHUSDT">ETH / USDT — $3,450.50</option>
+            <option value="SOLUSDT">SOL / USDT — $145.20</option>
+            <option value="BNBUSDT">BNB / USDT — $580.00</option>
+            <option value="XRPUSDT">XRP / USDT — $0.5820</option>
+            <option value="ADAUSDT">ADA / USDT — $0.3950</option>
+            <option value="DOGEUSDT">DOGE / USDT — $0.1240</option>
+            <option value="AVAXUSDT">AVAX / USDT — $26.80</option>
+            <option value="LINKUSDT">LINK / USDT — $14.10</option>
+            <option value="DOTUSDT">DOT / USDT — $6.75</option>
+          </select>
+          <div
+            class="offcanvas offcanvas-start"
+            tabindex="-1"
+            id="offcanvasNavbar"
+            aria-labelledby="offcanvasNavbarLabel"
+          >
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+              <button
                 type="button"
-                data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasNavbar"
-                aria-controls="offcanvasNavbar"
-                aria-label="Toggle navigation"
-              >
-                <span class="navbar-toggler-icon"></span></button
-              ><span class="d-none d-sm-inline">Cryptorium</span></a
-            >
-            <select
-              class="form-select bg-dark text-light border-secondary font-monospace"
-              style="max-width: 150px"
-              id="coinSelect"
-            >
-              <option value="BTCUSDT" selected>BTC / USDT — $65,100.00</option>
-              <option value="ETHUSDT">ETH / USDT — $3,450.50</option>
-              <option value="SOLUSDT">SOL / USDT — $145.20</option>
-              <option value="BNBUSDT">BNB / USDT — $580.00</option>
-              <option value="XRPUSDT">XRP / USDT — $0.5820</option>
-              <option value="ADAUSDT">ADA / USDT — $0.3950</option>
-              <option value="DOGEUSDT">DOGE / USDT — $0.1240</option>
-              <option value="AVAXUSDT">AVAX / USDT — $26.80</option>
-              <option value="LINKUSDT">LINK / USDT — $14.10</option>
-              <option value="DOTUSDT">DOT / USDT — $6.75</option>
-            </select>
-            <div
-              class="offcanvas offcanvas-start"
-              tabindex="-1"
-              id="offcanvasNavbar"
-              aria-labelledby="offcanvasNavbarLabel"
-            >
-              <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="offcanvas"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <div class="offcanvas-body">
-                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#"
-                      >Home</a
-                    >
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                  </li>
-                  <li class="nav-item dropdown">
-                    <a
-                      class="nav-link dropdown-toggle"
-                      href="#"
-                      role="button"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
-                      Dropdown
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Action</a></li>
-                      <li>
-                        <a class="dropdown-item" href="#">Another action</a>
-                      </li>
-                      <li>
-                        <hr class="dropdown-divider" />
-                      </li>
-                      <li>
-                        <a class="dropdown-item" href="#"
-                          >Something else here</a
-                        >
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
-                <form class="d-flex mt-3" role="search">
-                  <input
-                    class="form-control me-2"
-                    type="search"
-                    placeholder="Search"
-                    aria-label="Search"
-                  />
-                  <button class="btn btn-outline-success" type="submit">
-                    Search
-                  </button>
-                </form>
-              </div>
+                class="btn-close"
+                data-bs-dismiss="offcanvas"
+                aria-label="Close"
+              ></button>
             </div>
-          </div>
-        </nav>
-      </header>
-
-      <main>
-        <div class="container pt-3">
-          <!-- // bg-black -->
-          <div class="bg-body-tertiary p-2 rounded-3">
-            <div class="table-head">
-              <table class="table table-borderless table-sm mb-1">
-                <thead>
-                  <tr>
-                    <th class="pb-1 bg-transparent">price</th>
-                    <th class="pb-1 bg-transparent text-end">volume</th>
-                    <th class="pb-1 bg-transparent text-end">cost</th>
-                  </tr>
-                </thead>
-              </table>
-            </div>
-            <div class="table-top">
-              <table class="table table-borderless table-sm mb-0 table-hover">
-                <tbody>
-                  <tr>
-                    <td class="py-0 bg-transparent text-danger">
-                      <small>65 250.00</small>
-                    </td>
-                    <td class="py-0 bg-transparent text-end">
-                      <small>0.890</small>
-                    </td>
-                    <td class="py-0 bg-transparent text-end">
-                      <small>58 072</small>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="py-0 bg-transparent text-danger">
-                      <small>65 250.00</small>
-                    </td>
-                    <td class="py-0 bg-transparent text-end">
-                      <small>0.890</small>
-                    </td>
-                    <td class="py-0 bg-transparent text-end">
-                      <small>58 072</small>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="py-0 bg-transparent text-danger">
-                      <small>65 250.00</small>
-                    </td>
-                    <td class="py-0 bg-transparent text-end">
-                      <small>0.890</small>
-                    </td>
-                    <td class="py-0 bg-transparent text-end">
-                      <small>58 072</small>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="py-0 bg-transparent text-danger">
-                      <small>65 250.00</small>
-                    </td>
-                    <td class="py-0 bg-transparent text-end">
-                      <small>0.890</small>
-                    </td>
-                    <td class="py-0 bg-transparent text-end">
-                      <small>58 072</small>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="py-0 bg-transparent text-danger">
-                      <small>65 250.00</small>
-                    </td>
-                    <td class="py-0 bg-transparent text-end">
-                      <small>0.890</small>
-                    </td>
-                    <td class="py-0 bg-transparent text-end">
-                      <small>58 072</small>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="py-0 bg-transparent text-danger">
-                      <small>65 250.00</small>
-                    </td>
-                    <td class="py-0 bg-transparent text-end">
-                      <small>0.890</small>
-                    </td>
-                    <td class="py-0 bg-transparent text-end">
-                      <small>58 072</small>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="py-0 bg-transparent text-danger">
-                      <small>65 250.00</small>
-                    </td>
-                    <td class="py-0 bg-transparent text-end">
-                      <small>0.890</small>
-                    </td>
-                    <td class="py-0 bg-transparent text-end">
-                      <small>58 072</small>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="table-middle">
-              <table class="table table-borderless table-sm mb-0">
-                <tbody>
-                  <tr>
-                    <td
-                      colspan="3"
-                      class="py-1 bg-transparent fw-bold fs-6 text-warning"
-                    >
-                      65 100.00
-                      <span class="fs-7 text-white-50">↑ $65,100.00</span>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="table-bottom">
-              <table class="table table-borderless table-sm mb-0 table-hover">
-                <tbody>
-                  <tr>
-                    <td class="py-0 bg-transparent text-success">
-                      <small>65 000.00</small>
-                    </td>
-                    <td class="py-0 bg-transparent text-end">
-                      <small>3.500</small>
-                    </td>
-                    <td class="py-0 bg-transparent text-end">
-                      <small>227 500</small>
-                    </td>
-                  </tr>
-                  <tr></tr>
-                  <tr>
-                    <td class="py-0 bg-transparent text-success">
-                      <small>65 000.00</small>
-                    </td>
-                    <td class="py-0 bg-transparent text-end">
-                      <small>3.500</small>
-                    </td>
-                    <td class="py-0 bg-transparent text-end">
-                      <small>227 500</small>
-                    </td>
-                  </tr>
-                  <tr></tr>
-                  <tr>
-                    <td class="py-0 bg-transparent text-success">
-                      <small>65 000.00</small>
-                    </td>
-                    <td class="py-0 bg-transparent text-end">
-                      <small>3.500</small>
-                    </td>
-                    <td class="py-0 bg-transparent text-end">
-                      <small>227 500</small>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="py-0 bg-transparent text-success">
-                      <small>65 000.00</small>
-                    </td>
-                    <td class="py-0 bg-transparent text-end">
-                      <small>3.500</small>
-                    </td>
-                    <td class="py-0 bg-transparent text-end">
-                      <small>227 500</small>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="py-0 bg-transparent text-success">
-                      <small>65 000.00</small>
-                    </td>
-                    <td class="py-0 bg-transparent text-end">
-                      <small>3.500</small>
-                    </td>
-                    <td class="py-0 bg-transparent text-end">
-                      <small>227 500</small>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="py-0 bg-transparent text-success">
-                      <small>65 000.00</small>
-                    </td>
-                    <td class="py-0 bg-transparent text-end">
-                      <small>3.500</small>
-                    </td>
-                    <td class="py-0 bg-transparent text-end">
-                      <small>227 500</small>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="py-0 bg-transparent text-success">
-                      <small>65 000.00</small>
-                    </td>
-                    <td class="py-0 bg-transparent text-end">
-                      <small>3.500</small>
-                    </td>
-                    <td class="py-0 bg-transparent text-end">
-                      <small>227 500</small>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="offcanvas-body">
+              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#"
+                    >Home</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a
+                    class="nav-link dropdown-toggle"
+                    href="#"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    Dropdown
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li>
+                      <a class="dropdown-item" href="#">Another action</a>
+                    </li>
+                    <li>
+                      <hr class="dropdown-divider" />
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">Something else here</a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+              <form class="d-flex mt-3" role="search">
+                <input
+                  class="form-control me-2"
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                />
+                <button class="btn btn-outline-success" type="submit">
+                  Search
+                </button>
+              </form>
             </div>
           </div>
         </div>
-      </main>
-
-      <hr class="container my-5" />
-
-      <footer class="container pt-3">
-        <div class="row g-3">
-          <div class="col-12 col-sm-6">
-            <ul class="list-unstyled mb-0 d-flex flex-column gap-2">
-              <li><a href="#" class="link-light">Новости</a></li>
-              <li><a href="#" class="link-light">Обратная связь</a></li>
-              <li><a href="#" class="link-light">Сотрудничество</a></li>
-            </ul>
+      </nav>
+    </header>
+    <main>
+      <div class="container pt-3">
+        <div class="bg-body-tertiary p-3 rounded-3 w-100">
+          <div class="table-head">
+            <table class="table table-borderless table-sm mb-0">
+              <thead>
+                <tr>
+                  <th class="pb-2 bg-transparent text-white-50">Пара</th>
+                  <th class="pb-2 bg-transparent text-end text-white-50">
+                    Цена
+                  </th>
+                  <th class="pb-2 bg-transparent text-end text-white-50">
+                    24h Объем
+                  </th>
+                  <th class="pb-2 bg-transparent text-end text-white-50">
+                    Тек. Объем
+                  </th>
+                </tr>
+              </thead>
+            </table>
           </div>
-          <div class="col-12 col-sm-6">
-            <ul class="list-unstyled mb-0 d-flex flex-column gap-2">
-              <li><a href="#" class="link-light">Токены</a></li>
-              <li><a href="#" class="link-light">Уведомление о рисках</a></li>
-              <li><a href="#" class="link-light">Для разработчиков</a></li>
-            </ul>
+
+          <div
+            class="coins-list-scroll"
+            style="max-height: 360px; overflow-y: auto"
+          >
+            <table class="table table-borderless table-sm mb-0 table-hover">
+              <tbody>
+                <tr role="button">
+                  <td class="py-2 bg-transparent fw-bold text-light">
+                    BTC/USDT
+                  </td>
+                  <td class="py-2 bg-transparent text-end text-success">
+                    65 100.00
+                  </td>
+                  <td class="py-2 bg-transparent text-end text-white-50">
+                    1.24B$
+                  </td>
+                  <td class="py-2 bg-transparent text-end text-light">
+                    18.450
+                  </td>
+                </tr>
+                <tr role="button">
+                  <td class="py-2 bg-transparent fw-bold text-light">
+                    ETH/USDT
+                  </td>
+                  <td class="py-2 bg-transparent text-end text-danger">
+                    3 450.50
+                  </td>
+                  <td class="py-2 bg-transparent text-end text-white-50">
+                    840.2M$
+                  </td>
+                  <td class="py-2 bg-transparent text-end text-light">
+                    142.100
+                  </td>
+                </tr>
+                <tr role="button">
+                  <td class="py-2 bg-transparent fw-bold text-light">
+                    SOL/USDT
+                  </td>
+                  <td class="py-2 bg-transparent text-end text-success">
+                    145.20
+                  </td>
+                  <td class="py-2 bg-transparent text-end text-white-50">
+                    410.5M$
+                  </td>
+                  <td class="py-2 bg-transparent text-end text-light">
+                    980.500
+                  </td>
+                </tr>
+                <tr role="button">
+                  <td class="py-2 bg-transparent fw-bold text-light">
+                    BNB/USDT
+                  </td>
+                  <td class="py-2 bg-transparent text-end text-success">
+                    580.00
+                  </td>
+                  <td class="py-2 bg-transparent text-end text-white-50">
+                    195.0M$
+                  </td>
+                  <td class="py-2 bg-transparent text-end text-light">
+                    45.120
+                  </td>
+                </tr>
+                <tr role="button">
+                  <td class="py-2 bg-transparent fw-bold text-light">
+                    XRP/USDT
+                  </td>
+                  <td class="py-2 bg-transparent text-end text-danger">
+                    0.5820
+                  </td>
+                  <td class="py-2 bg-transparent text-end text-white-50">
+                    310.8M$
+                  </td>
+                  <td class="py-2 bg-transparent text-end text-light">
+                    12 450.000
+                  </td>
+                </tr>
+                <tr role="button">
+                  <td class="py-2 bg-transparent fw-bold text-light">
+                    ADA/USDT
+                  </td>
+                  <td class="py-2 bg-transparent text-end text-success">
+                    0.3950
+                  </td>
+                  <td class="py-2 bg-transparent text-end text-white-50">
+                    88.4M$
+                  </td>
+                  <td class="py-2 bg-transparent text-end text-light">
+                    8 900.000
+                  </td>
+                </tr>
+                <tr role="button">
+                  <td class="py-2 bg-transparent fw-bold text-light">
+                    DOGE/USDT
+                  </td>
+                  <td class="py-2 bg-transparent text-end text-danger">
+                    0.1240
+                  </td>
+                  <td class="py-2 bg-transparent text-end text-white-50">
+                    150.3M$
+                  </td>
+                  <td class="py-2 bg-transparent text-end text-light">
+                    35 120.000
+                  </td>
+                </tr>
+                <tr role="button">
+                  <td class="py-2 bg-transparent fw-bold text-light">
+                    AVAX/USDT
+                  </td>
+                  <td class="py-2 bg-transparent text-end text-success">
+                    26.80
+                  </td>
+                  <td class="py-2 bg-transparent text-end text-white-50">
+                    72.1M$
+                  </td>
+                  <td class="py-2 bg-transparent text-end text-light">
+                    310.450
+                  </td>
+                </tr>
+                <tr role="button">
+                  <td class="py-2 bg-transparent fw-bold text-light">
+                    LINK/USDT
+                  </td>
+                  <td class="py-2 bg-transparent text-end text-danger">
+                    14.10
+                  </td>
+                  <td class="py-2 bg-transparent text-end text-white-50">
+                    95.6M$
+                  </td>
+                  <td class="py-2 bg-transparent text-end text-light">
+                    540.000
+                  </td>
+                </tr>
+                <tr role="button">
+                  <td class="py-2 bg-transparent fw-bold text-light">
+                    DOT/USDT
+                  </td>
+                  <td class="py-2 bg-transparent text-end text-success">
+                    6.75
+                  </td>
+                  <td class="py-2 bg-transparent text-end text-white-50">
+                    44.8M$
+                  </td>
+                  <td class="py-2 bg-transparent text-end text-light">
+                    1 120.800
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
-      </footer>
-    </div>
+      </div>
+    </main>
+    <footer class="container pt-3">
+      <div class="row g-3">
+        <div class="col-12 col-sm-6">
+          <ul class="list-unstyled mb-0 d-flex flex-column gap-2">
+            <li><a href="#" class="link-light">Новости</a></li>
+            <li><a href="#" class="link-light">Обратная связь</a></li>
+            <li><a href="#" class="link-light">Сотрудничество</a></li>
+          </ul>
+        </div>
+        <div class="col-12 col-sm-6">
+          <ul class="list-unstyled mb-0 d-flex flex-column gap-2">
+            <li><a href="#" class="link-light">Токены</a></li>
+            <li><a href="#" class="link-light">Уведомление о рисках</a></li>
+            <li><a href="#" class="link-light">Для разработчиков</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
       crossorigin="anonymous"
     ></script>
-    <script>
-      document
-        .querySelector('.table-top')
-        .scrollBy({ behavior: 'instant', top: 1000 })
-    </script>
   </body>
 </html>

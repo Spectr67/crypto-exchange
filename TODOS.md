@@ -17,7 +17,7 @@ balance.limit? место full balance and full volume
 
 <!--  -->
 
-объекты Trader Order 
+объекты Trader Order
 
 🗿🗿🗿🗿🗿
 
@@ -42,10 +42,10 @@ balance.limit? место full balance and full volume
 <!--  -->
 
 candle {
-  o: 0
-  h: 0
-  l: 0
-  c: 0
+o: 0
+h: 0
+l: 0
+c: 0
 }
 
 покрасить всю таблицу бидов в один цвет
@@ -53,3 +53,8 @@ candle {
 убрать падинг сверху таблицы бидов
 
 как переключать приложение по валютным парам. будет какой-то селект
+
+trader ДОДЕЛАТЬ!
+линия перед footer in bids во все поставить
+навигация слева и текущая пара доделать !
+candles.html
