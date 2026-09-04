@@ -109,12 +109,13 @@
         </div>
       </nav>
     </header>
+
     <main>
       <div class="container pt-3">
         <div class="bg-body-tertiary p-3 rounded-3 w-100">
-          <div class="table-head">
-            <table class="table table-borderless table-sm mb-0">
-              <thead>
+          <div class="overflow-y-auto" style="max-height: 360px">
+            <table class="table table-borderless table-sm mb-0 table-hover">
+              <thead class="sticky-top bg-body-tertiary">
                 <tr>
                   <th class="pb-2 bg-transparent text-white-50">Пара</th>
                   <th class="pb-2 bg-transparent text-end text-white-50">
@@ -128,14 +129,6 @@
                   </th>
                 </tr>
               </thead>
-            </table>
-          </div>
-
-          <div
-            class="coins-list-scroll"
-            style="max-height: 360px; overflow-y: auto"
-          >
-            <table class="table table-borderless table-sm mb-0 table-hover">
               <tbody>
                 <tr role="button">
                   <td class="py-2 bg-transparent fw-bold text-light">
@@ -283,6 +276,7 @@
         </div>
       </div>
     </main>
+
     <hr class="container my-5" />
 
     <footer class="container pt-3">

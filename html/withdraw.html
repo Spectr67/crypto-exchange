@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body data-bs-theme="dark" class="min-vh-100" style="font-family: monospace">
+    <header>
+      <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#"
+            ><button
+              class="navbar-toggler me-2"
+              type="button"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvasNavbar"
+              aria-controls="offcanvasNavbar"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span></button
+            ><span class="d-none d-sm-inline">Cryptorium</span></a
+          >
+          <select
+            class="form-select bg-dark text-light border-secondary font-monospace"
+            style="max-width: 150px"
+            id="coinSelect"
+          >
+            <option value="BTCUSDT" selected>BTC / USDT — $65,100.00</option>
+            <option value="ETHUSDT">ETH / USDT — $3,450.50</option>
+            <option value="SOLUSDT">SOL / USDT — $145.20</option>
+            <option value="BNBUSDT">BNB / USDT — $580.00</option>
+            <option value="XRPUSDT">XRP / USDT — $0.5820</option>
+            <option value="ADAUSDT">ADA / USDT — $0.3950</option>
+            <option value="DOGEUSDT">DOGE / USDT — $0.1240</option>
+            <option value="AVAXUSDT">AVAX / USDT — $26.80</option>
+            <option value="LINKUSDT">LINK / USDT — $14.10</option>
+            <option value="DOTUSDT">DOT / USDT — $6.75</option>
+          </select>
+          <div
+            class="offcanvas offcanvas-start"
+            tabindex="-1"
+            id="offcanvasNavbar"
+            aria-labelledby="offcanvasNavbarLabel"
+          >
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="offcanvas"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="offcanvas-body">
+              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#"
+                    >Home</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a
+                    class="nav-link dropdown-toggle"
+                    href="#"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    Dropdown
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li>
+                      <a class="dropdown-item" href="#">Another action</a>
+                    </li>
+                    <li>
+                      <hr class="dropdown-divider" />
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">Something else here</a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+              <form class="d-flex mt-3" role="search">
+                <input
+                  class="form-control me-2"
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                />
+                <button class="btn btn-outline-success" type="submit">
+                  Search
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <div class="container my-4">
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-8 col-lg-6">
+            <div
+              class="bg-body-tertiary p-4 rounded-3 border border-secondary-subtle"
+            >
+              <h4 class="fw-bold text-light mb-4">Вывод средств</h4>
+
+              <form>
+                <div class="mb-3">
+                  <label
+                    for="withdrawCoin"
+                    class="form-label text-white-50 small"
+                    >Выберите монету</label
+                  >
+                  <select
+                    class="form-select bg-dark text-light border-secondary"
+                    id="withdrawCoin"
+                  >
+                    <option value="USDT" selected>USDT — Tether USD</option>
+                    <option value="BTC">BTC — Bitcoin</option>
+                    <option value="ETH">ETH — Ethereum</option>
+                    <option value="SOL">SOL — Solana</option>
+                  </select>
+                </div>
+
+                <div class="mb-3">
+                  <label
+                    for="withdrawNetwork"
+                    class="form-label text-white-50 small"
+                    >Сеть перевода</label
+                  >
+                  <select
+                    class="form-select bg-dark text-light border-secondary"
+                    id="withdrawNetwork"
+                  >
+                    <option value="TRC20" selected>Tron (TRC20)</option>
+                    <option value="ERC20">Ethereum (ERC20)</option>
+                    <option value="BEP20">BNB Smart Chain (BEP20)</option>
+                    <option value="SOL">Solana</option>
+                  </select>
+                </div>
+
+                <div class="mb-3">
+                  <label
+                    for="withdrawAddress"
+                    class="form-label text-white-50 small"
+                    >Адрес получателя</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control bg-dark text-light border-secondary"
+                    id="withdrawAddress"
+                    placeholder="Вставьте адрес кошелька"
+                  />
+                </div>
+                <div class="mb-3">
+                  <div
+                    class="d-flex justify-content-between align-items-center mb-1"
+                  >
+                    <label
+                      for="withdrawAmount"
+                      class="form-label text-white-50 small mb-0"
+                      >Сумма</label
+                    >
+                    <span class="text-white-50 small"
+                      >Доступно:
+                      <strong class="text-light">1,250.00 USDT</strong></span
+                    >
+                  </div>
+                  <div class="input-group">
+                    <input
+                      type="number"
+                      class="form-control bg-dark text-light border-secondary"
+                      id="withdrawAmount"
+                      placeholder="Мин. 10"
+                      step="any"
+                    />
+                    <button class="btn btn-outline-secondary text-warning">
+                      ВСЕ
+                    </button>
+                  </div>
+                </div>
+                <div class="p-3 bg-dark rounded-3 border border-secondary mb-4">
+                  <div
+                    class="d-flex justify-content-between text-white-50 small mb-2"
+                  >
+                    <span>Комиссия сети:</span>
+                    <span class="text-light">1.00 USDT</span>
+                  </div>
+                  <div
+                    class="d-flex justify-content-between text-white-50 small"
+                  >
+                    <span>К получению:</span>
+                    <span class="text-warning fw-bold fs-6">0.00 USDT</span>
+                  </div>
+                </div>
+                <div class="d-grid gap-2">
+                  <button
+                    type="button"
+                    class="btn btn-warning fw-semibold py-2"
+                  >
+                    Вывести средства
+                  </button>
+                  <button type="button" class="btn btn-outline-secondary py-2">
+                    История выводов
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <hr class="container my-5" />
+
+    <footer class="container pt-3">
+      <div class="row g-3">
+        <div class="col-12 col-sm-6">
+          <ul class="list-unstyled mb-0 d-flex flex-column gap-2">
+            <li><a href="#" class="link-light">Новости</a></li>
+            <li><a href="#" class="link-light">Обратная связь</a></li>
+            <li><a href="#" class="link-light">Сотрудничество</a></li>
+          </ul>
+        </div>
+        <div class="col-12 col-sm-6">
+          <ul class="list-unstyled mb-0 d-flex flex-column gap-2">
+            <li><a href="#" class="link-light">Токены</a></li>
+            <li><a href="#" class="link-light">Уведомление о рисках</a></li>
+            <li><a href="#" class="link-light">Для разработчиков</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
