@@ -33,12 +33,10 @@
         border-top: 1px solid #2b313a;
       }
 
-      /* Базовое закругление для всех кнопок */
       .btn {
         border-radius: 8px;
       }
 
-      /* Стили для кнопок "Депозит" и "Вывод" */
       .btn-crypto-primary,
       .btn-crypto-secondary {
         background-color: var(--bg-hover);
@@ -55,7 +53,6 @@
         border-color: #5a6270;
       }
 
-      /* Сохранение корректного закругления для групп кнопок в таблице */
       .btn-group .btn:first-child {
         border-top-left-radius: 8px;
         border-bottom-left-radius: 8px;
@@ -224,8 +221,10 @@
                   <tr>
                     <th scope="col">Токен</th>
                     <th scope="col">Всего</th>
-                    <th scope="col">Доступно</th>
-                    <th scope="col">В ордерах</th>
+                    <th scope="col" class="d-none d-md-table-cell">Доступно</th>
+                    <th scope="col" class="d-none d-md-table-cell">
+                      В ордерах
+                    </th>
                     <th scope="col" class="text-end">Действия</th>
                   </tr>
                 </thead>
@@ -240,10 +239,15 @@
                       </div>
                     </td>
                     <td class="fw-semibold">1,500.00</td>
-                    <td class="text-success" style="color: var(--s-base)">
+                    <td
+                      class="text-success d-none d-md-table-cell"
+                      style="color: var(--s-base)"
+                    >
                       1,000.00
                     </td>
-                    <td class="text-custom-muted">500.00</td>
+                    <td class="text-custom-muted d-none d-md-table-cell">
+                      500.00
+                    </td>
                     <td class="text-end">
                       <div class="btn-group btn-group-sm" role="group">
                         <button class="btn btn-crypto-primary">Депозит</button>
@@ -260,10 +264,15 @@
                       </div>
                     </td>
                     <td class="fw-semibold">0.015</td>
-                    <td class="text-success" style="color: var(--s-base)">
+                    <td
+                      class="text-success d-none d-md-table-cell"
+                      style="color: var(--s-base)"
+                    >
                       0.010
                     </td>
-                    <td class="text-custom-muted">0.005</td>
+                    <td class="text-custom-muted d-none d-md-table-cell">
+                      0.005
+                    </td>
                     <td class="text-end">
                       <div class="btn-group btn-group-sm" role="group">
                         <button class="btn btn-crypto-primary">Депозит</button>
@@ -280,10 +289,15 @@
                       </div>
                     </td>
                     <td class="fw-semibold">0.25</td>
-                    <td class="text-success" style="color: var(--s-base)">
+                    <td
+                      class="text-success d-none d-md-table-cell"
+                      style="color: var(--s-base)"
+                    >
                       0.25
                     </td>
-                    <td class="text-custom-muted">0.00</td>
+                    <td class="text-custom-muted d-none d-md-table-cell">
+                      0.00
+                    </td>
                     <td class="text-end">
                       <div class="btn-group btn-group-sm" role="group">
                         <button class="btn btn-crypto-primary">Депозит</button>
@@ -300,10 +314,15 @@
                       </div>
                     </td>
                     <td class="fw-semibold">3.50</td>
-                    <td class="text-success" style="color: var(--s-base)">
+                    <td
+                      class="text-success d-none d-md-table-cell"
+                      style="color: var(--s-base)"
+                    >
                       2.00
                     </td>
-                    <td class="text-custom-muted">1.50</td>
+                    <td class="text-custom-muted d-none d-md-table-cell">
+                      1.50
+                    </td>
                     <td class="text-end">
                       <div class="btn-group btn-group-sm" role="group">
                         <button class="btn btn-crypto-primary">Депозит</button>

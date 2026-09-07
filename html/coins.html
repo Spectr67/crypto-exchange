@@ -1,1 +1,426 @@
-все монеты которые есть на бирже с депозитом
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Maker</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <style>
+      .btn-custom-action {
+        padding: 0.35rem 0.75rem !important;
+        font-size: 0.85rem !important;
+      }
+    </style>
+  </head>
+
+  <body data-bs-theme="dark" class="min-vh-100" style="font-family: monospace">
+    <div class="wrapper">
+      <header class="mb-4">
+        <nav class="navbar bg-body-tertiary">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#"
+              ><button
+                class="navbar-toggler me-2"
+                type="button"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasNavbar"
+                aria-controls="offcanvasNavbar"
+                aria-label="Toggle navigation"
+              >
+                <span class="navbar-toggler-icon"></span></button
+              ><span class="d-none d-sm-inline">Cryptorium</span></a
+            >
+            <select
+              class="form-select bg-dark text-light border-secondary font-monospace"
+              style="max-width: 150px"
+              id="coinSelect"
+            >
+              <option value="BTCUSDT" selected>BTC / USDT — $65,100.00</option>
+              <option value="ETHUSDT">ETH / USDT — $3,450.50</option>
+              <option value="SOLUSDT">SOL / USDT — $145.20</option>
+              <option value="BNBUSDT">BNB / USDT — $580.00</option>
+              <option value="XRPUSDT">XRP / USDT — $0.5820</option>
+              <option value="ADAUSDT">ADA / USDT — $0.3950</option>
+              <option value="DOGEUSDT">DOGE / USDT — $0.1240</option>
+              <option value="AVAXUSDT">AVAX / USDT — $26.80</option>
+              <option value="LINKUSDT">LINK / USDT — $14.10</option>
+              <option value="DOTUSDT">DOT / USDT — $6.75</option>
+            </select>
+            <div
+              class="offcanvas offcanvas-start"
+              tabindex="-1"
+              id="offcanvasNavbar"
+              aria-labelledby="offcanvasNavbarLabel"
+            >
+              <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="offcanvas"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#"
+                      >Home</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a
+                      class="nav-link dropdown-toggle"
+                      href="#"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      Dropdown
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#">Action</a></li>
+                      <li>
+                        <a class="dropdown-item" href="#">Another action</a>
+                      </li>
+                      <li>
+                        <hr class="dropdown-divider" />
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="#"
+                          >Something else here</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+                <form class="d-flex mt-3" role="search">
+                  <input
+                    class="form-control me-2"
+                    type="search"
+                    placeholder="Search"
+                    aria-label="Search"
+                  />
+                  <button class="btn btn-outline-success" type="submit">
+                    Search
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <main class="pt-2">
+        <div class="container-fluid container-md p-0">
+          <div
+            class="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center gap-2 mb-3"
+          >
+            <h5 class="h6 mb-0 text-uppercase fw-bold">Доступные активы</h5>
+            <span
+              class="badge bg-body-tertiary text-secondary border border-secondary align-self-start align-self-sm-auto"
+            >
+              Всего монет: 6
+            </span>
+          </div>
+
+          <div class="row g-2 mb-3">
+            <div class="col-12 col-md-5">
+              <input
+                type="text"
+                class="form-control form-control-sm bg-body-tertiary text-light border-secondary"
+                placeholder="🔍 Поиск (BTC, USDT)..."
+              />
+            </div>
+            <div
+              class="col-12 col-md-7 d-flex flex-wrap gap-1 align-items-center"
+            >
+              <button
+                class="btn btn-sm btn-success font-monospace flex-fill flex-sm-grow-0"
+              >
+                Все
+              </button>
+              <button
+                class="btn btn-sm btn-outline-secondary font-monospace flex-fill flex-sm-grow-0"
+              >
+                Популярные
+              </button>
+              <button
+                class="btn btn-sm btn-outline-secondary font-monospace flex-fill flex-sm-grow-0"
+              >
+                Layer 1
+              </button>
+              <button
+                class="btn btn-sm btn-outline-secondary font-monospace flex-fill flex-sm-grow-0"
+              >
+                DeFi
+              </button>
+              <button
+                class="btn btn-sm btn-outline-secondary font-monospace flex-fill flex-sm-grow-0"
+              >
+                Meme
+              </button>
+            </div>
+          </div>
+
+          <div class="border border-secondary rounded bg-body-tertiary">
+            <div class="table-responsive">
+              <table
+                class="table table-dark table-striped table-hover table-sm align-middle mb-0"
+              >
+                <thead>
+                  <tr class="border-bottom border-secondary">
+                    <th class="py-2 ps-3 text-body-secondary small">Монета</th>
+                    <th
+                      class="py-2 text-body-secondary small d-none d-sm-table-cell"
+                    >
+                      Название
+                    </th>
+                    <th class="py-2 text-body-secondary small">Курс (USDT)</th>
+                    <th class="py-2 text-body-secondary small">24ч</th>
+                    <th
+                      class="py-2 text-body-secondary small d-none d-md-table-cell"
+                    >
+                      Баланс
+                    </th>
+                    <th class="py-2 text-end pe-3 text-body-secondary small">
+                      Действия
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="ps-3 fw-bold">
+                      <div class="d-flex align-items-center gap-2">
+                        <span
+                          class="badge rounded-circle bg-warning text-dark p-2 d-inline-flex align-items-center justify-content-center"
+                          style="width: 24px; height: 24px"
+                          >₿</span
+                        >
+                        <span>BTC</span>
+                      </div>
+                    </td>
+                    <td class="text-body-secondary d-none d-sm-table-cell">
+                      Bitcoin
+                    </td>
+                    <td>65 100.00</td>
+                    <td class="text-success">+2.45%</td>
+                    <td class="d-none d-md-table-cell">0.0450 BTC</td>
+                    <td class="text-end pe-3">
+                      <div class="d-flex justify-content-end gap-1">
+                        <button
+                          class="btn btn-success btn-sm btn-custom-action fw-bold"
+                        >
+                          Депозит
+                        </button>
+                        <button
+                          class="btn btn-outline-secondary btn-sm btn-custom-action d-none d-sm-inline-block"
+                        >
+                          Вывод
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td class="ps-3 fw-bold">
+                      <div class="d-flex align-items-center gap-2">
+                        <span
+                          class="badge rounded-circle bg-primary text-white p-2 d-inline-flex align-items-center justify-content-center"
+                          style="width: 24px; height: 24px"
+                          >Ξ</span
+                        >
+                        <span>ETH</span>
+                      </div>
+                    </td>
+                    <td class="text-body-secondary d-none d-sm-table-cell">
+                      Ethereum
+                    </td>
+                    <td>3 450.20</td>
+                    <td class="text-danger">-1.12%</td>
+                    <td class="d-none d-md-table-cell">1.2500 ETH</td>
+                    <td class="text-end pe-3">
+                      <div class="d-flex justify-content-end gap-1">
+                        <button
+                          class="btn btn-success btn-sm btn-custom-action fw-bold"
+                        >
+                          Депозит
+                        </button>
+                        <button
+                          class="btn btn-outline-secondary btn-sm btn-custom-action d-none d-sm-inline-block"
+                        >
+                          Вывод
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="ps-3 fw-bold">
+                      <div class="d-flex align-items-center gap-2">
+                        <span
+                          class="badge rounded-circle bg-success text-white p-2 d-inline-flex align-items-center justify-content-center"
+                          style="width: 24px; height: 24px"
+                          >₮</span
+                        >
+                        <span>USDT</span>
+                      </div>
+                    </td>
+                    <td class="text-body-secondary d-none d-sm-table-cell">
+                      Tether USD
+                    </td>
+                    <td>1.00</td>
+                    <td class="text-body-secondary">0.00%</td>
+                    <td class="d-none d-md-table-cell">1,250.00 USDT</td>
+                    <td class="text-end pe-3">
+                      <div class="d-flex justify-content-end gap-1">
+                        <button
+                          class="btn btn-success btn-sm btn-custom-action fw-bold"
+                        >
+                          Депозит
+                        </button>
+                        <button
+                          class="btn btn-outline-secondary btn-sm btn-custom-action d-none d-sm-inline-block"
+                        >
+                          Вывод
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="ps-3 fw-bold">
+                      <div class="d-flex align-items-center gap-2">
+                        <span
+                          class="badge rounded-circle bg-info text-dark p-2 d-inline-flex align-items-center justify-content-center"
+                          style="width: 24px; height: 24px"
+                          >S</span
+                        >
+                        <span>SOL</span>
+                      </div>
+                    </td>
+                    <td class="text-body-secondary d-none d-sm-table-cell">
+                      Solana
+                    </td>
+                    <td>148.80</td>
+                    <td class="text-success">+5.80%</td>
+                    <td class="d-none d-md-table-cell">0.0000 SOL</td>
+                    <td class="text-end pe-3">
+                      <div class="d-flex justify-content-end gap-1">
+                        <button
+                          class="btn btn-success btn-sm btn-custom-action fw-bold"
+                        >
+                          Депозит
+                        </button>
+                        <button
+                          class="btn btn-outline-secondary btn-sm btn-custom-action d-none d-sm-inline-block"
+                        >
+                          Вывод
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="ps-3 fw-bold">
+                      <div class="d-flex align-items-center gap-2">
+                        <span
+                          class="badge rounded-circle bg-info text-white p-2 d-inline-flex align-items-center justify-content-center"
+                          style="width: 24px; height: 24px"
+                          >💎</span
+                        >
+                        <span>TON</span>
+                      </div>
+                    </td>
+                    <td class="text-body-secondary d-none d-sm-table-cell">
+                      Toncoin
+                    </td>
+                    <td>6.75</td>
+                    <td class="text-success">+0.95%</td>
+                    <td class="d-none d-md-table-cell">150.0000 TON</td>
+                    <td class="text-end pe-3">
+                      <div class="d-flex justify-content-end gap-1">
+                        <button
+                          class="btn btn-success btn-sm btn-custom-action fw-bold"
+                        >
+                          Депозит
+                        </button>
+                        <button
+                          class="btn btn-outline-secondary btn-sm btn-custom-action d-none d-sm-inline-block"
+                        >
+                          Вывод
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="ps-3 fw-bold">
+                      <div class="d-flex align-items-center gap-2">
+                        <span
+                          class="badge rounded-circle bg-warning text-dark p-2 d-inline-flex align-items-center justify-content-center"
+                          style="width: 24px; height: 24px"
+                          >Ð</span
+                        >
+                        <span>DOGE</span>
+                      </div>
+                    </td>
+                    <td class="text-body-secondary d-none d-sm-table-cell">
+                      Dogecoin
+                    </td>
+                    <td>0.125</td>
+                    <td class="text-danger">-3.40%</td>
+                    <td class="d-none d-md-table-cell">0.0000 DOGE</td>
+                    <td class="text-end pe-3">
+                      <div class="d-flex justify-content-end gap-1">
+                        <button
+                          class="btn btn-success btn-sm btn-custom-action fw-bold"
+                        >
+                          Депозит
+                        </button>
+                        <button
+                          class="btn btn-outline-secondary btn-sm btn-custom-action d-none d-sm-inline-block"
+                        >
+                          Вывод
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <hr class="container my-5" />
+
+      <footer class="container pt-3">
+        <div class="row g-3">
+          <div class="col-12 col-sm-6">
+            <ul class="list-unstyled mb-0 d-flex flex-column gap-2">
+              <li><a href="#" class="link-light">Новости</a></li>
+              <li><a href="#" class="link-light">Обратная связь</a></li>
+              <li><a href="#" class="link-light">Сотрудничество</a></li>
+            </ul>
+          </div>
+          <div class="col-12 col-sm-6">
+            <ul class="list-unstyled mb-0 d-flex flex-column gap-2">
+              <li><a href="#" class="link-light">Токены</a></li>
+              <li><a href="#" class="link-light">Уведомление о рисках</a></li>
+              <li><a href="#" class="link-light">Для разработчиков</a></li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
