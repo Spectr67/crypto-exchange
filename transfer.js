@@ -14,7 +14,11 @@ export function transferDeal(taker, order, limitVolume, limitCost) {
   const maker = getTraderById(order.traderId)
 
   if (order.side === 'sell') {
+    // if (limitVolume === 0) return
     if (order.volume > limitVolume) {
+      // для упрощения кода
+      // если ордер слишком большой, то мы прерываем take
+      // по-хорошему в этой ситуации нужно выкупить ордер частично
       return false
     }
     if (transferBalancePayback(taker, maker, order.pair[1], order.cost)) {
@@ -39,7 +43,6 @@ export function transferDeal(taker, order, limitVolume, limitCost) {
 export function transferBalancePay(taker, order, symbol, sum) {
   taker.balance[symbol] += sum
   order.volume = 0 // обнуление не самый лучший ход
-  return true
   return sum
 }
 

@@ -8,10 +8,19 @@ export function take(traderId, side, pair, limitVolume) {
   if (!taker) return
   // if limitByCost
   // if limitByVolume
+  let currentLimitVolume = limitVolume
 
   for (const order of orders[side]) {
-    if (!transferDeal(taker, order, limitVolume)) return
-    // добавляем transaction history
+    const dealResult = transferDeal(taker, order, currentLimitVolume)
+    if (!dealResult) {
+      return
+    } else {
+      // console.log(dealResult)
+      console.log(currentLimitVolume)
+      currentLimitVolume -= dealResult
+
+      // добавляем transaction history
+    }
   }
 }
 

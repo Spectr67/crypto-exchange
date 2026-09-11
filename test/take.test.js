@@ -8,16 +8,16 @@ const taker = traders[1]
 console.log(maker)
 console.log(taker)
 
-make('иван_1', 'sell', 1, 100, ['BTC', 'USDT'])
-make('иван_1', 'sell', 1, 100, ['BTC', 'USDT'])
-make('иван_1', 'sell', 1, 100, ['BTC', 'USDT'])
-make('иван_1', 'sell', 1, 100, ['BTC', 'USDT'])
+make('иван_1', 'sell', 2, 150, ['BTC', 'USDT'])
+make('иван_1', 'sell', 2, 120, ['BTC', 'USDT'])
+make('иван_1', 'sell', 1, 130, ['BTC', 'USDT'])
+make('иван_1', 'sell', 1, 110, ['BTC', 'USDT'])
 
 console.log(maker)
 console.log(taker)
 console.log(orders)
 
-take('мария_2', 'sell', ['BTC', 'USDT'], 1)
+take('мария_2', 'sell', ['BTC', 'USDT'], 4)
 
 console.log(maker)
 console.log(taker)
