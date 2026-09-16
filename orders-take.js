@@ -3,7 +3,8 @@ import { orders } from './orders-make.js'
 import { getTraderById, traders } from './traders.js'
 import { transferDeal } from './transfer.js'
 
-export function take(traderId, side, pair, limitVolume) {
+// при установке лимита по стоимости, лимит по объёму должен быть Infinity
+export function take(traderId, side, pair, limitVolume, limitCost) {
   const taker = getTraderById(traderId)
   if (!taker) return
   // if limitByCost
@@ -15,10 +16,7 @@ export function take(traderId, side, pair, limitVolume) {
     if (!dealResult) {
       return
     } else {
-      // console.log(dealResult)
-      console.log(currentLimitVolume)
       currentLimitVolume -= dealResult
-
       // добавляем transaction history
     }
   }

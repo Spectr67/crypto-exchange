@@ -22,7 +22,12 @@ export function transferDeal(taker, order, limitVolume, limitCost) {
       return false
     }
     if (transferBalancePayback(taker, maker, order.pair[1], order.cost)) {
-      return transferBalancePay(taker, order, order.pair[0], order.volume)
+      transferBalancePay(taker, order, order.pair[0], order.volume)
+      const transferResult = {
+        payback: 0,
+        pay: 0,
+      }
+      return transferResult
     } else {
       console.log('order do not transfer "sell"')
       return false
@@ -52,5 +57,5 @@ export function transferBalancePayback(taker, maker, symbol, sum) {
   if (taker.balance[symbol] < sum) return false
   taker.balance[symbol] -= sum
   maker.balance[symbol] += sum
-  return true
+  return sum
 }

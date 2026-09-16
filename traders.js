@@ -10,7 +10,7 @@ export const traders = [
   },
   {
     id: 'мария_2',
-    balance: { USDT: 1000, BTC: 0 },
+    balance: { USDT: 11000, BTC: 0 },
   },
 ]
 // export const traders = [

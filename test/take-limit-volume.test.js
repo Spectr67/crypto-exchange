@@ -15,9 +15,9 @@ make('иван_1', 'sell', 1, 110, ['BTC', 'USDT'])
 
 console.log(maker)
 console.log(taker)
-console.log(orders)
+// console.log(orders)
 
-take('мария_2', 'sell', ['BTC', 'USDT'], 4)
+take('мария_2', 'sell', ['BTC', 'USDT'], 5)
 
 console.log(maker)
 console.log(taker)
