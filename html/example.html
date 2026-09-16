@@ -10,7 +10,8 @@
       integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
       crossorigin="anonymous"
     />
-    <style></style>
+
+    <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
   </head>
 
   <body data-bs-theme="dark" class="min-vh-100" style="font-family: monospace">
@@ -115,7 +116,47 @@
       </header>
       <main>
         <div class="container pt-3">
-          <h4 class="mb-3 text-light">ПРИМЕР</h4>
+          <h4 class="mb-3 text-light">График Пары</h4>
+          <div
+            class="d-flex justify-content-between align-items-center mb-3 p-2 bg-body-tertiary rounded border border-secondary border-opacity-25"
+          >
+            <div class="d-flex align-items-center gap-3">
+              <h4 class="h5 mb-0 font-monospace text-light fw-bold">
+                BTC / USDT
+              </h4>
+              <span class="fs-6 font-monospace text-success fw-semibold"
+                >$65,100.00</span
+              >
+              <span class="badge text-bg-success">+2.45%</span>
+            </div>
+            <div class="btn-group btn-group-sm" role="group">
+              <button type="button" class="btn btn-outline-secondary active">
+                1m
+              </button>
+              <button type="button" class="btn btn-outline-secondary">
+                15m
+              </button>
+              <button type="button" class="btn btn-outline-secondary">
+                1H
+              </button>
+              <button type="button" class="btn btn-outline-secondary">
+                4H
+              </button>
+              <button type="button" class="btn btn-outline-secondary">
+                1D
+              </button>
+            </div>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-12 col-lg-8">
+              <div
+                class="card bg-body-tertiary border-secondary overflow-hidden p-2"
+              >
+                <div id="tv-chart" class="ratio ratio-16x9"></div>
+              </div>
+            </div>
+          </div>
         </div>
       </main>
 
@@ -140,10 +181,112 @@
         </div>
       </footer>
     </div>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const container = document.getElementById('tv-chart')
+
+        const chart = LightweightCharts.createChart(container, {
+          layout: {
+            background: { type: 'solid', color: '#1e222d' },
+            textColor: '#d1d4dc',
+            fontSize: 12,
+            fontFamily: 'monospace',
+          },
+          grid: {
+            vertLines: { color: '#2a2e39' },
+            horzLines: { color: '#2a2e39' },
+          },
+          crosshair: {
+            mode: LightweightCharts.CrosshairMode.Normal,
+          },
+          rightPriceScale: {
+            borderColor: '#2a2e39',
+          },
+          timeScale: {
+            borderColor: '#2a2e39',
+            timeVisible: true,
+            secondsVisible: false,
+          },
+        })
+        const candlestickSeries = chart.addSeries(
+          LightweightCharts.CandlestickSeries,
+          {
+            upColor: '#089981',
+            downColor: '#f23645',
+            borderUpColor: '#089981',
+            borderDownColor: '#f23645',
+            wickUpColor: '#089981',
+            wickDownColor: '#f23645',
+          },
+        )
+        const candleData = [
+          {
+            time: '2026-08-25',
+            open: 63800,
+            high: 64500,
+            low: 63500,
+            close: 64200,
+          },
+          {
+            time: '2026-08-26',
+            open: 64200,
+            high: 64900,
+            low: 64000,
+            close: 64750,
+          },
+          {
+            time: '2026-08-27',
+            open: 64750,
+            high: 65300,
+            low: 64500,
+            close: 64300,
+          },
+          {
+            time: '2026-08-28',
+            open: 64300,
+            high: 64800,
+            low: 63900,
+            close: 64600,
+          },
+          {
+            time: '2026-08-29',
+            open: 64600,
+            high: 65400,
+            low: 64400,
+            close: 65100,
+          },
+          {
+            time: '2026-08-30',
+            open: 65100,
+            high: 65800,
+            low: 64900,
+            close: 65350,
+          },
+          {
+            time: '2026-08-31',
+            open: 65350,
+            high: 65600,
+            low: 64800,
+            close: 65100,
+          },
+        ]
+
+        candlestickSeries.setData(candleData)
+
+        const resizeObserver = new ResizeObserver(entries => {
+          for (let entry of entries) {
+            const { width, height } = entry.contentRect
+            chart.applyOptions({ width, height })
+          }
+        })
+        resizeObserver.observe(container)
+      })
+    </script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
       crossorigin="anonymous"
-    ></script>
+    />
   </body>
 </html>
