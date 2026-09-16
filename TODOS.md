@@ -67,5 +67,8 @@ trader ДОДЕЛАТЬ!
 <!-- deposit.html добавить input type number  -->
 
 на странице history.html отрисовываем массив tansactions
+на странице orders.html поменять шрифт
+поменять copy на не copy
+перпеписать скрипт на html v canldles
 
 <!-- проверить buy попытаться сделать take by cost  -->
