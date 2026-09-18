@@ -16,8 +16,8 @@
     <header>
       <nav class="navbar bg-body-tertiary">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#"
-            ><button
+          <a class="navbar-brand" href="#">
+            <button
               class="navbar-toggler me-2"
               type="button"
               data-bs-toggle="offcanvas"
@@ -25,9 +25,11 @@
               aria-controls="offcanvasNavbar"
               aria-label="Toggle navigation"
             >
-              <span class="navbar-toggler-icon"></span></button
-            ><span class="d-none d-sm-inline">Cryptorium</span></a
-          >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <span class="d-none d-sm-inline">Cryptorium</span>
+          </a>
+
           <select
             class="form-select bg-dark text-light border-secondary font-monospace"
             style="max-width: 150px"
@@ -44,6 +46,7 @@
             <option value="LINKUSDT">LINK / USDT — $14.10</option>
             <option value="DOTUSDT">DOT / USDT — $6.75</option>
           </select>
+
           <div
             class="offcanvas offcanvas-start"
             tabindex="-1"
@@ -60,40 +63,73 @@
               ></button>
             </div>
             <div class="offcanvas-body">
-              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="#"
-                    >Home</a
-                  >
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item dropdown">
-                  <a
-                    class="nav-link dropdown-toggle"
-                    href="#"
-                    role="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    Dropdown
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li>
-                      <a class="dropdown-item" href="#">Another action</a>
-                    </li>
-                    <li>
-                      <hr class="dropdown-divider" />
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="#">Something else here</a>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-              <form class="d-flex mt-3" role="search">
+              <div class="d-flex flex-column gap-2 pe-3">
+                <a href="./bids.html" class="btn btn-outline-success text-start"
+                  >Bids</a
+                >
+                <a
+                  href="./candles.html"
+                  class="btn btn-outline-success text-start"
+                  >Candles</a
+                >
+                <a
+                  href="./chart.html"
+                  class="btn btn-outline-success text-start"
+                  >Chart</a
+                >
+                <a
+                  href="./coins.html"
+                  class="btn btn-outline-success text-start"
+                  >Coins</a
+                >
+                <a
+                  href="./deposit.html"
+                  class="btn btn-outline-success text-start"
+                  >Deposit</a
+                >
+                <a
+                  href="./history.html"
+                  class="btn btn-outline-success text-start"
+                  >History</a
+                >
+                <a
+                  href="./maker.html"
+                  class="btn btn-outline-success text-start"
+                  >Maker</a
+                >
+                <a
+                  href="./orders.html"
+                  class="btn btn-outline-success text-start"
+                  >Orders</a
+                >
+                <a
+                  href="./pairs.html"
+                  class="btn btn-outline-success text-start"
+                  >Pairs</a
+                >
+                <a
+                  href="./taker.html"
+                  class="btn btn-outline-success text-start"
+                  >Taker</a
+                >
+                <a
+                  href="./trader.html"
+                  class="btn btn-outline-success text-start"
+                  >Trader</a
+                >
+                <a
+                  href="./wallet.html"
+                  class="btn btn-outline-success text-start"
+                  >Wallet</a
+                >
+                <a
+                  href="./withdraw.html"
+                  class="btn btn-outline-success text-start"
+                  >Withdraw</a
+                >
+              </div>
+
+              <form class="d-flex mt-4" role="search">
                 <input
                   class="form-control me-2"
                   type="search"
