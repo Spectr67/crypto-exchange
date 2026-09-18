@@ -21,13 +21,19 @@ export function transferDeal(taker, order, limitVolume, limitCost) {
       // по-хорошему в этой ситуации нужно выкупить ордер частично
       return false
     }
-    if (transferBalancePayback(taker, maker, order.pair[1], order.cost)) {
-      transferBalancePay(taker, order, order.pair[0], order.volume)
-      const transferResult = {
-        payback: 0,
-        pay: 0,
+    const payback = transferBalancePayback(
+      taker,
+      maker,
+      order.pair[1],
+      order.cost,
+    )
+    if (payback) {
+      const pay = transferBalancePay(taker, order, order.pair[0], order.volume)
+      const dealResult = {
+        payback,
+        pay,
       }
-      return transferResult
+      return dealResult
     } else {
       console.log('order do not transfer "sell"')
       return false

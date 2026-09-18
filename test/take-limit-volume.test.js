@@ -21,4 +21,7 @@ take('мария_2', 'sell', ['BTC', 'USDT'], 5)
 
 console.log(maker)
 console.log(taker)
-console.log(orders)
+orders.sell.forEach(order => {
+  console.log('volume :>> ', order.volume)
+  console.log('price  :>> ', order.price)
+})

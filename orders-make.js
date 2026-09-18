@@ -13,10 +13,16 @@ export class Order {
     this.traderId = traderId
     this.isInvalid = false
     const isCorrectNumbers = checkPositive(price) && checkPositive(volume)
-    if (isCorrectNumbers && this.checkTraderBalance()) {
+    const isTraderHasBalance = this.checkTraderBalance()
+    if (isCorrectNumbers && isTraderHasBalance) {
       this.#freezeBalance(pair)
     } else {
-      console.log('ERRORDERCREATE')
+      if (!isCorrectNumbers) {
+        console.log('ERRORDCRTNOPOS')
+      }
+      if (!isTraderHasBalance) {
+        console.log('ERRORDCRTTRDNOBAL')
+      }
       this.isInvalid = true
       this.capacity = 0
       this.volume = 0
