@@ -9,7 +9,10 @@ import { getTraderById } from './traders.js'
 export function transferDeal(taker, order, limitVolume, limitCost) {
   if (order.isInvalid) {
     console.log('ERRINVALIDORDER')
-    return
+    return {
+      payback: false,
+      pay: false,
+    }
   }
   const maker = getTraderById(order.traderId)
 
@@ -19,8 +22,21 @@ export function transferDeal(taker, order, limitVolume, limitCost) {
       // для упрощения кода
       // если ордер слишком большой, то мы прерываем take
       // по-хорошему в этой ситуации нужно выкупить ордер частично
-      return false
+      return {
+        payback: false,
+        pay: false,
+      }
     }
+    console.log(limitCost)
+    if (order.cost > limitCost) {
+      //
+      console.log('???')
+      return {
+        payback: false,
+        pay: false,
+      }
+    }
+
     const payback = transferBalancePayback(
       taker,
       maker,
@@ -36,7 +52,7 @@ export function transferDeal(taker, order, limitVolume, limitCost) {
       return dealResult
     } else {
       console.log('order do not transfer "sell"')
-      return false
+      return dealResult
     }
   }
   if (order.side === 'buy') {

@@ -11,15 +11,18 @@ export function take(traderId, side, pair, limitVolume, limitCost) {
     // if limitByCost
     let currentLimitCost = limitCost
     for (const order of orders[side]) {
-      const dealResult = transferDeal(taker, order, Infinity)
+      const dealResult = transferDeal(taker, order, Infinity, currentLimitCost)
       const dealResultPayback = dealResult.payback
-      console.log('>>>', dealResult)
-      console.log('>>>', dealResultPayback)
-      if (!dealResultPayback === false) {
-        console.log('>>>')
+      // console.log('>', dealResult)
+      console.log('--', dealResultPayback)
+      // dealResult.payback может быть 0, поэтому такой странный if
+      if (dealResultPayback === false) {
+        console.log('>>>', currentLimitCost)
         return
       } else {
+        console.log('>', currentLimitCost)
         currentLimitCost -= dealResultPayback
+        console.log('>>', currentLimitCost)
         // добавляем transaction history
       }
     }
