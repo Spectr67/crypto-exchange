@@ -3,17 +3,15 @@ import { orders } from './orders-make.js'
 import { getTraderById, traders } from './traders.js'
 import { transferDeal } from './transfer.js'
 
-// при установке лимита по стоимости, лимит по объёму должен быть Infinity
 export function take(traderId, side, pair, limitVolume, limitCost) {
   const taker = getTraderById(traderId)
   if (!taker) return
-  let currentLimitVolume = limitVolume
-  let currentLimitCost = limitCost
 
-  if (limitVolume === Infinity) {
+  if (limitCost) {
     // if limitByCost
+    let currentLimitCost = limitCost
     for (const order of orders[side]) {
-      const dealResult = transferDeal(taker, order, limitVolume)
+      const dealResult = transferDeal(taker, order, Infinity)
       const dealResultPayback = dealResult.payback
       console.log('>>>', dealResult)
       console.log('>>>', dealResultPayback)
@@ -27,6 +25,7 @@ export function take(traderId, side, pair, limitVolume, limitCost) {
     }
   } else {
     // if limitByVolume
+    let currentLimitVolume = limitVolume
     for (const order of orders[side]) {
       const dealResult = transferDeal(taker, order, currentLimitVolume)
       const dealResultPay = dealResult.pay
