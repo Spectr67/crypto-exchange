@@ -6,11 +6,11 @@ import { orders } from './orders-make.js'
 export const traders = [
   {
     id: 'иван_1',
-    balance: { USDT: 0, BTC: 15 },
+    balance: { USDT: 10000, BTC: 15 },
   },
   {
     id: 'мария_2',
-    balance: { USDT: 11000, BTC: 0 },
+    balance: { USDT: 11000, BTC: 10 },
   },
 ]
 // export const traders = [

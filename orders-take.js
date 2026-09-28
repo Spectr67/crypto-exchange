@@ -3,6 +3,9 @@ import { orders } from './orders-make.js'
 import { getTraderById, traders } from './traders.js'
 import { transferDeal } from './transfer.js'
 
+// take не выкупает ордера, тейк забирает ордера
+// тейкаем ордера и мейкаем ордера
+
 export function take(traderId, side, pair, limitVolume, limitCost) {
   const taker = getTraderById(traderId)
   if (!taker) return
@@ -14,13 +17,13 @@ export function take(traderId, side, pair, limitVolume, limitCost) {
       const dealResult = transferDeal(taker, order, Infinity, currentLimitCost)
       const dealResultPayback = dealResult.payback
       // console.log('>', dealResult)
-      console.log('--', dealResultPayback)
+      // console.log('--', dealResultPayback)
       // dealResult.payback может быть 0, поэтому такой странный if
       if (dealResultPayback === false) {
         console.log('>>>', currentLimitCost)
         return
       } else {
-        console.log('>', currentLimitCost)
+        // console.log('>', currentLimitCost)
         currentLimitCost -= dealResultPayback
         console.log('>>', currentLimitCost)
         // добавляем transaction history

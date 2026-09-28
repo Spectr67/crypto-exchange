@@ -23,7 +23,7 @@ console.log(traders[0])
 console.log(traders[1])
 console.log(computeBids(), '\n')
 
-take('мария_2', 'sell')
+take('мария_2', 'buy', -150, -100)
 
 console.log('===')
 console.log(traders[0])

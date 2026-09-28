@@ -56,11 +56,43 @@ export function transferDeal(taker, order, limitVolume, limitCost) {
     }
   }
   if (order.side === 'buy') {
-    if (transferBalancePayback(taker, maker, order.pair[0], order.volume)) {
-      return transferBalancePay(taker, order, order.pair[1], order.cost)
+    if (limitVolume === 0) return
+    if (order.cost > limitCost) {
+      return {
+        payback: false,
+        pay: false,
+      }
+    }
+
+    const pay = transferBalancePayback(
+      taker,
+      maker,
+      order.pair[0],
+      order.volume,
+    )
+
+    if (pay) {
+      const payback = transferBalancePay(
+        taker,
+        order,
+        order.pair[1],
+        order.cost,
+      )
+
+      console.log(pay)
+      console.log('pay')
+
+      return {
+        pay,
+        payback: order.cost,
+      }
     } else {
       console.log('order do not transfer "buy"')
-      return false
+
+      return {
+        pay: false,
+        payback: false,
+      }
     }
   }
 }
