@@ -22,7 +22,7 @@ console.log(orders.buy.length)
 console.log('orders.buy.length')
 console.log(orders.sell.length)
 console.log('orders.sell.length')
-take('мария_2', 'buy', ['BTC', 'USDT'], Infinity, 0)
+take('мария_2', 'buy', ['BTC', 'USDT'], Infinity, 1000)
 
 // take('мария_2', 'sell', ['USDT', 'BTC'], Infinity, 229)
 

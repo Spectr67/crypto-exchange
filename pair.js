@@ -1,4 +1,5 @@
 const pair = {
+  id: 1,
   symbols: ['BTC', 'USDT'],
   caption: 'BTC/USDT',
   currentVolume: 0,

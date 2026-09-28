@@ -45,5 +45,16 @@ const trader = {
   },
 
   createdAt: new Date(),
+  updatedAt: new Date(),
   lastLoginAt: null,
 }
+
+trader.balance.USDT += 999
+
+trader.addDeposit('USDT', 999)
+
+trader.addWithdraw('USDT', 999)
+
+trader.make() // ?
+
+trader.take() // ?

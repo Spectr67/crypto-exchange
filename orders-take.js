@@ -15,17 +15,12 @@ export function take(traderId, side, pair, limitVolume, limitCost) {
     let currentLimitCost = limitCost
     for (const order of orders[side]) {
       const dealResult = transferDeal(taker, order, Infinity, currentLimitCost)
-      const dealResultPayback = dealResult.payback
-      // console.log('>', dealResult)
-      // console.log('--', dealResultPayback)
-      // dealResult.payback может быть 0, поэтому такой странный if
-      if (dealResultPayback === false) {
-        console.log('>>>', currentLimitCost)
+      const dealResultPay = dealResult.pay
+      // dealResult.pay может быть 0, поэтому такой странный if
+      if (dealResultPay === false) {
         return
       } else {
-        // console.log('>', currentLimitCost)
-        currentLimitCost -= dealResultPayback
-        console.log('>>', currentLimitCost)
+        currentLimitCost -= dealResultPay
         // добавляем transaction history
       }
     }

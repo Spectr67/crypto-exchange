@@ -9,10 +9,7 @@ import { getTraderById } from './traders.js'
 export function transferDeal(taker, order, limitVolume, limitCost) {
   if (order.isInvalid) {
     console.log('ERRINVALIDORDER')
-    return {
-      payback: false,
-      pay: false,
-    }
+    return { payback: false, pay: false }
   }
   const maker = getTraderById(order.traderId)
 
@@ -22,21 +19,11 @@ export function transferDeal(taker, order, limitVolume, limitCost) {
       // для упрощения кода
       // если ордер слишком большой, то мы прерываем take
       // по-хорошему в этой ситуации нужно выкупить ордер частично
-      return {
-        payback: false,
-        pay: false,
-      }
+      return { payback: false, pay: false }
     }
-    console.log(limitCost)
     if (order.cost > limitCost) {
-      //
-      console.log('???')
-      return {
-        payback: false,
-        pay: false,
-      }
+      return { payback: false, pay: false }
     }
-
     const payback = transferBalancePayback(
       taker,
       maker,
@@ -45,55 +32,29 @@ export function transferDeal(taker, order, limitVolume, limitCost) {
     )
     if (payback) {
       const pay = transferBalancePay(taker, order, order.pair[0], order.volume)
-      const dealResult = {
-        payback,
-        pay,
-      }
-      return dealResult
-    } else {
-      console.log('order do not transfer "sell"')
-      return dealResult
+      return { payback, pay }
     }
+    console.log('order do not transfer "sell"')
+    return { payback: false, pay: false }
   }
-  if (order.side === 'buy') {
-    if (limitVolume === 0) return
-    if (order.cost > limitCost) {
-      return {
-        payback: false,
-        pay: false,
-      }
-    }
 
-    const pay = transferBalancePayback(
+  if (order.side === 'buy') {
+    // if (limitVolume === 0) return
+    if (order.cost > limitCost) {
+      return { payback: false, pay: false }
+    }
+    const payback = transferBalancePayback(
       taker,
       maker,
       order.pair[0],
       order.volume,
     )
-
-    if (pay) {
-      const payback = transferBalancePay(
-        taker,
-        order,
-        order.pair[1],
-        order.cost,
-      )
-
-      console.log(pay)
-      console.log('pay')
-
-      return {
-        pay,
-        payback: order.cost,
-      }
-    } else {
-      console.log('order do not transfer "buy"')
-
-      return {
-        pay: false,
-        payback: false,
-      }
+    if (payback) {
+      const pay = transferBalancePay(taker, order, order.pair[1], order.cost)
+      return { pay, payback }
     }
+    console.log('order do not transfer "buy"')
+    return { pay: false, payback: false }
   }
 }
 
