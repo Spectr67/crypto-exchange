@@ -9,43 +9,90 @@ import { transferDeal } from './transfer.js'
 export function take(traderId, side, pair, limitVolume, limitCost) {
   const taker = getTraderById(traderId)
   if (!taker) return
-  if (limitCost !== Infinity) {
-    // if limitByCost
-    let currentLimitCost = limitCost
-    for (const order of orders[side]) {
-      const dealResult = transferDeal(taker, order, Infinity, currentLimitCost)
-      const dealResultPay = dealResult.pay
-      if (dealResultPay === false) {
-        return
-      } else {
-        currentLimitCost -= dealResultPay
-        if (currentLimitCost <= 0) {
+  if (side === 'buy') {
+    if (limitCost !== Infinity) {
+      // if limitByCost
+      console.log('BUY limitByCost')
+      let currentLimitCost = limitCost
+      for (const order of orders[side]) {
+        const dealResult = transferDeal(
+          taker,
+          order,
+          Infinity,
+          currentLimitCost,
+        )
+        const dealResultPay = dealResult.pay
+        // dealResult.pay может быть 0, поэтому такой странный if
+        if (dealResultPay === false) {
           return
+        } else {
+          currentLimitCost -= dealResultPay
+          // добавляем transaction history
         }
-        // добавляем transaction history
+      }
+    } else {
+      // if limitByVolume
+      console.log('BUY limitByVolume')
+      let currentLimitVolume = limitVolume
+      for (const order of orders[side]) {
+        console.log(currentLimitVolume)
+        const dealResult = transferDeal(
+          taker,
+          order,
+          currentLimitVolume,
+          Infinity,
+        )
+        const dealResultPay = dealResult.pay
+        if (!dealResultPay) {
+          return
+        } else {
+          currentLimitVolume -= dealResultPay
+          // добавляем transaction history
+        }
       }
     }
-  } else {
-    // if limitByVolume
-    let currentLimitVolume = limitVolume
-
-    for (const order of orders[side]) {
-      const dealResult = transferDeal(
-        taker,
-        order,
-        currentLimitVolume,
-        Infinity,
-      )
-
-      const dealResultPayback = dealResult.payback
-      if (dealResultPayback === false) {
-        return
-      } else {
-        currentLimitVolume -= dealResultPayback
-        if (currentLimitVolume <= 0) {
+  }
+  if (side === 'sell') {
+    if (limitCost !== Infinity) {
+      // if limitByCost
+      console.log('SELL limitByCost')
+      let currentLimitCost = limitCost
+      for (const order of orders[side]) {
+        console.log(currentLimitCost)
+        const dealResult = transferDeal(
+          taker,
+          order,
+          Infinity,
+          currentLimitCost,
+        )
+        const dealResultPayback = dealResult.payback
+        // dealResult.pay может быть 0, поэтому такой странный if
+        if (dealResultPayback === false) {
           return
+        } else {
+          currentLimitCost -= dealResultPayback
+          // добавляем transaction history
         }
-        // добавляем transaction history
+      }
+    } else {
+      // if limitByVolume
+      console.log('SELL limitByVolume')
+      let currentLimitVolume = limitVolume
+      for (const order of orders[side]) {
+        console.log(currentLimitVolume)
+        const dealResult = transferDeal(
+          taker,
+          order,
+          currentLimitVolume,
+          Infinity,
+        )
+        const dealResultPay = dealResult.pay
+        if (!dealResultPay) {
+          return
+        } else {
+          currentLimitVolume -= dealResultPay
+          // добавляем transaction history
+        }
       }
     }
   }

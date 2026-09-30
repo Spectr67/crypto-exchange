@@ -17,7 +17,7 @@ console.log(maker)
 console.log(taker)
 // console.log(orders)
 
-take('мария_2', 'buy', ['BTC', 'USDT'], -5, Infinity)
+take('мария_2', 'buy', ['BTC', 'USDT'], 200, Infinity)
 
 console.log(maker)
 console.log(taker)
