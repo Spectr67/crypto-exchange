@@ -8,20 +8,20 @@ const taker = traders[1]
 console.log(maker)
 console.log(taker)
 
-make('иван_1', 'sell', 2, 150, ['BTC', 'USDT'])
-make('иван_1', 'sell', 2, 120, ['BTC', 'USDT'])
-make('иван_1', 'sell', 1, 130, ['BTC', 'USDT'])
-make('иван_1', 'sell', 1, 110, ['BTC', 'USDT'])
+make('иван_1', 'buy', 2, 150, ['BTC', 'USDT'])
+make('иван_1', 'buy', 2, 120, ['BTC', 'USDT'])
+make('иван_1', 'buy', 1, 130, ['BTC', 'USDT'])
+make('иван_1', 'buy', 1, 110, ['BTC', 'USDT'])
 
 console.log(maker)
 console.log(taker)
 // console.log(orders)
 
-take('мария_2', 'sell', ['BTC', 'USDT'], 5)
+take('мария_2', 'buy', ['BTC', 'USDT'], -5, Infinity)
 
 console.log(maker)
 console.log(taker)
-orders.sell.forEach(order => {
+orders.buy.forEach(order => {
   console.log('volume :>> ', order.volume)
   console.log('price  :>> ', order.price)
 })

@@ -9,31 +9,42 @@ import { transferDeal } from './transfer.js'
 export function take(traderId, side, pair, limitVolume, limitCost) {
   const taker = getTraderById(traderId)
   if (!taker) return
-
-  if (limitCost) {
+  if (limitCost !== Infinity) {
     // if limitByCost
     let currentLimitCost = limitCost
     for (const order of orders[side]) {
       const dealResult = transferDeal(taker, order, Infinity, currentLimitCost)
       const dealResultPay = dealResult.pay
-      // dealResult.pay может быть 0, поэтому такой странный if
       if (dealResultPay === false) {
         return
       } else {
         currentLimitCost -= dealResultPay
+        if (currentLimitCost <= 0) {
+          return
+        }
         // добавляем transaction history
       }
     }
   } else {
     // if limitByVolume
     let currentLimitVolume = limitVolume
+
     for (const order of orders[side]) {
-      const dealResult = transferDeal(taker, order, currentLimitVolume)
-      const dealResultPay = dealResult.pay
-      if (!dealResultPay) {
+      const dealResult = transferDeal(
+        taker,
+        order,
+        currentLimitVolume,
+        Infinity,
+      )
+
+      const dealResultPayback = dealResult.payback
+      if (dealResultPayback === false) {
         return
       } else {
-        currentLimitVolume -= dealResultPay
+        currentLimitVolume -= dealResultPayback
+        if (currentLimitVolume <= 0) {
+          return
+        }
         // добавляем transaction history
       }
     }

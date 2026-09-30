@@ -39,21 +39,29 @@ export function transferDeal(taker, order, limitVolume, limitCost) {
   }
 
   if (order.side === 'buy') {
-    // if (limitVolume === 0) return
+    if (order.volume > limitVolume) {
+      return { payback: false, pay: false }
+    }
+
     if (order.cost > limitCost) {
       return { payback: false, pay: false }
     }
+
     const payback = transferBalancePayback(
       taker,
       maker,
       order.pair[0],
       order.volume,
     )
+
     if (payback) {
       const pay = transferBalancePay(taker, order, order.pair[1], order.cost)
+
       return { pay, payback }
     }
+
     console.log('order do not transfer "buy"')
+
     return { pay: false, payback: false }
   }
 }
