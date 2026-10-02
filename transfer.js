@@ -27,8 +27,8 @@ export function transferDeal(taker, order, limitVolume, limitCost) {
     const payback = transferBalancePayback(
       taker,
       maker,
-      order.pair[0],
-      order.volume,
+      order.pair[1],
+      order.cost,
     )
 
     if (payback === false) {
@@ -36,7 +36,7 @@ export function transferDeal(taker, order, limitVolume, limitCost) {
       return { payback: false, pay: false }
     }
 
-    const pay = transferBalancePay(taker, order, order.pair[1], order.cost)
+    const pay = transferBalancePay(taker, order, order.pair[0], order.volume)
 
     return { payback, pay }
   }
@@ -51,8 +51,8 @@ export function transferDeal(taker, order, limitVolume, limitCost) {
     const payback = transferBalancePayback(
       taker,
       maker,
-      order.pair[1],
-      order.cost,
+      order.pair[0],
+      order.volume,
     )
 
     if (payback === false) {
@@ -62,7 +62,7 @@ export function transferDeal(taker, order, limitVolume, limitCost) {
 
     // taker получает BTC
     // maker отдаёт BTC
-    const pay = transferBalancePay(taker, order, order.pair[0], order.volume)
+    const pay = transferBalancePay(taker, order, order.pair[1], order.cost)
 
     return { payback, pay }
   }
