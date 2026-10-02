@@ -27,43 +27,47 @@ export function transferDeal(taker, order, limitVolume, limitCost) {
     const payback = transferBalancePayback(
       taker,
       maker,
-      order.pair[1],
-      order.cost,
+      order.pair[0],
+      order.volume,
     )
-    if (payback) {
-      const pay = transferBalancePay(taker, order, order.pair[0], order.volume)
-      return { payback, pay }
+
+    if (payback === false) {
+      console.log('order do not transfer "sell"')
+      return { payback: false, pay: false }
     }
-    console.log('order do not transfer "sell"')
-    return { payback: false, pay: false }
+
+    const pay = transferBalancePay(taker, order, order.pair[1], order.cost)
+
+    return { payback, pay }
   }
 
   if (order.side === 'buy') {
     if (order.volume > limitVolume) {
       return { payback: false, pay: false }
     }
-
     if (order.cost > limitCost) {
       return { payback: false, pay: false }
     }
-
     const payback = transferBalancePayback(
       taker,
       maker,
-      order.pair[0],
-      order.volume,
+      order.pair[1],
+      order.cost,
     )
 
-    if (payback) {
-      const pay = transferBalancePay(taker, order, order.pair[1], order.cost)
-
-      return { pay, payback }
+    if (payback === false) {
+      console.log('order do not transfer "buy"')
+      return { payback: false, pay: false }
     }
 
-    console.log('order do not transfer "buy"')
+    // taker получает BTC
+    // maker отдаёт BTC
+    const pay = transferBalancePay(taker, order, order.pair[0], order.volume)
 
-    return { pay: false, payback: false }
+    return { payback, pay }
   }
+
+  return { payback: false, pay: false }
 }
 
 // убрать экспорт
