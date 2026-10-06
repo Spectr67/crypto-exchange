@@ -207,7 +207,7 @@ export default {
   </div>
 </template>
 
-<style>
+<style scoped>
 .table-top,
 .table-bottom {
   overflow-y: auto;

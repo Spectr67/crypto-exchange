@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import PageExample from '../Pages/PageExample.vue'
 import PageBids from '@/Pages/PageBids.vue'
 import PageCandles from '@/Pages/PageCandles.vue'
+import PageCoins from '@/Pages/PageCoins.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -18,6 +19,10 @@ const router = createRouter({
     {
       path: '/candles',
       component: PageCandles,
+    },
+    {
+      path: '/coins',
+      component: PageCoins,
     },
   ],
 })
