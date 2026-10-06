@@ -4,6 +4,7 @@ import PageBids from '@/Pages/PageBids.vue'
 import PageCandles from '@/Pages/PageCandles.vue'
 import PageCoins from '@/Pages/PageCoins.vue'
 import PageDepost from '@/Pages/PageDepost.vue'
+import PageHistory from '@/Pages/PageHistory.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -28,6 +29,10 @@ const router = createRouter({
     {
       path: '/deposit',
       component: PageDepost,
+    },
+    {
+      path: '/history',
+      component: PageHistory,
     },
   ],
 })
