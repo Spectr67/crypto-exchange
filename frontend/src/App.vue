@@ -1,19 +1,27 @@
 <script>
-import ButtonSubmit from './components/ButtonSubmit.vue'
 import FooterWidget from './components/FooterWidget.vue'
 import HeaderWidget from './components/HeaderWidget.vue'
+
 export default {
-  components: { ButtonSubmit, HeaderWidget, FooterWidget },
+  components: {
+    HeaderWidget,
+    FooterWidget,
+  },
 }
 </script>
 
 <template>
-  <header>
-    <HeaderWidget></HeaderWidget>
-  </header>
-  <footer>
-    <FooterWidget></FooterWidget>
-  </footer>
-</template>
+  <div class="wrapper">
+    <header>
+      <HeaderWidget />
+    </header>
 
-<style></style>
+    <main>
+      <router-view />
+    </main>
+
+    <footer>
+      <FooterWidget />
+    </footer>
+  </div>
+</template>
