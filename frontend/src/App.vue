@@ -12,16 +12,12 @@ export default {
 
 <template>
   <div class="wrapper">
-    <header>
-      <HeaderWidget />
-    </header>
+    <HeaderWidget />
 
     <main>
       <router-view />
     </main>
 
-    <footer>
-      <FooterWidget />
-    </footer>
+    <FooterWidget />
   </div>
 </template>

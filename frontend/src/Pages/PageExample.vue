@@ -1,11 +1,4 @@
-<script>
-import FooterWidget from '@/components/FooterWidget.vue'
-import HeaderWidget from '@/components/HeaderWidget.vue'
-
-export default {
-  components: { HeaderWidget, FooterWidget },
-}
-</script>
+<script></script>
 
 <template>
   <div class="container pt-3">
