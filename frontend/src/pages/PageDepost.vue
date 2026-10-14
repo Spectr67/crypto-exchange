@@ -1,7 +1,7 @@
 <script>
 import FooterWidget from '@/components/FooterWidget.vue'
 import HeaderWidget from '@/components/HeaderWidget.vue'
-import { deposit } from '../../api/Deposit'
+import { postDeposit } from '../../api/postDeposit'
 
 export default {
   components: {
@@ -23,7 +23,7 @@ export default {
         return
       }
       this.loading = true
-      const result = await deposit(this.selectedCoin, Number(this.amount))
+      const result = await postDeposit(this.selectedCoin, Number(this.amount))
     },
   },
 }

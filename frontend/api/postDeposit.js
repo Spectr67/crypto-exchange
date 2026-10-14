@@ -1,6 +1,6 @@
 const API_URL = 'http://localhost:3000/api/v0'
 
-export async function deposit(coin, amount) {
+export async function postDeposit(coin, amount) {
   const response = await fetch(`${API_URL}/deposit`, {
     method: 'POST',
     headers: {
