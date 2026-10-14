@@ -1,5 +1,5 @@
 <script>
-import CoinsTable from '@/components/CoinPageComponents/CoinsTable.vue'
+import CoinsTable from '@/components/coin/CoinsTable.vue'
 import FilterCoins from '@/components/FilterCoins.vue'
 import SearchForm from '@/components/SearchForm.vue'
 
