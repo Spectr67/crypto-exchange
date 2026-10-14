@@ -6,8 +6,21 @@ export default {
     CoinRow,
   },
 
-  props: {
-    coins: {},
+  props: ['coins'],
+
+  data() {
+    return {
+      arrayObjs: [
+        {
+          caption: 'Монета',
+          classes: ['ps-3'],
+        },
+        {
+          caption: 'Название',
+          classes: ['d-none d-sm-table-cell'],
+        },
+      ],
+    }
   },
 }
 </script>
@@ -17,6 +30,16 @@ export default {
     <table class="table table-dark table-striped table-hover table-sm align-middle mb-0">
       <thead>
         <tr class="border-bottom border-secondary">
+          <UiTh caption="Монета" classes="ps-3" />
+          <UiTh caption="Название" classes="d-none d-sm-table-cell" />
+          <UiTh caption="Price (USDT)" />
+
+          <UiTh v-for="object of arrayObjs" :key="object.caption" :object="object" />
+
+          <UiTh v-for="(val, key) in obj" :key="object.caption" :object="object" />
+
+          <UiTh :object="{ caption: 'Монета', classes: 'ps-3' }" />
+
           <th class="py-2 text-body-secondary small ps-3">Монета</th>
 
           <th class="py-2 text-body-secondary small d-none d-sm-table-cell">Название</th>
