@@ -61,7 +61,7 @@ export default {
     </td>
 
     <td class="text-end pe-2 pe-sm-3">
-      <CoinActions :coin="coin" @deposit="" />
+      <CoinActions :coin="coin" />
     </td>
   </tr>
 </template>

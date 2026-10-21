@@ -12,6 +12,7 @@ import PageTaker from '@/pages/PageTaker.vue'
 import PageTrader from '@/pages/PageTrader.vue'
 import PageWallet from '@/pages/PageWallet.vue'
 import PageWithdraw from '@/pages/PageWithdraw.vue'
+import PageDepositSuccess from '@/pages/PageDepositSuccess.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -36,6 +37,7 @@ const router = createRouter({
     {
       path: '/deposit',
       component: PageDepost,
+      props: (route) => ({ symbol: route.query.symbol }),
     },
     {
       path: '/history',
@@ -68,6 +70,10 @@ const router = createRouter({
     {
       path: '/withdraw',
       component: PageWithdraw,
+    },
+    {
+      path: '/deposit-success',
+      component: PageDepositSuccess,
     },
   ],
 })

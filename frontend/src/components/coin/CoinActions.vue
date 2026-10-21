@@ -1,16 +1,14 @@
 <script>
 export default {
-  props: {
-    coin: {
-      type: Object,
-      required: true,
-    },
-  },
+  props: ['coin'],
 }
 </script>
 
 <template>
-  <button class="btn btn-success btn-sm fw-bold pe-2" @click="$router.push('/deposit')">
+  <button
+    class="btn btn-success btn-sm fw-bold pe-2"
+    @click="$router.push({ path: '/deposit', query: { symbol: coin.symbol } })"
+  >
     Депозит
   </button>
 

@@ -4,6 +4,7 @@ import HeaderWidget from '@/components/HeaderWidget.vue'
 import { postDeposit } from '../../api/postDeposit'
 
 export default {
+  props: ['symbol'],
   components: {
     HeaderWidget,
     FooterWidget,
@@ -11,7 +12,7 @@ export default {
 
   data() {
     return {
-      selectedCoin: 'USDT',
+      selectedCoin: this.symbol,
       amount: '',
       loading: false,
     }
@@ -32,6 +33,7 @@ export default {
 <template>
   <div class="container pt-3">
     <h4 class="mb-3 text-light">Пополнение баланса</h4>
+    <h3>{{ symbol }}</h3>
 
     <div class="row justify-content-center">
       <div class="col-12 col-md-8 col-lg-6">
@@ -90,7 +92,12 @@ export default {
             </div>
 
             <div class="d-grid">
-              <button type="submit" class="btn btn-success py-2 text-white" :disabled="loading">
+              <button
+                type="submit"
+                class="btn btn-success py-2 text-white"
+                :disabled="loading"
+                @click="$router.push('/deposit-success')"
+              >
                 {{ loading ? 'Обработка...' : 'Пополнить' }}
               </button>
             </div>

@@ -1,9 +1,11 @@
 <script>
 import CoinRow from './CoinRow.vue'
+import UiTh from './UiTh.vue'
 
 export default {
   components: {
     CoinRow,
+    UiTh,
   },
 
   props: ['coins'],
@@ -11,14 +13,12 @@ export default {
   data() {
     return {
       arrayObjs: [
-        {
-          caption: 'Монета',
-          classes: ['ps-3'],
-        },
-        {
-          caption: 'Название',
-          classes: ['d-none d-sm-table-cell'],
-        },
+        ['Монета', 'ps-3'],
+        ['Название', 'd-none d-sm-table-cell'],
+        ['Price (USDT)', ''],
+        ['24ч', ''],
+        ['Volume', 'd-none d-md-table-cell'],
+        ['Действия', 'text-end pe-3'],
       ],
     }
   },
@@ -30,27 +30,7 @@ export default {
     <table class="table table-dark table-striped table-hover table-sm align-middle mb-0">
       <thead>
         <tr class="border-bottom border-secondary">
-          <UiTh caption="Монета" classes="ps-3" />
-          <UiTh caption="Название" classes="d-none d-sm-table-cell" />
-          <UiTh caption="Price (USDT)" />
-
-          <UiTh v-for="object of arrayObjs" :key="object.caption" :object="object" />
-
-          <UiTh v-for="(val, key) in obj" :key="object.caption" :object="object" />
-
-          <UiTh :object="{ caption: 'Монета', classes: 'ps-3' }" />
-
-          <th class="py-2 text-body-secondary small ps-3">Монета</th>
-
-          <th class="py-2 text-body-secondary small d-none d-sm-table-cell">Название</th>
-
-          <th class="py-2 text-body-secondary small">Price (USDT)</th>
-
-          <th class="py-2 text-body-secondary small">24ч</th>
-
-          <th class="py-2 text-body-secondary small d-none d-md-table-cell">Volume</th>
-
-          <th class="py-2 text-body-secondary small text-end pe-3">Действия</th>
+          <UiTh v-for="(object, index) in arrayObjs" :key="index" :object="object" />
         </tr>
       </thead>
 
