@@ -73,6 +73,7 @@ export function transferDeal(taker, order, limitVolume, limitCost) {
 // убрать экспорт
 // к моменту вызова этой функции ордер уже оплачен из баланса тейкера
 export function transferBalancePay(taker, order, symbol, sum) {
+  // taker.wallet[symbol] += sum
   taker.balance[symbol] += sum
   order.volume = 0 // обнуление не самый лучший ход
   return sum
@@ -81,6 +82,7 @@ export function transferBalancePay(taker, order, symbol, sum) {
 // убрать экспорт
 export function transferBalancePayback(taker, maker, symbol, sum) {
   if (!checkPositive(sum)) return false
+  // if (taker.wallet[symbol] < sum) return false
   if (taker.balance[symbol] < sum) return false
   taker.balance[symbol] -= sum
   maker.balance[symbol] += sum

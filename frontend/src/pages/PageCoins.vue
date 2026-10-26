@@ -12,10 +12,9 @@ export default {
 
   data() {
     return {
-      search: '',
-      selectedCategory: 'Все',
-
-      categories: ['Все', 'Популярные', 'Layer 1', 'DeFi', 'Meme'],
+      // search: '',
+      // selectedCategory: 'Все',
+      // categories: ['Все', 'Популярные', 'Layer 1', 'DeFi', 'Meme'],
 
       coins: [
         {
