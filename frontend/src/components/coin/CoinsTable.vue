@@ -12,6 +12,14 @@ export default {
 
   data() {
     return {
+      // arrayObjs: {
+      //   Монета: 'ps-3',
+      //   Название: 'd-none d-sm-table-cell',
+      //   'Price (USDT)': '',
+      //   '24ч': '',
+      //   Volume: 'd-none d-md-table-cell',
+      //   Действия: 'text-end pe-3',
+      // },
       arrayObjs: [
         ['Монета', 'ps-3'],
         ['Название', 'd-none d-sm-table-cell'],

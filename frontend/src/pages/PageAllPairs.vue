@@ -14,14 +14,14 @@ export default {
     return {
       categories: ['Все', 'Популярные', 'Layer 1', 'DeFi', 'Meme'],
 
-      headers: [
-        ['Монета', 'ps-2 ps-sm-3'],
-        ['Название', 'd-none d-sm-table-cell'],
-        ['Цена', 'text-end'],
-        ['Изменение за 24ч', 'd-none d-md-table-cell text-end'],
-        ['Объём', 'd-none d-lg-table-cell text-end'],
-        ['Действия', 'text-end pe-2 pe-sm-3'],
-      ],
+      // headers: [
+      //   ['Монета', 'ps-2 ps-sm-3'],
+      //   ['Название', 'd-none d-sm-table-cell'],
+      //   ['Цена', 'text-end'],
+      //   ['Изменение за 24ч', 'd-none d-md-table-cell text-end'],
+      //   ['Объём', 'd-none d-lg-table-cell text-end'],
+      //   ['Действия', 'text-end pe-2 pe-sm-3'],
+      // ],
 
       coins: [
         {
@@ -79,6 +79,43 @@ export default {
           color: 'warning',
         },
       ],
+
+      pairsFromBackend: [
+        {
+          id: 1,
+          caption: 'BTC/USDT',
+          lastPrice: 0,
+          volume24h: 0,
+          diff24h: 0,
+        },
+      ],
+
+      // computed
+      rowsFormatted: [
+        {
+          caption: 'BTC/USDT',
+          lastPrice: (0).toPrecision(2),
+          volume24h: 0,
+          diff24h: '+10%',
+          // diff24h_color:
+          //   pair.diff24h > 0 ? 'text-success' : pair.diff24h < 0 ? 'text-danger' : 'text-secondary',
+        },
+      ],
+
+      tableClasses: {
+        th: {
+          caption: 'ps-2 ps-sm-3',
+          lastPrice: 'd-none d-sm-table-cell',
+          volume24h: 'text-end fw-bold text-nowrap',
+          diff24h: 'text-end fw-bold text-nowrap',
+        },
+        td: {
+          caption: 'ps-2 ps-sm-3',
+          lastPrice: 'd-none d-sm-table-cell text-secondary',
+          volume24h: 'text-end fw-bold text-nowrap',
+          diff24h: 'text-end fw-bold text-nowrap',
+        },
+      },
     }
   },
 
@@ -87,6 +124,7 @@ export default {
       return this.coins.map((coin) => ({
         id: coin.symbol,
 
+        // cols
         cells: [
           {
             type: 'coin',
@@ -158,6 +196,9 @@ export default {
       </div>
 
       <TableWidget
+        :show-actions="true"
+        :rows-formatted
+        :table-classes
         :headers="headers"
         :rows="tableRows"
         :classes="['table-dark', 'table-hover', 'align-middle', 'mb-0']"

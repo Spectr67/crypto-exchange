@@ -12,6 +12,8 @@ export default {
     TableTd,
   },
 
+  props: ['rowsFromBackendFormatted', 'tableColsClasses'],
+
   props: {
     headers: {
       type: Array,
@@ -35,7 +37,7 @@ export default {
   <div class="border border-secondary rounded bg-body-tertiary">
     <table :class="['table', ...classes]">
       <TableHead>
-        <TableTr :classes="['border-bottom', 'border-secondary']">
+        <TableTr class="border-bottom border-secondary">
           <th v-for="(header, index) in headers" :key="index" :class="header[1]">
             {{ header[0] }}
           </th>
