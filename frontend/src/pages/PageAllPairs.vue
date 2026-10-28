@@ -1,20 +1,27 @@
 <script>
-import CoinsTable from '@/components/coin/CoinsTable.vue'
 import FilterCoins from '@/components/FilterCoins.vue'
 import SearchForm from '@/components/SearchForm.vue'
+import TableWidget from '@/components/table/TableWidget.vue'
 
 export default {
   components: {
-    CoinsTable,
     FilterCoins,
     SearchForm,
+    TableWidget,
   },
 
   data() {
     return {
-      // search: '',
-      // selectedCategory: 'Все',
-      // categories: ['Все', 'Популярные', 'Layer 1', 'DeFi', 'Meme'],
+      categories: ['Все', 'Популярные', 'Layer 1', 'DeFi', 'Meme'],
+
+      headers: [
+        ['Монета', 'ps-2 ps-sm-3'],
+        ['Название', 'd-none d-sm-table-cell'],
+        ['Цена', 'text-end'],
+        ['Изменение за 24ч', 'd-none d-md-table-cell text-end'],
+        ['Объём', 'd-none d-lg-table-cell text-end'],
+        ['Действия', 'text-end pe-2 pe-sm-3'],
+      ],
 
       coins: [
         {
@@ -74,6 +81,58 @@ export default {
       ],
     }
   },
+
+  computed: {
+    tableRows() {
+      return this.coins.map((coin) => ({
+        id: coin.symbol,
+
+        cells: [
+          {
+            type: 'coin',
+            value: coin.symbol,
+            icon: coin.icon,
+            color: coin.color,
+            classes: ['ps-2', 'ps-sm-3'],
+          },
+          {
+            value: coin.coinName,
+            classes: ['d-none', 'd-sm-table-cell', 'text-secondary'],
+          },
+          {
+            value:
+              coin.lastPrice.toLocaleString('en-US', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              }) + ' USDT',
+            classes: ['text-end', 'fw-bold', 'text-nowrap'],
+          },
+          {
+            value: (coin.changePercent > 0 ? '+' : '') + coin.changePercent + '%',
+            classes: [
+              'd-none',
+              'd-md-table-cell',
+              'text-end',
+              'text-nowrap',
+              coin.changePercent > 0
+                ? 'text-success'
+                : coin.changePercent < 0
+                  ? 'text-danger'
+                  : 'text-secondary',
+            ],
+          },
+          {
+            value: coin.volume,
+            classes: ['d-none', 'd-lg-table-cell', 'text-end', 'text-secondary', 'text-nowrap'],
+          },
+          {
+            type: 'actions',
+            classes: ['text-end', 'pe-2', 'pe-sm-3', 'text-nowrap'],
+          },
+        ],
+      }))
+    },
+  },
 }
 </script>
 
@@ -98,7 +157,11 @@ export default {
         <FilterCoins :categories="categories" />
       </div>
 
-      <CoinsTable :coins="coins" />
+      <TableWidget
+        :headers="headers"
+        :rows="tableRows"
+        :classes="['table-dark', 'table-hover', 'align-middle', 'mb-0']"
+      />
     </div>
   </div>
 </template>

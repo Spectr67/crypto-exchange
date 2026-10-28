@@ -4,7 +4,7 @@
     <a href="./bids" class="btn btn-outline-success text-start">Bids</a>
     <a href="./candles" class="btn btn-outline-success text-start">Candles</a>
     <a href="./chart" class="btn btn-outline-success text-start">Chart</a>
-    <a href="./coins" class="btn btn-outline-success text-start">Coins</a>
+    <a href="./pairs" class="btn btn-outline-success text-start">All Pairs</a>
     <a href="./deposit" class="btn btn-outline-success text-start">Deposit</a>
     <a href="./history" class="btn btn-outline-success text-start">History</a>
     <a href="./maker" class="btn btn-outline-success text-start">Maker</a>

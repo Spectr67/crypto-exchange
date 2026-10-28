@@ -1,18 +1,18 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import PageExample from '@/pages/PageExample.vue'
-import PageBids from '@/pages/PageBids.vue'
-import PageCandles from '@/pages/PageCandles.vue'
-import PageCoins from '@/pages/PageCoins.vue'
+import PageExample from '../../pagesInProgress/PageExample.vue'
+import PageBids from '../../pagesInProgress/PageBids.vue'
+import PageCandles from '../../pagesInProgress/PageCandles.vue'
 import PageDepost from '@/pages/PageDepost.vue'
-import PageHistory from '@/pages/PageHistory.vue'
-import PageMaker from '@/pages/PageMaker.vue'
-import PageOrders from '@/pages/PageOrders.vue'
-import PagePairs from '@/pages/PagePairs.vue'
-import PageTaker from '@/pages/PageTaker.vue'
+import PageHistory from '../../pagesInProgress/PageHistory.vue'
+import PageMaker from '../../pagesInProgress/PageMaker.vue'
+import PageOrders from '../../pagesInProgress/PageOrders.vue'
+import PagePairs from '../../pagesInProgress/PagePairs.vue'
+import PageTaker from '../../pagesInProgress/PageTaker.vue'
 import PageTrader from '@/pages/PageTrader.vue'
 import PageWallet from '@/pages/PageWallet.vue'
 import PageWithdraw from '@/pages/PageWithdraw.vue'
-import PageDepositSuccess from '@/pages/PageDepositSuccess.vue'
+import PageDepositSuccess from '../../pagesInProgress/PageDepositSuccess.vue'
+import PageAllPairs from '@/pages/PageAllPairs.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -31,8 +31,8 @@ const router = createRouter({
       component: PageCandles,
     },
     {
-      path: '/coins',
-      component: PageCoins,
+      path: '/pairs',
+      component: PageAllPairs,
     },
     {
       path: '/deposit',

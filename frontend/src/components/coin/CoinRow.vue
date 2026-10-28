@@ -1,9 +1,9 @@
 <script>
-import CoinActions from './CoinActions.vue'
+import ButtonWidget from '../ButtonWidget.vue'
 
 export default {
   components: {
-    CoinActions,
+    ButtonWidget,
   },
 
   props: {
@@ -61,7 +61,7 @@ export default {
     </td>
 
     <td class="text-end pe-2 pe-sm-3">
-      <CoinActions :coin="coin" />
+      <ButtonWidget :coin="coin" />
     </td>
   </tr>
 </template>
