@@ -14,8 +14,8 @@
 // ]
 
 // пара символ и название
-
-const coins = {
+// symbol: coinName
+export const coins = {
   BTC: 'Bitcoin',
   ETH: 'Ethereum',
   LTC: 'Lightcoin',
