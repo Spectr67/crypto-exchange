@@ -1,11 +1,6 @@
 <script>
 export default {
-  props: {
-    classes: {
-      type: Array,
-      default: () => [],
-    },
-  },
+  props: ['classes'],
 }
 </script>
 

@@ -14,15 +14,6 @@ export default {
     return {
       categories: ['Все', 'Популярные', 'Layer 1', 'DeFi', 'Meme'],
 
-      // headers: [
-      //   ['Монета', 'ps-2 ps-sm-3'],
-      //   ['Название', 'd-none d-sm-table-cell'],
-      //   ['Цена', 'text-end'],
-      //   ['Изменение за 24ч', 'd-none d-md-table-cell text-end'],
-      //   ['Объём', 'd-none d-lg-table-cell text-end'],
-      //   ['Действия', 'text-end pe-2 pe-sm-3'],
-      // ],
-
       coins: [
         {
           symbol: 'BTC',
@@ -80,94 +71,60 @@ export default {
         },
       ],
 
-      pairsFromBackend: [
-        {
-          id: 1,
-          caption: 'BTC/USDT',
-          lastPrice: 0,
-          volume24h: 0,
-          diff24h: 0,
-        },
-      ],
-
-      // computed
-      rowsFormatted: [
-        {
-          caption: 'BTC/USDT',
-          lastPrice: (0).toPrecision(2),
-          volume24h: 0,
-          diff24h: '+10%',
-          // diff24h_color:
-          //   pair.diff24h > 0 ? 'text-success' : pair.diff24h < 0 ? 'text-danger' : 'text-secondary',
-        },
-      ],
-
       tableClasses: {
         th: {
-          caption: 'ps-2 ps-sm-3',
-          lastPrice: 'd-none d-sm-table-cell',
-          volume24h: 'text-end fw-bold text-nowrap',
-          diff24h: 'text-end fw-bold text-nowrap',
+          coin: 'ps-2 ps-sm-3',
+          name: 'd-none d-sm-table-cell',
+          price: 'text-end',
+          change: 'd-none d-md-table-cell text-end',
+          volume: 'd-none d-lg-table-cell text-end',
+          actions: 'text-end pe-2 pe-sm-3',
         },
+
         td: {
-          caption: 'ps-2 ps-sm-3',
-          lastPrice: 'd-none d-sm-table-cell text-secondary',
-          volume24h: 'text-end fw-bold text-nowrap',
-          diff24h: 'text-end fw-bold text-nowrap',
+          coin: 'ps-2 ps-sm-3',
+          name: 'd-none d-sm-table-cell text-secondary',
+          price: 'text-end fw-bold text-nowrap',
+          change: 'd-none d-md-table-cell text-end text-nowrap',
+          volume: 'd-none d-lg-table-cell text-end text-secondary text-nowrap',
+          actions: 'text-end pe-2 pe-sm-3 text-nowrap',
         },
       },
     }
   },
 
   computed: {
-    tableRows() {
+    rowsFormatted() {
       return this.coins.map((coin) => ({
         id: coin.symbol,
 
-        // cols
-        cells: [
-          {
-            type: 'coin',
-            value: coin.symbol,
-            icon: coin.icon,
-            color: coin.color,
-            classes: ['ps-2', 'ps-sm-3'],
-          },
-          {
-            value: coin.coinName,
-            classes: ['d-none', 'd-sm-table-cell', 'text-secondary'],
-          },
-          {
-            value:
-              coin.lastPrice.toLocaleString('en-US', {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-              }) + ' USDT',
-            classes: ['text-end', 'fw-bold', 'text-nowrap'],
-          },
-          {
-            value: (coin.changePercent > 0 ? '+' : '') + coin.changePercent + '%',
-            classes: [
-              'd-none',
-              'd-md-table-cell',
-              'text-end',
-              'text-nowrap',
-              coin.changePercent > 0
-                ? 'text-success'
-                : coin.changePercent < 0
-                  ? 'text-danger'
-                  : 'text-secondary',
-            ],
-          },
-          {
-            value: coin.volume,
-            classes: ['d-none', 'd-lg-table-cell', 'text-end', 'text-secondary', 'text-nowrap'],
-          },
-          {
-            type: 'actions',
-            classes: ['text-end', 'pe-2', 'pe-sm-3', 'text-nowrap'],
-          },
-        ],
+        coin: {
+          symbol: coin.symbol,
+          icon: coin.icon,
+          color: coin.color,
+        },
+
+        name: coin.coinName,
+
+        price:
+          coin.lastPrice.toLocaleString('en-US', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          }) + ' USDT',
+
+        change: {
+          value: (coin.changePercent > 0 ? '+' : '') + coin.changePercent + '%',
+          color:
+            coin.changePercent > 0
+              ? 'text-success'
+              : coin.changePercent < 0
+                ? 'text-danger'
+                : 'text-secondary',
+        },
+
+        volume: coin.volume,
+
+        actions: true,
       }))
     },
   },
@@ -196,11 +153,9 @@ export default {
       </div>
 
       <TableWidget
-        :show-actions="true"
-        :rows-formatted
-        :table-classes
+        :rows-formatted="rowsFormatted"
+        :table-classes="tableClasses"
         :headers="headers"
-        :rows="tableRows"
         :classes="['table-dark', 'table-hover', 'align-middle', 'mb-0']"
       />
     </div>

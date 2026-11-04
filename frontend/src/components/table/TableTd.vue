@@ -1,20 +1,11 @@
 <script>
 export default {
-  props: {
-    classes: {
-      type: Array,
-      default: () => [],
-    },
-    colspan: {
-      type: Number,
-      default: null,
-    },
-  },
+  props: ['classes', 'tag'],
 }
 </script>
 
 <template>
-  <td :class="classes" :colspan="colspan">
+  <component :is="tag || 'td'" :class="classes">
     <slot></slot>
-  </td>
+  </component>
 </template>

@@ -43,9 +43,9 @@ export default {
 </script>
 
 <template>
-  <TableSheet :list="cars" :styles="carStyles" />
+  <!-- <TableSheet :list="cars" :styles="carStyles" />
 
-  <TableSheet :list="students" :styles="studentStyles" />
+  <TableSheet :list="students" :styles="studentStyles" /> -->
 
   <div class="wrapper">
     <HeaderWidget />
