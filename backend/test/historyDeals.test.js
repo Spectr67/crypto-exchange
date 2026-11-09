@@ -19,3 +19,7 @@ console.log(historyDeals2)
 const historyDeals3 = getHistoryDeals()
 
 console.log(historyDeals3)
+
+console.log(4 / 3)
+
+// console.log(historyDeals3[2])

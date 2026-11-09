@@ -22,6 +22,10 @@ function createHistoryDeal(orderId, takerId, volume, cost) {
     takerId,
     volume,
     cost,
+    getPrice() {
+      // const order = {} // getOrderById(this.orderId)
+      // console.log(order)
+    },
   }
 }
 

@@ -1,65 +1,38 @@
-// const coins = [
-//   {
-//     symbol: 'BTC',
-//     coinName: 'Bitcoin',
-//   },
-//   {
-//     symbol: 'ETH',
-//     coinName: 'Ethereum',
-//   },
-//   {
-//     symbol: 'LTC',
-//     coinName: 'Lightcoin',
-//   },
-// ]
-
 // пара символ и название
 // symbol: coinName
 
-export const coins = {
+const coins = {
   BTC: 'Bitcoin',
   ETH: 'Ethereum',
   LTC: 'Litecoin',
+}
 
-  findBySymbol(symbol) {
-    return this[symbol] || false
-  },
+export function getCoins() {
+  return { ...coins }
+}
 
-  add(symbol, name) {
-    if (this[symbol]) return false
+export function getCount() {
+  return Object.keys(coins).length
+}
 
-    this[symbol] = name
-    return true
-  },
+export function isExistsCoinBySymbol(symbol) {
+  return Object.hasOwn(coins, symbol)
+}
 
-  remove(symbol) {
-    if (!this[symbol]) return false
+export function addCoin(symbol, coinName) {
+  if (coins[symbol]) return false
+  coins[symbol] = coinName
+  return true
+}
 
-    delete this[symbol]
-    return true
-  },
+export function removeCoinBySymbol(symbol) {
+  if (!coins[symbol]) return false
+  delete coins[symbol]
+  return true
+}
 
-  update(symbol, name) {
-    if (!this[symbol]) return false
-
-    this[symbol] = name
-    return true
-  },
-
-  getAll() {
-    return Object.keys(this)
-      .filter(key => typeof this[key] === 'string')
-      .reduce((result, key) => {
-        result[key] = this[key]
-        return result
-      }, {})
-  },
-
-  getCount() {
-    return Object.keys(this).filter(key => typeof this[key] === 'string').length
-  },
-
-  symbolCheck(symbol) {
-    return Object.hasOwn(this, symbol) && typeof this[symbol] === 'string'
-  },
+export function updateCoinBySymbol(symbol, coinName) {
+  if (!coins[symbol]) return false
+  coins[symbol] = coinName
+  return true
 }

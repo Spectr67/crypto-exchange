@@ -1,5 +1,5 @@
 // function createNewPair() {
-//   const id = function()
+//   const id = randId()
 //   const symbols = function()
 //   const caption = function()
 //   const lastPrice = function()
@@ -10,11 +10,13 @@
 //   return bids Pair()
 // }
 
+import { randId } from './functions.js'
+
 export class Pair {
   constructor(
     id,
     symbols,
-    caption = `${symbols[0]}/${symbols[1]}`,
+    caption,
     lastPrice = 0,
     volume24h = 0,
     diff24h = 0,
@@ -22,15 +24,19 @@ export class Pair {
     orders = [],
     bids = [],
   ) {
-    this.id = id
+    this.id = randId()
     this.symbols = symbols
-    this.caption = caption
+    this.caption = `${symbols[0]}/${symbols[1]}`
     this.lastPrice = lastPrice
     this.volume24h = volume24h
     this.diff24h = diff24h
     this.candles = candles
     this.orders = orders
     this.bids = bids
+  }
+
+  foo() {
+    console.log('bar')
   }
 
   findCandleByTime(time) {
