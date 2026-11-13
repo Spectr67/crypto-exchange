@@ -14,23 +14,28 @@ const historyDeal = {
 
 const historyDeals = []
 
-function createHistoryDeal(orderId, takerId, volume, cost) {
+function createHistoryDeal(orderId, takerId, volume) {
   return {
     id: randId(),
     date: Date.now(),
     orderId,
     takerId,
     volume,
-    cost,
+    // cost, // computed
     getPrice() {
       // const order = {} // getOrderById(this.orderId)
       // console.log(order)
+      return order.price
     },
   }
 }
 
-export function addHistoryDeal(orderId, takerId, volume, cost) {
-  const historyDeal = createHistoryDeal(orderId, takerId, volume, cost)
+export function getLastPrice() {
+  //
+}
+
+export function addHistoryDeal(orderId, takerId, volume) {
+  const historyDeal = createHistoryDeal(orderId, takerId, volume)
   historyDeals.push(historyDeal)
 }
 

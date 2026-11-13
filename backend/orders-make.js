@@ -69,20 +69,36 @@ export class Order {
   }
 }
 
-export const orders = {
-  sell: [],
-  buy: [],
-}
+// export const orders = {
+//   sell: [],
+//   buy: [],
+// }
 
-function appendOrder(order) {
-  orders[order.side].push(order)
-  orders['sell'].sort((newVal, oldVal) => newVal.price - oldVal.price)
-  orders['buy'].sort((newVal, oldVal) => newVal.price - oldVal.price)
-}
+// function appendOrder(order) {
+//   orders[order.side].push(order)
+//   orders['sell'].sort((newVal, oldVal) => newVal.price - oldVal.price)
+//   orders['buy'].sort((newVal, oldVal) => newVal.price - oldVal.price)
+// }
 
-export function make(traderId, side, volume, price, pair = ['BTC', 'USDT']) {
+export function make(traderId, side, volume, price, symbols = ['BTC', 'USDT']) {
   if (!checkPositive(price, volume)) return
-  const newOrder = new Order(traderId, side, volume, price, pair)
+  const newOrder = new Order(traderId, side, volume, price, symbols)
   if (newOrder.isInvalid) return false
   appendOrder(newOrder)
+}
+
+export class Orders {
+  constructor(caption) {
+    this.caption = caption
+    this.sell = []
+    this.buy = []
+  }
+
+  // в идеале делать сортировку не при добавлении ордера, а при чтении
+  // и в супер идеале еще и прокешировать
+  appendOrder(order) {
+    this[order.side].push(order)
+    this.sell.sort((newVal, oldVal) => newVal.price - oldVal.price)
+    this.buy.sort((newVal, oldVal) => newVal.price - oldVal.price)
+  }
 }

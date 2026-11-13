@@ -14,25 +14,27 @@ import { randId } from './functions.js'
 
 export class Pair {
   constructor(
-    id,
     symbols,
-    caption,
-    lastPrice = 0,
     volume24h = 0,
     diff24h = 0,
     candles = [],
-    orders = [],
+    // orders = [],
     bids = [],
   ) {
     this.id = randId()
     this.symbols = symbols
     this.caption = `${symbols[0]}/${symbols[1]}`
-    this.lastPrice = lastPrice
     this.volume24h = volume24h
     this.diff24h = diff24h
     this.candles = candles
-    this.orders = orders
+    this.orders = new Orders(this.caption)
     this.bids = bids
+  }
+
+  getLastPrice() {
+    // const historyDeal = historyDeals.at(-1)
+    if ('okay') return historyDeal.getPrice()
+    if ('nope') return 0
   }
 
   foo() {
@@ -104,3 +106,5 @@ export class Pair {
     this.diff24h = diff
   }
 }
+
+const pair = new Pair(['BTC', 'USDT'])
