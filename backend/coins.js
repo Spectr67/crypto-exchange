@@ -1,14 +1,14 @@
-// пара символ и название
-// symbol: coinName
-
 const coins = {
   BTC: 'Bitcoin',
   ETH: 'Ethereum',
   LTC: 'Litecoin',
 }
 
-export function getCoins() {
-  return { ...coins }
+export function getAllCoins() {
+  const copyCoins = { ...coins }
+  Object.setPrototypeOf(copyCoins, Object.getPrototypeOf(coins))
+
+  return copyCoins
 }
 
 export function getCount() {
@@ -20,19 +20,22 @@ export function isExistsCoinBySymbol(symbol) {
 }
 
 export function addCoin(symbol, coinName) {
-  if (coins[symbol]) return false
+  if (isExistsCoinBySymbol(symbol)) return false
+
   coins[symbol] = coinName
   return true
 }
 
 export function removeCoinBySymbol(symbol) {
-  if (!coins[symbol]) return false
+  if (!isExistsCoinBySymbol(symbol)) return false
+
   delete coins[symbol]
   return true
 }
 
 export function updateCoinBySymbol(symbol, coinName) {
-  if (!coins[symbol]) return false
+  if (!isExistsCoinBySymbol(symbol)) return false
+
   coins[symbol] = coinName
   return true
 }
