@@ -1,8 +1,9 @@
-import { coins } from './coins.js'
+import { getAllCoins } from './coins.js'
 import { randId } from './functions.js'
 
 export default class Pocket {
   constructor(symbol) {
+    const coins = getAllCoins()
     if (!coins[symbol]) throw new Error(`not valid symbol ${symbol}`)
     this.id = randId()
     this.total = 0

@@ -1,5 +1,5 @@
 import { checkPositive } from './functions.js'
-import { orders } from './orders-make.js'
+// import { orders } from './orders-make.js'
 
 // createTrader()
 

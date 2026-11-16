@@ -14,6 +14,10 @@ const historyDeal = {
 
 const historyDeals = []
 
+historyDeals.getVolume24h(['BTC', 'USDT'])
+
+historyDeals.diff24h(['BTC', 'USDT'])
+
 function createHistoryDeal(orderId, takerId, volume) {
   return {
     id: randId(),

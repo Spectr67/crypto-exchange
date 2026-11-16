@@ -2,9 +2,9 @@ import { checkPositive, checkTraderBalance, randId } from './functions.js'
 import { getTraderById } from './traders.js'
 
 export class Order {
-  constructor(traderId, side, volume, price, pair = ['BTC', 'USDT']) {
+  constructor(traderId, side, volume, price, symbols) {
     this.id = randId()
-    this.pair = pair
+    this.symbols = symbols
     this.side = side
     this.capacity = volume // read only
     this.volume = volume
@@ -15,7 +15,7 @@ export class Order {
     const isCorrectNumbers = checkPositive(price) && checkPositive(volume)
     const isTraderHasBalance = this.checkTraderBalance()
     if (isCorrectNumbers && isTraderHasBalance) {
-      this.#freezeBalance(pair)
+      this.#freezeBalance()
     } else {
       if (!isCorrectNumbers) {
         console.log('ERRORDCRTNOPOS')
@@ -32,18 +32,18 @@ export class Order {
   }
 
   checkTraderBalance() {
-    const { traderId, side, volume, price, pair } = this
-    return checkTraderBalance(traderId, side, volume, price, pair)
+    const { traderId, side, volume, price, symbols } = this
+    return checkTraderBalance(traderId, side, volume, price, symbols)
   }
 
   #freezeBalance() {
     const trader = getTraderById(this.traderId)
     if (this.side === 'sell') {
-      const symbol = this.pair[0]
+      const symbol = this.symbols[0]
       trader.balance[symbol] -= this.volume
     }
     if (this.side === 'buy') {
-      const symbol = this.pair[1]
+      const symbol = this.symbols[1]
       trader.balance[symbol] -= this.cost
     }
   }
@@ -51,11 +51,11 @@ export class Order {
   #unfreezeBalance() {
     const trader = getTraderById(this.traderId)
     if (this.side === 'sell') {
-      const symbol = this.pair[0]
+      const symbol = this.symbols[0]
       trader.balance[symbol] += this.volume
     }
     if (this.side === 'buy') {
-      const symbol = this.pair[1]
+      const symbol = this.symbols[1]
       trader.balance[symbol] += this.volume
     }
   }
@@ -80,16 +80,17 @@ export class Order {
 //   orders['buy'].sort((newVal, oldVal) => newVal.price - oldVal.price)
 // }
 
-export function make(traderId, side, volume, price, symbols = ['BTC', 'USDT']) {
-  if (!checkPositive(price, volume)) return
-  const newOrder = new Order(traderId, side, volume, price, symbols)
-  if (newOrder.isInvalid) return false
-  appendOrder(newOrder)
-}
+// export function make(traderId, side, volume, price, symbols = ['BTC', 'USDT']) {
+//   if (!checkPositive(price, volume)) return
+//   const newOrder = new Order(traderId, side, volume, price, symbols)
+//   if (newOrder.isInvalid) return false
+//   appendOrder(newOrder)
+// }
 
 export class Orders {
-  constructor(caption) {
-    this.caption = caption
+  constructor(symbols) {
+    this.symbols = symbols
+    this.caption = `${symbols[0]}/${symbols[1]}`
     this.sell = []
     this.buy = []
   }
@@ -100,5 +101,12 @@ export class Orders {
     this[order.side].push(order)
     this.sell.sort((newVal, oldVal) => newVal.price - oldVal.price)
     this.buy.sort((newVal, oldVal) => newVal.price - oldVal.price)
+  }
+
+  make(traderId, side, volume, price) {
+    if (!checkPositive(price, volume)) return
+    const newOrder = new Order(traderId, side, volume, price, this.symbols)
+    if (newOrder.isInvalid) return false
+    this.appendOrder(newOrder)
   }
 }

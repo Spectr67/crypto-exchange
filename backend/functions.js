@@ -1,9 +1,9 @@
-import { orders } from './orders-make.js'
+// import { orders } from './orders-make.js'
 import { getTraderById } from './traders.js'
 
 export const randId = () => crypto.randomUUID().split('-')[0]
 
-export function computeBids() {
+export function computeBids(orders) {
   const bids = { sell: [], buy: [] }
   const side = ['buy', 'sell']
   side.forEach(s => {
@@ -22,11 +22,13 @@ export function checkPositive(...numbers) {
   return result
 }
 
-export function checkTraderBalance(traderId, side, volume, price, pair) {
+export function checkTraderBalance(traderId, side, volume, price, pairCaption) {
+  console.log(pairCaption)
   const trader = getTraderById(traderId)
   if (!trader) return false
 
-  const [asset, quote] = pair
+  const [asset, quote] = pairCaption
+  console.log(asset, quote)
 
   if (side === 'sell') {
     return trader.balance[asset] >= volume

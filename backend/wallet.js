@@ -1,4 +1,3 @@
-import { coins } from './coins.js'
 import Pocket from './pocket.js'
 
 export const wallet = {

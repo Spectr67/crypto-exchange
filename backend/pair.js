@@ -10,25 +10,21 @@
 //   return bids Pair()
 // }
 
-import { randId } from './functions.js'
+import { computeBids, randId } from './functions.js'
+import { Orders } from './orders-make.js'
 
 export class Pair {
-  constructor(
-    symbols,
-    volume24h = 0,
-    diff24h = 0,
-    candles = [],
-    // orders = [],
-    bids = [],
-  ) {
+  constructor(symbols) {
     this.id = randId()
     this.symbols = symbols
     this.caption = `${symbols[0]}/${symbols[1]}`
-    this.volume24h = volume24h
-    this.diff24h = diff24h
-    this.candles = candles
-    this.orders = new Orders(this.caption)
-    this.bids = bids
+    this.orders = new Orders(symbols)
+    // this.historyDeals =
+    // this.candles =
+  }
+
+  getBids() {
+    return computeBids(this.orders)
   }
 
   getLastPrice() {
@@ -37,74 +33,19 @@ export class Pair {
     if ('nope') return 0
   }
 
-  foo() {
-    console.log('bar')
+  getVolume24h() {
+    return historyDeals.getVolume24h(['BTC', 'USDT'])
   }
 
-  findCandleByTime(time) {
-    return this.candles.find(candle => candle.openTime === time)
-  }
-
-  findOrderById(id) {
-    return this.orders.find(order => order.id === id)
-  }
-
-  findBidById(id) {
-    return this.bids.find(bid => bid.id === id)
-  }
-
-  addCandle(candle) {
-    this.candles.push(candle)
-  }
-
-  addOrder(order) {
-    this.orders.push(order)
-  }
-
-  addBid(bid) {
-    this.bids.push(bid)
-  }
-
-  removeOrderById(id) {
-    const index = this.orders.findIndex(order => order.id === id)
-
-    if (index === -1) return false
-
-    this.orders.splice(index, 1)
-    return true
-  }
-
-  removeBidById(id) {
-    const index = this.bids.findIndex(bid => bid.id === id)
-
-    if (index === -1) return false
-
-    this.bids.splice(index, 1)
-    return true
-  }
-
-  getOrders() {
-    return this.orders
-  }
-
-  getBids() {
-    return this.bids
-  }
-
-  getCandles() {
-    return this.candles
-  }
-
-  updatePrice(price) {
-    this.lastPrice = price
-  }
-
-  updateVolume(volume) {
-    this.volume24h = volume
-  }
-  updateDiff(diff) {
-    this.diff24h = diff
+  getDiff24h() {
+    return historyDeals.getVolume24h(['BTC', 'USDT'])
   }
 }
 
 const pair = new Pair(['BTC', 'USDT'])
+
+console.log(pair.getBids())
+
+pair.orders.make('иван_1', 'sell', 1, 2)
+
+console.log(pair.getBids())
