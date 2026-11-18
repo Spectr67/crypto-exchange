@@ -1,163 +1,301 @@
 <script>
-import FilterCoins from '@/components/FilterCoins.vue'
-import SearchForm from '@/components/SearchForm.vue'
 import TableWidget from '@/components/table/TableWidget.vue'
 
 export default {
   components: {
-    FilterCoins,
-    SearchForm,
     TableWidget,
   },
 
   data() {
     return {
-      categories: ['Все', 'Популярные', 'Layer 1', 'DeFi', 'Meme'],
+      styles: {
+        Пара: 'pb-2 bg-transparent text-white-50',
+        Цена: 'pb-2 bg-transparent text-end text-white-50',
+        '24h Объем': 'pb-2 bg-transparent text-end text-white-50',
+        'Тек. Объем': 'pb-2 bg-transparent text-end text-white-50',
+        Действие: 'pb-2 bg-transparent text-end text-white-50',
+      },
 
-      coins: [
+      pairs: [
         {
-          symbol: 'BTC',
-          coinName: 'Bitcoin',
-          lastPrice: 65100,
-          changePercent: 2.45,
-          volume: '0.0450 BTC',
-          icon: '₿',
-          color: 'warning',
+          Пара: {
+            icon: '₿',
+            iconClasses: 'bg-warning text-dark',
+            value: 'BTC/USDT',
+            classes: 'py-2 bg-transparent fw-bold text-light',
+          },
+          Цена: {
+            value: '65 100.00',
+            classes: 'py-2 bg-transparent text-end text-success',
+          },
+          '24h Объем': {
+            value: '1.24B$',
+            classes: 'py-2 bg-transparent text-end text-white-50',
+          },
+          'Тек. Объем': {
+            value: '18.450',
+            classes: 'py-2 bg-transparent text-end text-light',
+          },
+          Действие: {
+            button: 'К торговле',
+            buttonClasses: 'btn btn-success btn-sm fw-bold',
+            classes: 'py-2 bg-transparent text-end',
+          },
         },
+
         {
-          symbol: 'ETH',
-          coinName: 'Ethereum',
-          lastPrice: 3450.2,
-          changePercent: -1.12,
-          volume: '1.2500 ETH',
-          icon: 'Ξ',
-          color: 'primary',
+          Пара: {
+            icon: 'Ξ',
+            iconClasses: 'bg-primary text-light',
+            value: 'ETH/USDT',
+            classes: 'py-2 bg-transparent fw-bold text-light',
+          },
+          Цена: {
+            value: '3 450.50',
+            classes: 'py-2 bg-transparent text-end text-danger',
+          },
+          '24h Объем': {
+            value: '840.2M$',
+            classes: 'py-2 bg-transparent text-end text-white-50',
+          },
+          'Тек. Объем': {
+            value: '142.100',
+            classes: 'py-2 bg-transparent text-end text-light',
+          },
+          Действие: {
+            button: 'К торговле',
+            buttonClasses: 'btn btn-success btn-sm fw-bold',
+            classes: 'py-2 bg-transparent text-end',
+          },
         },
+
         {
-          symbol: 'USDT',
-          coinName: 'Tether USD',
-          lastPrice: 1,
-          changePercent: 0,
-          volume: '1,250.00 USDT',
-          icon: '₮',
-          color: 'success',
+          Пара: {
+            icon: 'S',
+            iconClasses: 'bg-info text-dark',
+            value: 'SOL/USDT',
+            classes: 'py-2 bg-transparent fw-bold text-light',
+          },
+          Цена: {
+            value: '145.20',
+            classes: 'py-2 bg-transparent text-end text-success',
+          },
+          '24h Объем': {
+            value: '410.5M$',
+            classes: 'py-2 bg-transparent text-end text-white-50',
+          },
+          'Тек. Объем': {
+            value: '980.500',
+            classes: 'py-2 bg-transparent text-end text-light',
+          },
+          Действие: {
+            button: 'К торговле',
+            buttonClasses: 'btn btn-success btn-sm fw-bold',
+            classes: 'py-2 bg-transparent text-end',
+          },
         },
+
         {
-          symbol: 'SOL',
-          coinName: 'Solana',
-          lastPrice: 148.8,
-          changePercent: 5.8,
-          volume: '0.0000 SOL',
-          icon: 'S',
-          color: 'info',
+          Пара: {
+            icon: 'B',
+            iconClasses: 'bg-warning text-dark',
+            value: 'BNB/USDT',
+            classes: 'py-2 bg-transparent fw-bold text-light',
+          },
+          Цена: {
+            value: '580.00',
+            classes: 'py-2 bg-transparent text-end text-success',
+          },
+          '24h Объем': {
+            value: '195.0M$',
+            classes: 'py-2 bg-transparent text-end text-white-50',
+          },
+          'Тек. Объем': {
+            value: '45.120',
+            classes: 'py-2 bg-transparent text-end text-light',
+          },
+          Действие: {
+            button: 'К торговле',
+            buttonClasses: 'btn btn-success btn-sm fw-bold',
+            classes: 'py-2 bg-transparent text-end',
+          },
         },
+
         {
-          symbol: 'TON',
-          coinName: 'Toncoin',
-          lastPrice: 6.75,
-          changePercent: 0.95,
-          volume: '150.0000 TON',
-          icon: '💎',
-          color: 'info',
+          Пара: {
+            icon: 'X',
+            iconClasses: 'bg-secondary text-light',
+            value: 'XRP/USDT',
+            classes: 'py-2 bg-transparent fw-bold text-light',
+          },
+          Цена: {
+            value: '0.5820',
+            classes: 'py-2 bg-transparent text-end text-danger',
+          },
+          '24h Объем': {
+            value: '310.8M$',
+            classes: 'py-2 bg-transparent text-end text-white-50',
+          },
+          'Тек. Объем': {
+            value: '12 450.000',
+            classes: 'py-2 bg-transparent text-end text-light',
+          },
+          Действие: {
+            button: 'К торговле',
+            buttonClasses: 'btn btn-success btn-sm fw-bold',
+            classes: 'py-2 bg-transparent text-end',
+          },
         },
+
         {
-          symbol: 'DOGE',
-          coinName: 'Dogecoin',
-          lastPrice: 0.125,
-          changePercent: -3.4,
-          volume: '0.0000 DOGE',
-          icon: 'Ð',
-          color: 'warning',
+          Пара: {
+            icon: 'A',
+            iconClasses: 'bg-primary text-light',
+            value: 'ADA/USDT',
+            classes: 'py-2 bg-transparent fw-bold text-light',
+          },
+          Цена: {
+            value: '0.3950',
+            classes: 'py-2 bg-transparent text-end text-success',
+          },
+          '24h Объем': {
+            value: '88.4M$',
+            classes: 'py-2 bg-transparent text-end text-white-50',
+          },
+          'Тек. Объем': {
+            value: '8 900.000',
+            classes: 'py-2 bg-transparent text-end text-light',
+          },
+          Действие: {
+            button: 'К торговле',
+            buttonClasses: 'btn btn-success btn-sm fw-bold',
+            classes: 'py-2 bg-transparent text-end',
+          },
+        },
+
+        {
+          Пара: {
+            icon: 'Ð',
+            iconClasses: 'bg-warning text-dark',
+            value: 'DOGE/USDT',
+            classes: 'py-2 bg-transparent fw-bold text-light',
+          },
+          Цена: {
+            value: '0.1240',
+            classes: 'py-2 bg-transparent text-end text-danger',
+          },
+          '24h Объем': {
+            value: '150.3M$',
+            classes: 'py-2 bg-transparent text-end text-white-50',
+          },
+          'Тек. Объем': {
+            value: '35 120.000',
+            classes: 'py-2 bg-transparent text-end text-light',
+          },
+          Действие: {
+            button: 'К торговле',
+            buttonClasses: 'btn btn-success btn-sm fw-bold',
+            classes: 'py-2 bg-transparent text-end',
+          },
+        },
+
+        {
+          Пара: {
+            icon: 'A',
+            iconClasses: 'bg-danger text-light',
+            value: 'AVAX/USDT',
+            classes: 'py-2 bg-transparent fw-bold text-light',
+          },
+          Цена: {
+            value: '26.80',
+            classes: 'py-2 bg-transparent text-end text-success',
+          },
+          '24h Объем': {
+            value: '72.1M$',
+            classes: 'py-2 bg-transparent text-end text-white-50',
+          },
+          'Тек. Объем': {
+            value: '310.450',
+            classes: 'py-2 bg-transparent text-end text-light',
+          },
+          Действие: {
+            button: 'К торговле',
+            buttonClasses: 'btn btn-success btn-sm fw-bold',
+            classes: 'py-2 bg-transparent text-end',
+          },
+        },
+
+        {
+          Пара: {
+            icon: 'L',
+            iconClasses: 'bg-primary text-light',
+            value: 'LINK/USDT',
+            classes: 'py-2 bg-transparent fw-bold text-light',
+          },
+          Цена: {
+            value: '14.10',
+            classes: 'py-2 bg-transparent text-end text-danger',
+          },
+          '24h Объем': {
+            value: '95.6M$',
+            classes: 'py-2 bg-transparent text-end text-white-50',
+          },
+          'Тек. Объем': {
+            value: '540.000',
+            classes: 'py-2 bg-transparent text-end text-light',
+          },
+          Действие: {
+            button: 'К торговле',
+            buttonClasses: 'btn btn-success btn-sm fw-bold',
+            classes: 'py-2 bg-transparent text-end',
+          },
+        },
+
+        {
+          Пара: {
+            icon: 'D',
+            iconClasses: 'bg-info text-dark',
+            value: 'DOT/USDT',
+            classes: 'py-2 bg-transparent fw-bold text-light',
+          },
+          Цена: {
+            value: '6.75',
+            classes: 'py-2 bg-transparent text-end text-success',
+          },
+          '24h Объем': {
+            value: '44.8M$',
+            classes: 'py-2 bg-transparent text-end text-white-50',
+          },
+          'Тек. Объем': {
+            value: '1 120.800',
+            classes: 'py-2 bg-transparent text-end text-light',
+          },
+          Действие: {
+            button: 'К торговле',
+            buttonClasses: 'btn btn-success btn-sm fw-bold',
+            classes: 'py-2 bg-transparent text-end',
+          },
         },
       ],
-
-      tableClasses: {
-        th: {
-          coin: 'ps-2 ps-sm-3',
-          name: 'd-none d-sm-table-cell',
-          price: 'text-end',
-          change: 'd-none d-md-table-cell text-end',
-          volume: 'd-none d-lg-table-cell text-end',
-          actions: 'text-end pe-2 pe-sm-3',
-        },
-
-        td: {
-          coin: 'ps-2 ps-sm-3',
-          name: 'd-none d-sm-table-cell text-secondary',
-          price: 'text-end fw-bold text-nowrap',
-          change: 'd-none d-md-table-cell text-end text-nowrap',
-          volume: 'd-none d-lg-table-cell text-end text-secondary text-nowrap',
-          actions: 'text-end pe-2 pe-sm-3 text-nowrap',
-        },
-      },
     }
-  },
-
-  computed: {
-    rowsFormatted() {
-      return this.coins.map((coin) => ({
-        id: coin.symbol,
-
-        coin: {
-          symbol: coin.symbol,
-          icon: coin.icon,
-          color: coin.color,
-        },
-
-        name: coin.coinName,
-
-        price:
-          coin.lastPrice.toLocaleString('en-US', {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-          }) + ' USDT',
-
-        change: {
-          value: (coin.changePercent > 0 ? '+' : '') + coin.changePercent + '%',
-          color:
-            coin.changePercent > 0
-              ? 'text-success'
-              : coin.changePercent < 0
-                ? 'text-danger'
-                : 'text-secondary',
-        },
-
-        volume: coin.volume,
-
-        actions: true,
-      }))
-    },
   },
 }
 </script>
 
 <template>
-  <div class="container pt-3">
-    <div class="container-fluid container-md p-0">
-      <div
-        class="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center gap-2 mb-3"
-      >
-        <h4 class="mb-3 text-light">Доступные активы</h4>
+  <main>
+    <div class="container pt-3">
+      <h4 class="mb-3 text-light">Все Пары</h4>
 
-        <span
-          class="badge bg-body-tertiary text-secondary border border-secondary align-self-start align-self-sm-auto"
-        >
-          Всего монет: {{ coins.length }}
-        </span>
+      <div class="bg-body-tertiary p-3 rounded-3 w-100">
+        <div class="overflow-y-auto" style="max-height: 360px">
+          <TableWidget
+            :list="pairs"
+            :styles="styles"
+            table-classes="table table-borderless table-sm mb-0 table-hover"
+          />
+        </div>
       </div>
-
-      <div class="row g-2 mb-3">
-        <SearchForm />
-
-        <FilterCoins :categories="categories" />
-      </div>
-
-      <TableWidget
-        :rows-formatted="rowsFormatted"
-        :table-classes="tableClasses"
-        :headers="headers"
-        :classes="['table-dark', 'table-hover', 'align-middle', 'mb-0']"
-      />
     </div>
-  </div>
+  </main>
 </template>

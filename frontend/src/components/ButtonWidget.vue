@@ -1,12 +1,12 @@
 <script>
 export default {
-  props: ['button'],
+  props: ['title', 'classes'],
+
   emits: ['click'],
 }
 </script>
-
 <template>
-  <button :type="button.type" :class="['btn', `btn-${button.variant}`]" @click="$emit('click')">
-    {{ button.caption }}
+  <button :class="classes" @click="$emit('click')">
+    {{ title }}
   </button>
 </template>

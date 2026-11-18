@@ -1,30 +1,23 @@
 <script>
 import TableHead from './TableHead.vue'
-import TableBody from './TableBody.vue'
+import TableTr from './TableTr.vue'
 
 export default {
   components: {
     TableHead,
-    TableBody,
+    TableTr,
   },
 
-  props: ['rowsFormatted', 'tableClasses', 'classes', 'headers'],
-
-  emits: ['deposit', 'withdraw'],
+  props: ['list', 'styles', 'tableClasses'],
 }
 </script>
 
 <template>
-  <div class="border border-secondary rounded bg-body-tertiary">
-    <table :class="['table', classes]">
-      <TableHead :headers="headers" />
+  <table :class="tableClasses">
+    <TableHead :styles="styles" />
 
-      <TableBody
-        :rows-formatted="rowsFormatted"
-        :table-classes="tableClasses"
-        @deposit="$emit('deposit', $event)"
-        @withdraw="$emit('withdraw', $event)"
-      />
-    </table>
-  </div>
+    <tbody>
+      <TableTr v-for="(item, index) of list" :key="index" :item="item" :styles="styles" />
+    </tbody>
+  </table>
 </template>
