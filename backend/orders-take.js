@@ -6,7 +6,7 @@ import { transferDeal } from './transfer.js'
 // take не выкупает ордера, тейк забирает ордера
 // тейкаем ордера и мейкаем ордера
 
-export function take(traderId, side, pair, limitVolume, limitCost) {
+export function take(traderId, side, caption, limitVolume, limitCost) {
   const taker = getTraderById(traderId)
   if (!taker) return
   if (side === 'buy') {
@@ -14,6 +14,7 @@ export function take(traderId, side, pair, limitVolume, limitCost) {
       // if limitByCost
       console.log('BUY limitByCost')
       let currentLimitCost = limitCost
+      // заменить orders[side] на orders.getByCaption(caption).filter(order => order.side === side)
       for (const order of orders[side]) {
         const dealResult = transferDeal(
           taker,
@@ -100,13 +101,13 @@ export function take(traderId, side, pair, limitVolume, limitCost) {
 
 function takeByVolume() {
   // делаем что-то
-  take(traderId, side, pair, limitVolume, limitCost)
+  take(traderId, side, symbol, limitVolume, limitCost)
   // делаем что-то
 }
 
 function takeByCost() {
   // делаем что-то
-  take(traderId, side, pair, limitVolume, limitCost)
+  take(traderId, side, symbol, limitVolume, limitCost)
   // делаем что-то
 }
 

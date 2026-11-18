@@ -1,10 +1,21 @@
-const trader = {
-  id: 1,
+import { randId } from './functions.js'
+import { Wallet } from './wallet.js'
 
-  // wallet
+class Trader {
+  constructor() {
+    this.id = randId()
+    this.wallet = new Wallet()
+    this.orders = new Orders(symbols)
+  }
 
-  orders: [],
+  getMyOrders() {
+    return pairs
+      .map(pair => pair.orders.filter(order => order.traderId === this.id))
+      .flat()
+  }
 }
+
+// console.log([[{}], [{}]].flat())
 
 trader.balance.USDT += 999
 

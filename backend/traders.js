@@ -1,3 +1,6 @@
+// старый
+// DEPRECATED
+
 import { checkPositive } from './functions.js'
 // import { orders } from './orders-make.js'
 
@@ -6,7 +9,7 @@ import { checkPositive } from './functions.js'
 export const traders = [
   {
     id: 'иван_1',
-    balance: { USDT: 10000, BTC: 15 },
+    balance: { USDT: 10000, BTC: 15, ETH: 33 },
   },
   {
     id: 'мария_2',

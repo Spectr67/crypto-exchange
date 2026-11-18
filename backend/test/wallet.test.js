@@ -1,4 +1,6 @@
-import { wallet } from '../wallet.js'
+import { Wallet } from '../wallet.js'
+
+const wallet = new Wallet()
 
 // console.log(wallet.addPocket('BTC'))
 // console.log(wallet.addPocket('BTC'))

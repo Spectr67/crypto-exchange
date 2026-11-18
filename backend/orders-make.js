@@ -5,6 +5,7 @@ export class Order {
   constructor(traderId, side, volume, price, symbols) {
     this.id = randId()
     this.symbols = symbols
+    this.caption = `${symbols[0]}/${symbols[1]}`
     this.side = side
     this.capacity = volume // read only
     this.volume = volume
@@ -89,24 +90,43 @@ export class Order {
 
 export class Orders {
   constructor(symbols) {
-    this.symbols = symbols
-    this.caption = `${symbols[0]}/${symbols[1]}`
-    this.sell = []
-    this.buy = []
+    // this.symbols = symbols
+    // this.caption = `${symbols[0]}/${symbols[1]}`
+    // this.sell = []
+    // this.buy = []
+    this.orders = []
   }
 
   // в идеале делать сортировку не при добавлении ордера, а при чтении
   // и в супер идеале еще и прокешировать
   appendOrder(order) {
-    this[order.side].push(order)
-    this.sell.sort((newVal, oldVal) => newVal.price - oldVal.price)
-    this.buy.sort((newVal, oldVal) => newVal.price - oldVal.price)
+    this.orders.push(order)
+    this.orders.sort((newVal, oldVal) => newVal.price - oldVal.price)
+    // this.sell.sort((newVal, oldVal) => newVal.price - oldVal.price)
+    // this.buy.sort((newVal, oldVal) => newVal.price - oldVal.price)
   }
 
-  make(traderId, side, volume, price) {
+  make(traderId, side, volume, price, symbols) {
     if (!checkPositive(price, volume)) return
-    const newOrder = new Order(traderId, side, volume, price, this.symbols)
+    const newOrder = new Order(traderId, side, volume, price, symbols)
     if (newOrder.isInvalid) return false
     this.appendOrder(newOrder)
   }
+
+  getByCaption(caption) {
+    //
+  }
+}
+
+const allOrders = {
+  'BTC/USDT': {
+    symbols: ['BTC', 'USDT'],
+    caption: 'BTC/USDT',
+    sell: [],
+    buy: [],
+  },
+  'ETH/USDT': {
+    sell: [],
+    buy: [],
+  },
 }
