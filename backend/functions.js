@@ -23,12 +23,12 @@ export function checkPositive(...numbers) {
 }
 
 export function checkTraderBalance(traderId, side, volume, price, pairCaption) {
-  console.log(pairCaption)
+  // console.log(pairCaption)
   const trader = getTraderById(traderId)
   if (!trader) return false
 
   const [asset, quote] = pairCaption
-  console.log(asset, quote)
+  // console.log(asset, quote)
 
   if (side === 'sell') {
     return trader.balance[asset] >= volume

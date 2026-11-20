@@ -11,16 +11,21 @@
 // }
 
 import { computeBids, randId } from './functions.js'
-import { Orders } from './orders-make.js'
+import { make, orders } from './orders-make.js'
 
 export class Pair {
   constructor(symbols) {
     this.id = randId()
     this.symbols = symbols
     this.caption = `${symbols[0]}/${symbols[1]}`
-    this.orders = new Orders(symbols)
+    // this.orders = new Orders(symbols)
+    // this.orders = []
     // this.historyDeals =
     // this.candles =
+  }
+
+  getOrdersList() {
+    return orders.getByCaption(this.caption)
   }
 
   getBids() {
@@ -44,8 +49,12 @@ export class Pair {
 
 const pair = new Pair(['BTC', 'USDT'])
 
-console.log(pair.getBids())
+console.log(pair.getOrdersList())
 
-pair.orders.make('иван_1', 'sell', 1, 2)
+make('иван_1', 'sell', 1, 2, ['BTC', 'USDT'])
 
-console.log(pair.getBids())
+console.log(pair.getOrdersList())
+
+// console.log(pair.getBids())
+
+// console.log(pair.getBids())
