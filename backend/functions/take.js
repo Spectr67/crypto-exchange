@@ -1,10 +1,5 @@
-import { checkPositive } from './functions.js'
-import { orders } from './orders-make.js'
-import { getTraderById, traders } from './traders.js'
-import { transferDeal } from './transfer.js'
-
-// take не выкупает ордера, тейк забирает ордера
-// тейкаем ордера и мейкаем ордера
+import { getTraderById } from '../traders.js'
+import { transferDeal } from '../transfer.js'
 
 export function take(traderId, side, caption, limitVolume, limitCost) {
   const taker = getTraderById(traderId)
@@ -15,6 +10,7 @@ export function take(traderId, side, caption, limitVolume, limitCost) {
       console.log('BUY limitByCost')
       let currentLimitCost = limitCost
       // заменить orders[side] на orders.getByCaption(caption).filter(order => order.side === side)
+      // const ordersSide = . . .
       for (const order of orders[side]) {
         const dealResult = transferDeal(
           taker,
@@ -35,6 +31,7 @@ export function take(traderId, side, caption, limitVolume, limitCost) {
       // if limitByVolume
       console.log('BUY limitByVolume')
       let currentLimitVolume = limitVolume
+      // const ordersSide = . . .
       for (const order of orders[side]) {
         console.log(currentLimitVolume)
         const dealResult = transferDeal(
@@ -58,6 +55,7 @@ export function take(traderId, side, caption, limitVolume, limitCost) {
       // if limitByCost
       console.log('SELL limitByCost')
       let currentLimitCost = limitCost
+      // const ordersSide = . . .
       for (const order of orders[side]) {
         console.log(currentLimitCost)
         const dealResult = transferDeal(
@@ -79,6 +77,7 @@ export function take(traderId, side, caption, limitVolume, limitCost) {
       // if limitByVolume
       console.log('SELL limitByVolume')
       let currentLimitVolume = limitVolume
+      // const ordersSide = . . .
       for (const order of orders[side]) {
         console.log(currentLimitVolume)
         const dealResult = transferDeal(
@@ -110,67 +109,3 @@ function takeByCost() {
   take(traderId, side, symbol, limitVolume, limitCost)
   // делаем что-то
 }
-
-// ВНЕЗАПНО 2 варианта ТЕЙКА!!
-// ограничение либо по объёму закупки либо по сумме закупки
-// takeByCost
-// takeByVolume
-// export function take(takerTraderId, side, limitVolume, limitCost, pair) {
-//   const taker = getTraderById(takerTraderId)
-//   if (!taker) return
-
-//   if (checkPositive(limitVolume)) {
-//     takeByVolume(taker, side, limitVolume, pair)
-//   } else if (checkPositive(limitCost)) {
-//     takeByCost(taker, side, limitCost, pair)
-//   }
-// }
-
-// function takeByVolume(taker, side, limitVolume, pair) {
-//   let remainVolume = limitVolume
-//   const targetPoolName = side === 'buy' ? 'sell' : 'buy'
-//   const targetPool = orders[targetPoolName]
-
-//   for (let i = 0; i < targetPool.length && remainVolume > 0; i++) {
-//     const order = targetPool[i]
-
-//     if (order.traderId !== taker.id) {
-//       const dealVolume = Math.min(order.volume, remainVolume)
-//       const dealCost = dealVolume * order.price
-
-//       const success = transferDeal(taker, order, pair, dealVolume, dealCost)
-
-//       if (success) {
-//         remainVolume -= dealVolume
-//       } else {
-//         remainVolume = 0
-//       }
-//     }
-//   }
-//   orders[targetPoolName] = targetPool.filter(order => !order.isFulfilled)
-// }
-// function takeByCost(taker, side, limitCost, pair) {
-//   let remainCost = limitCost
-//   const targetPoolName = side === 'buy' ? 'sell' : 'buy'
-//   const targetPool = orders[targetPoolName]
-
-//   for (let i = 0; i < targetPool.length && remainCost > 0; i++) {
-//     const order = targetPool[i]
-
-//     if (order.traderId !== taker.id) {
-//       const orderCost = order.volume * order.price
-//       const dealCost = Math.min(orderCost, remainCost)
-//       const dealVolume = dealCost / order.price
-//       //                                               карго культ
-//       const success = transferDeal(taker, order, pair, dealVolume, dealCost)
-
-//       if (success) {
-//         remainCost -= dealCost
-//       } else {
-//         remainCost = 0
-//       }
-//     }
-//   }
-
-//   orders[targetPoolName] = targetPool.filter(order => !order.isFulfilled)
-// }

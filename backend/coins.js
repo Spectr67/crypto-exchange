@@ -1,4 +1,5 @@
 const coins = {
+  USDT: 'Tether',
   BTC: 'Bitcoin',
   ETH: 'Ethereum',
   LTC: 'Litecoin',

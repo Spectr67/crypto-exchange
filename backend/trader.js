@@ -1,28 +1,24 @@
 import { randId } from './functions.js'
+import { orders } from './orders.js'
 import { Wallet } from './wallet.js'
 
-class Trader {
+export class Trader {
   constructor() {
     this.id = randId()
     this.wallet = new Wallet()
-    this.orders = new Orders(symbols)
+    // при создании трейдера заполнить покетами
+    this.wallet.addPocket('USDT')
   }
 
-  getMyOrders() {
-    return pairs
-      .map(pair => pair.orders.filter(order => order.traderId === this.id))
-      .flat()
+  getOrdersList() {
+    return orders.getByTraderId(this.id)
+  }
+
+  deposit(symbol, amount) {
+    return this.wallet.putDownBySymbol(symbol, amount)
+  }
+
+  withdraw(symbol, amount) {
+    return this.wallet.pickUpBySymbol(symbol, amount)
   }
 }
-
-// console.log([[{}], [{}]].flat())
-
-trader.balance.USDT += 999
-
-trader.addDeposit('USDT', 999)
-
-trader.addWithdraw('USDT', 999)
-
-trader.make() // ?
-
-trader.take() // ?

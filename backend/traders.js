@@ -1,37 +1,21 @@
-// старый
-// DEPRECATED
+import { Trader } from './trader.js'
 
-import { checkPositive } from './functions.js'
-// import { orders } from './orders-make.js'
+const traders = []
 
-// createTrader()
-
-export const traders = [
-  {
-    id: 'иван_1',
-    balance: { USDT: 10000, BTC: 15, ETH: 33 },
-  },
-  {
-    id: 'мария_2',
-    balance: { USDT: 1350, BTC: 10, ETH: 33 },
-  },
-]
-// export const traders = [
-//   {
-//     id: 'иван_1',
-//     balance: { USDT: 1500, BTC: 0 },
-//   },
-//   {
-//     id: 'мария_2',
-//     balance: { USDT: 0, BTC: 5 },
-//   },
-// ]
+export function addTrader() {
+  const trader = new Trader()
+  traders.push(trader)
+}
 
 export function getTraderById(id) {
-  const trader = traders.find(u => u.id === id)
+  const trader = traders.find(t => t.id === id)
   if (!trader) {
     console.log('ERRTRADERNOTEXIST')
-    return false
+    return null
   }
   return trader
+}
+
+export function getTradersAll() {
+  return traders
 }

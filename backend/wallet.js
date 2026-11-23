@@ -15,6 +15,7 @@ export class Wallet {
     //
   }
 
+  // private
   getPocketBySymbol(symbol) {
     return this.pockets.find(p => p.symbol === symbol)
   }

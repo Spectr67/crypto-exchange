@@ -1,5 +1,5 @@
 import { checkTraderBalance } from '../functions.js'
-import { traders } from '../traders.js'
+import { traders } from '../traders-old.js'
 const symbols = ['BTC', 'USDT']
 
 console.log(traders[0])
