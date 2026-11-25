@@ -1,5 +1,5 @@
 import { checkPositive, checkTraderBalance, randId } from './functions.js'
-import { getTraderById } from './traders-old.js'
+import { getTraderById } from './traders.js'
 
 export class Order {
   constructor(traderId, side, volume, price, symbols) {

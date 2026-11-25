@@ -1,5 +1,5 @@
 import { orders } from './orders.js'
-import { getTraderById } from './traders-old.js'
+import { getTraderById } from './traders.js'
 
 export const randId = () => crypto.randomUUID().split('-')[0]
 
