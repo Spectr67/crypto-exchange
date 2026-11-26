@@ -1,11 +1,6 @@
 <script>
 export default {
-  props: {
-    categories: {
-      type: Array,
-      required: true,
-    },
-  },
+  props: ['categories'],
 }
 </script>
 
@@ -15,7 +10,7 @@ export default {
       v-for="(item, index) in categories"
       :key="item"
       :class="[
-        'btn btn-sm font-monospace flex-fill flex-sm-grow-0',
+        'btn btn-sm font-monospace flex-fill',
         index === 0 ? 'btn-success' : 'btn-outline-secondary',
       ]"
       type="button"

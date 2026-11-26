@@ -1,10 +1,10 @@
 <script>
-import AllPairsHeader from '@/components/AllPairsTable/AllPairsHeader.vue'
+import AllPairsTableWidget from '@/components/AllPairsTable/AllPairsTableWidget.vue'
 import FilterCoins from '@/components/FilterCoins.vue'
 import HeaderSearchForm from '@/components/HeaderSearchForm.vue'
 
 export default {
-  components: { AllPairsHeader, FilterCoins, HeaderSearchForm },
+  components: { FilterCoins, HeaderSearchForm, AllPairsTableWidget },
 
   data() {
     return {
@@ -34,10 +34,8 @@ export default {
         <FilterCoins :categories="categories" />
       </div>
 
-      <div class="bg-body-tertiary p-3 rounded-3 w-100">
-        <div class="overflow-y-auto" style="max-height: 360px">
-          <table></table>
-        </div>
+      <div class="border border-secondary rounded bg-body-tertiary">
+        <AllPairsTableWidget />
       </div>
     </div>
   </main>
