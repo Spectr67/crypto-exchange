@@ -18,4 +18,11 @@ export function getTraderById(id) {
 
 export function getTradersAll() {
   return traders
+  // return [...traders].map(trader => structuredClone(trader))
+}
+
+export function checkWalletByTraderId(id, side, volume, price, pairCaption) {
+  const trader = getTraderById(id)
+  if (!trader) return false
+  return trader.checkWalletAmount(side, volume, price, pairCaption)
 }

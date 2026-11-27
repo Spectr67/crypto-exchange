@@ -15,6 +15,11 @@ export class Wallet {
     //
   }
 
+  hasAvailableAmountBySymbol(symbol, amount) {
+    const pocket = this.getPocketBySymbol(symbol)
+    return pocket.hasAvailableAmount(amount)
+  }
+
   // private
   getPocketBySymbol(symbol) {
     return this.pockets.find(p => p.symbol === symbol)

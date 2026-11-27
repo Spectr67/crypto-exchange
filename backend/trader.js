@@ -8,6 +8,7 @@ export class Trader {
     this.wallet = new Wallet()
     // при создании трейдера заполнить покетами
     this.wallet.addPocket('USDT')
+    this.wallet.addPocket('BTC')
   }
 
   getOrdersList() {
@@ -20,5 +21,17 @@ export class Trader {
 
   withdraw(symbol, amount) {
     return this.wallet.pickUpBySymbol(symbol, amount)
+  }
+
+  checkWalletAmount(side, volume, price, pairCaption) {
+    const [asset, quote] = pairCaption
+    if (side === 'sell') {
+      return this.wallet.hasAvailableAmountBySymbol(asset, volume)
+    }
+    if (side === 'buy') {
+      const cost = price * volume
+      return this.wallet.hasAvailableAmountBySymbol(quote, cost)
+    }
+    return false
   }
 }

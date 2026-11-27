@@ -1,5 +1,5 @@
-import { checkPositive, checkTraderBalance, randId } from './functions.js'
-import { getTraderById } from './traders.js'
+import { checkPositive, randId } from './functions.js'
+import { checkWalletByTraderId, getTraderById } from './traders.js'
 
 export class Order {
   constructor(traderId, side, volume, price, symbols) {
@@ -14,7 +14,7 @@ export class Order {
     this.traderId = traderId
     this.isInvalid = false
     const isCorrectNumbers = checkPositive(price) && checkPositive(volume)
-    const isTraderHasBalance = this.checkTraderBalance()
+    const isTraderHasBalance = this.checkTraderWallet()
     if (isCorrectNumbers && isTraderHasBalance) {
       this.#freezeBalance()
     } else {
@@ -32,9 +32,9 @@ export class Order {
     }
   }
 
-  checkTraderBalance() {
+  checkTraderWallet() {
     const { traderId, side, volume, price, symbols } = this
-    return checkTraderBalance(traderId, side, volume, price, symbols)
+    return checkWalletByTraderId(traderId, side, volume, price, symbols)
   }
 
   #freezeBalance() {

@@ -6,10 +6,14 @@ export default class Pocket {
     const coins = getAllCoins()
     if (!coins[symbol]) throw new Error(`not valid symbol ${symbol}`)
     this.id = randId()
-    this.total = 0
-    this.freezed = 0
+    this.total = 0 // производная от this.freezed + this.available
+    this.freezed = 0 // производная от orders
     this.available = 0
     this.symbol = symbol
+  }
+
+  hasAvailableAmount(amount) {
+    return this.available >= amount
   }
 
   putDown(incomeValue) {

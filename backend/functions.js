@@ -49,22 +49,3 @@ export function checkPositive(...numbers) {
   if (!result) console.log('ERRINCORRECTNUMBER')
   return result
 }
-
-export function checkTraderBalance(traderId, side, volume, price, pairCaption) {
-  // console.log(pairCaption)
-  const trader = getTraderById(traderId)
-  if (!trader) return false
-
-  const [asset, quote] = pairCaption
-  // console.log(asset, quote)
-
-  if (side === 'sell') {
-    return trader.balance[asset] >= volume
-  }
-  if (side === 'buy') {
-    const cost = price * volume
-    return trader.balance[quote] >= cost
-  }
-
-  return false
-}
